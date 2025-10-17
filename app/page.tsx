@@ -11,14 +11,20 @@ import { socialLinks } from "@/lib/constants"
 import Link from "next/link"
 import { EventCard } from "@/components/ui/3d-card-demo"
 import { Modal } from "@/components/ui/modal"
-
+import { motion } from "framer-motion";
 export default function Home() {
   const [isJoinModalOpen, setIsJoinModalOpen] = useState(false)
 
   return (
     <>
       <main className="p-inset h-[100dvh] w-full border-border text-border bg-border">
-        <div className="relative h-full w-full">
+        {/* <div> */}
+        <motion.div
+        initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      viewport={{ once: true }} 
+        className="animate-fadeIn relative h-full w-full">
           <FloatingHeader />
           <div className="absolute top-8 right-8 flex gap-4 z-20">
             <Link
@@ -92,7 +98,8 @@ export default function Home() {
             </div>
           </div>
           <Footer />
-        </div>
+        </motion.div>
+        {/* </div> */}
       </main>
 
       <section className="relative min-h-screen w-full overflow-hidden">
