@@ -12,6 +12,8 @@ import Link from "next/link"
 import { EventCard } from "@/components/ui/3d-card-demo"
 import { Modal } from "@/components/ui/modal"
 import { motion } from "framer-motion";
+import BackedByCarousel from "@/components/backed-by-carousel"
+// import LogoCarousel from "@/components/test-carousel"
 export default function Home() {
   const [isJoinModalOpen, setIsJoinModalOpen] = useState(false)
 
@@ -52,8 +54,9 @@ export default function Home() {
               <br />
               <span className="italic">foundry</span>
             </h1>
-
-            <div className="flex flex-col items-center gap-6">
+            <BackedByCarousel />
+            {/* <LogoCarousel /> */}
+            {/* <div className="flex flex-col items-center gap-6">
               <p className="text-white/80 text-sm md:text-base font-light tracking-wider uppercase text-center">
                 Backed by
               </p>
@@ -95,7 +98,7 @@ export default function Home() {
                   />
                 </Link>
               </div>
-            </div>
+            </div> */}
           </div>
           <Footer />
         </motion.div>
