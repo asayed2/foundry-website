@@ -13,11 +13,24 @@ import { EventCard } from "@/components/ui/3d-card-demo"
 import { Modal } from "@/components/ui/modal"
 import { motion } from "framer-motion";
 import BackedByCarousel from "@/components/backed-by-carousel"
+import { FormEvent } from 'react';
+
 // import LogoCarousel from "@/components/test-carousel"
 export default function Home() {
   const [isJoinModalOpen, setIsJoinModalOpen] = useState(false)
-
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const response = await fetch('/api/submit', { //this is a bogus endpoint that sends form data
+      // will be replaced by your actualing mailing lisyt endpoint
+    method: 'POST',
+    body: formData,
+    });
+    const data = await response.json();
+    console.log(data);
+  }
   return (
+    
     <>
       <main className="p-inset h-[100dvh] w-full border-border text-border bg-border">
         {/* <div> */}
@@ -464,6 +477,73 @@ export default function Home() {
             We're building a community of innovative founders and forward-thinking investors who believe in
             democratizing access to opportunities and creating equal chances for success.
           </p>
+          <div className="min-h-screen flex items-center justify-center bg-black">
+  <div className="bg-black p-6 rounded-lg shadow-lg w-full max-w-lg">
+    <h2 className="text-2xl font-semibold text-center mb-6 text-white">
+      Register
+    </h2>
+    <form className="space-y-4">
+      <div>
+        <label className="block mb-2 text-sm font-medium text-white">
+          Full Name
+        </label>
+        <input
+          type="text"
+          className="bg-black w-full px-4 py-2 border border-white rounded-md focus:outline-none focus:ring-2 focus:ring-white"
+          placeholder="Enter your name"
+        />
+      </div>
+      <div>
+        <label className="block mb-2 text-sm font-medium text-white">
+          Email Address
+        </label>
+        <input
+          type="email"
+          className="bg-black w-full px-4 py-2 border border-white rounded-md focus:outline-none focus:ring-2 focus:ring-white"
+          placeholder="Enter your email"
+        />
+      </div>
+      <div>
+        <label className="block mb-2 text-sm font-medium text-white">
+          Password
+        </label>
+        <input
+          type="password"
+          className="bg-black w-full px-4 py-2 border border-white rounded-md focus:outline-none focus:ring-2 focus:ring-white"
+          placeholder="Enter your password"
+        />
+      </div>
+      <div>
+        <label className="block mb-2 text-sm font-medium text-white">
+          Confirm Password
+        </label>
+        <input
+          type="password"
+          className="bg-black w-full px-4 py-2 border border-white rounded-md focus:outline-none focus:ring-2 focus:ring-white"
+          placeholder="Confirm your password"
+        />
+      </div>
+      <div className="flex items-center">
+        <input
+          type="checkbox"
+          className="h-4 w-4 border-black rounded"
+        />
+        <label className="ml-2 text-sm text-white">
+          I agree to the terms and conditions
+        </label>
+      </div>
+      <div>
+        <button
+          type="submit"
+          className="w-full px-4 py-2 text-black hover:text-white bg-white rounded-md hover:bg-black hover:border-white hover:border focus:outline-none focus:bg-gray-900"
+        >
+          Register
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
           <p>Content coming soon...</p>
         </div>
       </Modal>
