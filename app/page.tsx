@@ -462,8 +462,6 @@ export default function Home() {
         {/* Subtle grid pattern */}
         <div className="absolute inset-0 bg-[linear-gradient(rgba(241,239,231,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(241,239,231,0.02)_1px,transparent_1px)] bg-[size:100px_100px]"></div>
 
-<<<<<<< HEAD
-
         {/* Animated gradient background */}
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#F1EFE7]/10 rounded-full blur-3xl animate-pulse"></div>
