@@ -40,7 +40,7 @@ export default function Home() {
             </Link>
           </div>
           <Background
-            src="https://blobs.vusercontent.net/blob/istockphoto-1421524030-640_adpp_is-PtXS1UnBN8Pund3mLnNVv2IUeR1opE.mp4"
+            src="https://blobs.vusercontent.com/blob/istockphoto-1421524030-640_adpp_is-PtXS1UnBN8Pund3mLnNVv2IUeR1opE.mp4"
             placeholder="/alt-placeholder.png"
           />
           <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
@@ -114,6 +114,18 @@ export default function Home() {
                     <img
                       src="/greylock-logo.png"
                       alt="Greylock Partners"
+                      className="h-full w-auto object-contain filter brightness-0 invert"
+                    />
+                  </Link>
+                  <Link
+                    href="https://www.avax.network"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-40 h-12 md:w-48 md:h-14 flex items-center justify-center hover:opacity-80 transition-opacity shrink-0"
+                  >
+                    <img
+                      src="/avalanche-logo.png"
+                      alt="Avalanche"
                       className="h-full w-auto object-contain filter brightness-0 invert"
                     />
                   </Link>
@@ -201,6 +213,18 @@ export default function Home() {
                     />
                   </Link>
                   <Link
+                    href="https://www.avax.network"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-40 h-12 md:w-48 md:h-14 flex items-center justify-center hover:opacity-80 transition-opacity shrink-0"
+                  >
+                    <img
+                      src="/avalanche-logo.png"
+                      alt="Avalanche"
+                      className="h-full w-auto object-contain filter brightness-0 invert"
+                    />
+                  </Link>
+                  <Link
                     href="https://lovable.dev"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -280,6 +304,18 @@ export default function Home() {
                     <img
                       src="/greylock-logo.png"
                       alt="Greylock Partners"
+                      className="h-full w-auto object-contain filter brightness-0 invert"
+                    />
+                  </Link>
+                  <Link
+                    href="https://www.avax.network"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-40 h-12 md:w-48 md:h-14 flex items-center justify-center hover:opacity-80 transition-opacity shrink-0"
+                  >
+                    <img
+                      src="/avalanche-logo.png"
+                      alt="Avalanche"
                       className="h-full w-auto object-contain filter brightness-0 invert"
                     />
                   </Link>
