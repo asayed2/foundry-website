@@ -63,11 +63,16 @@ const config: Config = {
       },
       animation: {
         "scroll-left": "scroll-left 30s linear infinite",
+        "lighthouse-rotate": "lighthouse-rotate 12s linear infinite",
       },
       keyframes: {
         "scroll-left": {
           "0%": { transform: "translateX(0)" },
           "100%": { transform: "translateX(-33.333%)" },
+        },
+        "lighthouse-rotate": {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
         },
       },
     },
