@@ -17,7 +17,7 @@ export default function Home() {
 
   return (
     <>
-      <main className="p-inset h-[100dvh] w-full border-border text-border bg-border">
+      <main className="p-inset h-[100dvh] w-full bg-black">
         <div className="relative h-full w-full">
           <FloatingHeader onJoinFoundryClick={() => setIsJoinModalOpen(true)} />
           <div className="absolute top-8 right-8 flex gap-4 z-20">
