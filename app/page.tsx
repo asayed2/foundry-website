@@ -488,9 +488,9 @@ export default function Home() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
               <EventCard
-                title="Founder Meetup"
-                description="Join us for an evening of networking with fellow founders, investors, and builders. Share your experiences and learn from others in the community."
-                date="March 15, 2025 • 6:00 PM"
+                title="The Catalyst"
+                description="A mixer with top talent and a chance to connect with top pre-seed VC funds and learn more."
+                date="October 4, 2025 • 6:00 PM"
                 location="Philadelphia, PA"
                 imageUrl="/startup-networking-event.png"
                 buttonText="Learn More"
@@ -499,9 +499,9 @@ export default function Home() {
               />
 
               <EventCard
-                title="Pitch Night"
-                description="Present your startup to a panel of experienced VCs and get valuable feedback. Top pitches will have the opportunity for follow-up meetings."
-                date="March 22, 2025 • 7:00 PM"
+                title="Startup in a Weekend Hackathon"
+                description="36 hours of building and learning to build the next unicorn. Join us for an intensive weekend of innovation and collaboration."
+                date="November 21-23, 2025"
                 location="Philadelphia, PA"
                 imageUrl="/startup-pitch.png"
                 buttonText="Learn More"
@@ -510,9 +510,9 @@ export default function Home() {
               />
 
               <EventCard
-                title="Workshop: Building MVPs"
-                description="Learn how to rapidly prototype and validate your ideas. Hands-on workshop covering modern development tools and best practices."
-                date="March 29, 2025 • 2:00 PM"
+                title="Coming Soon"
+                description="Stay tuned for our next exciting event. We're planning something special for the community."
+                date="TBA"
                 location="Philadelphia, PA"
                 imageUrl="/coding-workshop-developers.jpg"
                 buttonText="Learn More"
