@@ -2,13 +2,6 @@
 
 import { Button } from "@/components/ui/button"
 import { useState, useEffect } from "react"
-import { createGlobalStyle } from 'styled-components';
-
-const GlobalStyle = createGlobalStyle`
-  .logo-font {
-    font-family: 'Times New Roman', Times, serif;
-  }
-`;
 
 export function FloatingHeader() {
   const [currentTime, setCurrentTime] = useState("")
@@ -38,8 +31,7 @@ export function FloatingHeader() {
           {/* Logo */}
           <div className="flex items-center gap-2">
             <div className="w-6 h-6 bg-black/40 rounded-sm flex items-center justify-center">
-              <span className="text-white text-xs font-bold logo-font"
-              style={{ fontFamily: "'Times New Roman', Times, serif", fontStyle: "italic" }}>f</span>
+              <span className="text-white text-xs font-bold">F</span>
             </div>
           </div>
 
