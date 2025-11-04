@@ -54,10 +54,7 @@ export default function Home() {
               <GitHubLogoIcon className="size-5 text-white" />
             </Link>
           </div>
-          <Background
-            src="https://blobs.vusercontent.net/blob/istockphoto-1421524030-640_adpp_is-PtXS1UnBN8Pund3mLnNVv2IUeR1opE.mp4"
-            placeholder="/alt-placeholder.png"
-          />
+          <Background src="/istockphoto-1421524030-640_adpp_is.mp4" placeholder="/alt-placeholder.png" />
           <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
             <h1 className="font-serif text-white text-8xl md:text-9xl lg:text-[12rem] leading-[0.6] text-center mb-16 [text-shadow:0_2px_4px_rgba(0,0,0,0.2)]">
               the
@@ -168,6 +165,18 @@ export default function Home() {
                     />
                   </Link>
                   <Link
+                    href="https://www.avax.network"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-40 h-12 md:w-48 md:h-14 flex items-center justify-center hover:opacity-80 transition-opacity shrink-0"
+                  >
+                    <img
+                      src="/avalanche-logo.png"
+                      alt="Avalanche"
+                      className="h-full w-auto object-contain filter brightness-0 invert"
+                    />
+                  </Link>
+                  <Link
                     href="https://lovable.dev"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -264,6 +273,18 @@ export default function Home() {
                       src="/greylock-logo.png"
                       alt="Greylock Partners"
                       className="h-full w-auto object-contain filter brightness-0 invert transition-all duration-300"
+                    />
+                  </Link>
+                  <Link
+                    href="https://www.avax.network"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-40 h-12 md:w-48 md:h-14 flex items-center justify-center hover:opacity-80 transition-opacity shrink-0"
+                  >
+                    <img
+                      src="/avalanche-logo.png"
+                      alt="Avalanche"
+                      className="h-full w-auto object-contain filter brightness-0 invert"
                     />
                   </Link>
                   <Link
@@ -366,6 +387,18 @@ export default function Home() {
                     />
                   </Link>
                   <Link
+                    href="https://www.avax.network"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-40 h-12 md:w-48 md:h-14 flex items-center justify-center hover:opacity-80 transition-opacity shrink-0"
+                  >
+                    <img
+                      src="/avalanche-logo.png"
+                      alt="Avalanche"
+                      className="h-full w-auto object-contain filter brightness-0 invert"
+                    />
+                  </Link>
+                  <Link
                     href="https://lovable.dev"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -429,6 +462,7 @@ export default function Home() {
         {/* Subtle grid pattern */}
         <div className="absolute inset-0 bg-[linear-gradient(rgba(241,239,231,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(241,239,231,0.02)_1px,transparent_1px)] bg-[size:100px_100px]"></div>
 
+<<<<<<< HEAD
 
         {/* Animated gradient background */}
         <div className="absolute inset-0 opacity-20">
