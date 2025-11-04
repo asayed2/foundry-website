@@ -17,7 +17,7 @@ export default function Home() {
 
   return (
     <>
-      <main className="p-inset h-[100dvh] w-full bg-black">
+      <main className="p-inset h-[100dvh] w-full border-border text-border bg-border">
         <div className="relative h-full w-full">
           <FloatingHeader onJoinFoundryClick={() => setIsJoinModalOpen(true)} />
           <div className="absolute top-8 right-8 flex gap-4 z-20">
@@ -39,10 +39,7 @@ export default function Home() {
               <GitHubLogoIcon className="size-5 text-white" />
             </Link>
           </div>
-          <Background
-            src="https://blobs.vusercontent.com/blob/istockphoto-1421524030-640_adpp_is-PtXS1UnBN8Pund3mLnNVv2IUeR1opE.mp4"
-            placeholder="/alt-placeholder.png"
-          />
+          <Background src="/istockphoto-1421524030-640_adpp_is.mp4" placeholder="/alt-placeholder.png" />
           <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
             <h1 className="font-serif text-white text-8xl md:text-9xl lg:text-[12rem] leading-[0.6] text-center mb-16 [text-shadow:0_2px_4px_rgba(0,0,0,0.2)]">
               the
