@@ -9,8 +9,8 @@ import { buttonVariants } from "@/components/ui/button"
 import XLogoIcon from "@/components/icons/x"
 import { socialLinks } from "@/lib/constants"
 import Link from "next/link"
-import { EventCard } from "@/components/ui/3d-card-demo"
 import { Modal } from "@/components/ui/modal"
+import { EventCard } from "@/components/ui/3d-card-demo"
 
 export default function Home() {
   const [isJoinModalOpen, setIsJoinModalOpen] = useState(false)
@@ -19,7 +19,7 @@ export default function Home() {
     <>
       <main className="p-inset h-[100dvh] w-full border-border text-border bg-border">
         <div className="relative h-full w-full">
-          <FloatingHeader />
+          <FloatingHeader onJoinFoundryClick={() => setIsJoinModalOpen(true)} />
           <div className="absolute top-8 right-8 flex gap-4 z-20">
             <Link
               target="_blank"
@@ -39,75 +39,298 @@ export default function Home() {
               <GitHubLogoIcon className="size-5 text-white" />
             </Link>
           </div>
-          <Background src="https://blobs.vusercontent.net/blob/istockphoto-1421524030-640_adpp_is-PtXS1UnBN8Pund3mLnNVv2IUeR1opE.mp4" placeholder="/alt-placeholder.png" />
+          <Background
+            src="https://blobs.vusercontent.net/blob/istockphoto-1421524030-640_adpp_is-PtXS1UnBN8Pund3mLnNVv2IUeR1opE.mp4"
+            placeholder="/alt-placeholder.png"
+          />
           <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
             <h1 className="font-serif text-white text-8xl md:text-9xl lg:text-[12rem] leading-[0.6] text-center mb-16 [text-shadow:0_2px_4px_rgba(0,0,0,0.2)]">
               the
               <br />
               <span className="italic">foundry</span>
             </h1>
-
-            <div className="flex flex-col items-center gap-6">
-              <p className="text-white/80 text-sm md:text-base font-light tracking-wider uppercase text-center">
-                Backed by
-              </p>
-              <div className="flex items-center justify-center gap-8 md:gap-12">
-                <Link
-                  href="https://www.dormroomfund.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-48 h-20 md:w-64 md:h-24 flex items-center justify-center hover:opacity-80 transition-opacity"
-                >
-                  <img
-                    src="/dorm-room-fund-logo.svg"
-                    alt="Dorm Room Fund"
-                    className="h-full w-auto object-contain filter brightness-0 invert"
-                  />
-                </Link>
-                <Link
-                  href="https://www.afore.vc"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-20 h-8 md:w-24 md:h-10 flex items-center justify-center hover:opacity-80 transition-opacity"
-                >
-                  <img
-                    src="/afore-capital-logo.png"
-                    alt="Afore Capital"
-                    className="h-full w-auto object-contain filter brightness-0 invert"
-                  />
-                </Link>
-                <Link
-                  href="https://pear.vc"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-50 h-20 md:w-60 md:h-25 flex items-center justify-center hover:opacity-80 transition-opacity"
-                >
-                  <img
-                    src="/pear-vc-logo.png"
-                    alt="Pear VC"
-                    className="h-full w-auto object-contain filter brightness-0 invert"
-                  />
-                </Link>
-              </div>
-            </div>
           </div>
           <Footer />
         </div>
       </main>
 
-      <section className="relative min-h-screen w-full overflow-hidden">
+      <section id="about" className="relative min-h-screen w-full overflow-hidden">
         <div className="absolute inset-0 bg-black"></div>
 
-        {/* Animated content that scrolls away */}
-        <div className="relative z-10 min-h-screen flex items-center justify-center px-8">
-          <div className="max-w-4xl mx-auto text-center transform transition-all duration-1000 ease-out">
+        <div className="relative z-10 pt-32 pb-16">
+          <div className="flex flex-col items-center gap-6 w-full mb-64">
+            <p
+              className="text-sm md:text-base font-light tracking-wider uppercase text-center"
+              style={{ color: "#F1EFE7" }}
+            >
+              Backed by
+            </p>
+            <div className="w-full overflow-hidden">
+              <div className="flex animate-scroll-left">
+                {/* First set of logos */}
+                <div className="flex items-center gap-12 md:gap-16 px-8 shrink-0">
+                  <Link
+                    href="https://www.dormroomfund.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-32 h-12 md:w-40 md:h-14 flex items-center justify-center hover:opacity-80 transition-opacity shrink-0"
+                  >
+                    <img
+                      src="/dorm-room-fund-logo.svg"
+                      alt="Dorm Room Fund"
+                      className="h-full w-auto object-contain filter brightness-0 invert"
+                    />
+                  </Link>
+                  <Link
+                    href="https://www.afore.vc"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-14 h-6 md:w-16 md:h-7 flex items-center justify-center hover:opacity-80 transition-opacity shrink-0"
+                  >
+                    <img
+                      src="/afore-capital-logo.png"
+                      alt="Afore Capital"
+                      className="h-full w-auto object-contain filter brightness-0 invert"
+                    />
+                  </Link>
+                  <Link
+                    href="https://pear.vc"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-32 h-12 md:w-38 md:h-14 flex items-center justify-center hover:opacity-80 transition-opacity shrink-0"
+                  >
+                    <img
+                      src="/pear-vc-logo.png"
+                      alt="Pear VC"
+                      className="h-full w-auto object-contain filter brightness-0 invert"
+                    />
+                  </Link>
+                  <Link
+                    href="https://greylock.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-32 h-12 md:w-40 md:h-14 flex items-center justify-center hover:opacity-80 transition-opacity shrink-0"
+                  >
+                    <img
+                      src="/greylock-logo.png"
+                      alt="Greylock Partners"
+                      className="h-full w-auto object-contain filter brightness-0 invert"
+                    />
+                  </Link>
+                  <Link
+                    href="https://lovable.dev"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center hover:opacity-80 transition-opacity shrink-0"
+                  >
+                    <img src="/lovable-logo.png" alt="Lovable" className="h-full w-auto object-contain" />
+                  </Link>
+                  <Link
+                    href="https://adobe.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-24 h-10 md:w-28 md:h-12 flex items-center justify-center hover:opacity-80 transition-opacity shrink-0"
+                  >
+                    <img
+                      src="/adobe-logo.png"
+                      alt="Adobe"
+                      className="h-full w-auto object-contain filter brightness-0 invert"
+                    />
+                  </Link>
+                  <Link
+                    href="https://www.perplexity.ai"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-32 h-10 md:w-36 md:h-12 flex items-center justify-center hover:opacity-80 transition-opacity shrink-0"
+                  >
+                    <img
+                      src="/off-white-logo.png"
+                      alt="Off-White"
+                      className="h-full w-auto object-contain filter brightness-0 invert"
+                    />
+                  </Link>
+                </div>
+                {/* Duplicate set for seamless loop */}
+                <div className="flex items-center gap-12 md:gap-16 px-8 shrink-0">
+                  <Link
+                    href="https://www.dormroomfund.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-32 h-12 md:w-40 md:h-14 flex items-center justify-center hover:opacity-80 transition-opacity shrink-0"
+                  >
+                    <img
+                      src="/dorm-room-fund-logo.svg"
+                      alt="Dorm Room Fund"
+                      className="h-full w-auto object-contain filter brightness-0 invert"
+                    />
+                  </Link>
+                  <Link
+                    href="https://www.afore.vc"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-14 h-6 md:w-16 md:h-7 flex items-center justify-center hover:opacity-80 transition-opacity shrink-0"
+                  >
+                    <img
+                      src="/afore-capital-logo.png"
+                      alt="Afore Capital"
+                      className="h-full w-auto object-contain filter brightness-0 invert"
+                    />
+                  </Link>
+                  <Link
+                    href="https://pear.vc"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-32 h-12 md:w-38 md:h-14 flex items-center justify-center hover:opacity-80 transition-opacity shrink-0"
+                  >
+                    <img
+                      src="/pear-vc-logo.png"
+                      alt="Pear VC"
+                      className="h-full w-auto object-contain filter brightness-0 invert"
+                    />
+                  </Link>
+                  <Link
+                    href="https://greylock.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-32 h-12 md:w-40 md:h-14 flex items-center justify-center hover:opacity-80 transition-opacity shrink-0"
+                  >
+                    <img
+                      src="/greylock-logo.png"
+                      alt="Greylock Partners"
+                      className="h-full w-auto object-contain filter brightness-0 invert"
+                    />
+                  </Link>
+                  <Link
+                    href="https://lovable.dev"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center hover:opacity-80 transition-opacity shrink-0"
+                  >
+                    <img src="/lovable-logo.png" alt="Lovable" className="h-full w-auto object-contain" />
+                  </Link>
+                  <Link
+                    href="https://adobe.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-24 h-10 md:w-28 md:h-12 flex items-center justify-center hover:opacity-80 transition-opacity shrink-0"
+                  >
+                    <img
+                      src="/adobe-logo.png"
+                      alt="Adobe"
+                      className="h-full w-auto object-contain filter brightness-0 invert"
+                    />
+                  </Link>
+                  <Link
+                    href="https://www.perplexity.ai"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-32 h-10 md:w-36 md:h-12 flex items-center justify-center hover:opacity-80 transition-opacity shrink-0"
+                  >
+                    <img
+                      src="/off-white-logo.png"
+                      alt="Off-White"
+                      className="h-full w-auto object-contain filter brightness-0 invert"
+                    />
+                  </Link>
+                </div>
+                {/* Third set for extra smoothness */}
+                <div className="flex items-center gap-12 md:gap-16 px-8 shrink-0">
+                  <Link
+                    href="https://www.dormroomfund.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-32 h-12 md:w-40 md:h-14 flex items-center justify-center hover:opacity-80 transition-opacity shrink-0"
+                  >
+                    <img
+                      src="/dorm-room-fund-logo.svg"
+                      alt="Dorm Room Fund"
+                      className="h-full w-auto object-contain filter brightness-0 invert"
+                    />
+                  </Link>
+                  <Link
+                    href="https://www.afore.vc"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-14 h-6 md:w-16 md:h-7 flex items-center justify-center hover:opacity-80 transition-opacity shrink-0"
+                  >
+                    <img
+                      src="/afore-capital-logo.png"
+                      alt="Afore Capital"
+                      className="h-full w-auto object-contain filter brightness-0 invert"
+                    />
+                  </Link>
+                  <Link
+                    href="https://pear.vc"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-32 h-12 md:w-38 md:h-14 flex items-center justify-center hover:opacity-80 transition-opacity shrink-0"
+                  >
+                    <img
+                      src="/pear-vc-logo.png"
+                      alt="Pear VC"
+                      className="h-full w-auto object-contain filter brightness-0 invert"
+                    />
+                  </Link>
+                  <Link
+                    href="https://greylock.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-32 h-12 md:w-40 md:h-14 flex items-center justify-center hover:opacity-80 transition-opacity shrink-0"
+                  >
+                    <img
+                      src="/greylock-logo.png"
+                      alt="Greylock Partners"
+                      className="h-full w-auto object-contain filter brightness-0 invert"
+                    />
+                  </Link>
+                  <Link
+                    href="https://lovable.dev"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center hover:opacity-80 transition-opacity shrink-0"
+                  >
+                    <img src="/lovable-logo.png" alt="Lovable" className="h-full w-auto object-contain" />
+                  </Link>
+                  <Link
+                    href="https://adobe.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-24 h-10 md:w-28 md:h-12 flex items-center justify-center hover:opacity-80 transition-opacity shrink-0"
+                  >
+                    <img
+                      src="/adobe-logo.png"
+                      alt="Adobe"
+                      className="h-full w-auto object-contain filter brightness-0 invert"
+                    />
+                  </Link>
+                  <Link
+                    href="https://www.perplexity.ai"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-32 h-10 md:w-36 md:h-12 flex items-center justify-center hover:opacity-80 transition-opacity shrink-0"
+                  >
+                    <img
+                      src="/off-white-logo.png"
+                      alt="Off-White"
+                      className="h-full w-auto object-contain filter brightness-0 invert"
+                    />
+                  </Link>
+                </div>
+              </div>
+            </div>
             <h2 className="font-serif text-6xl md:text-7xl lg:text-8xl mb-8" style={{ color: "#F1EFE7" }}>
               About <span className="italic">Us</span>
             </h2>
 
             <div className="space-y-8">
-              <p className="text-xl md:text-2xl font-light leading-relaxed" style={{ color: "#F1EFE7" }}>
-                Better deals for VCs, equal opportunities for Founders.
+              <p
+                className="text-lg md:text-xl font-light leading-relaxed max-w-4xl mx-auto text-center"
+                style={{ color: "#F1EFE7" }}
+              >
+                Foundry is the first builder-led community in Philadelphia that's actually building alongside its
+                members. We started by searching for the right resources—VC connections, partnerships, go-to-market
+                guidance, and real builder support—then decided to create them ourselves. Foundry exists for those with
+                the knowledge and drive to make the impossible happen. We genuinely care, and that's what sets us apart.
               </p>
             </div>
           </div>
@@ -253,6 +476,56 @@ export default function Home() {
 
       <div className="h-96 bg-black"></div>
 
+      {/* Events section with EventCard components */}
+      <section id="events" className="relative min-h-screen w-full overflow-hidden">
+        <div className="absolute inset-0 bg-black"></div>
+
+        <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-8 py-16">
+          <div className="max-w-7xl mx-auto w-full">
+            <h2 className="font-serif text-6xl md:text-7xl lg:text-8xl mb-16 text-center" style={{ color: "#F1EFE7" }}>
+              Events
+            </h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+              <EventCard
+                title="Founder Meetup"
+                description="Join us for an evening of networking with fellow founders, investors, and builders. Share your experiences and learn from others in the community."
+                date="March 15, 2025 • 6:00 PM"
+                location="Philadelphia, PA"
+                imageUrl="/startup-networking-event.png"
+                buttonText="Learn More"
+                buttonHref="#"
+                hasRefinedBorder={true}
+              />
+
+              <EventCard
+                title="Pitch Night"
+                description="Present your startup to a panel of experienced VCs and get valuable feedback. Top pitches will have the opportunity for follow-up meetings."
+                date="March 22, 2025 • 7:00 PM"
+                location="Philadelphia, PA"
+                imageUrl="/startup-pitch.png"
+                buttonText="Learn More"
+                buttonHref="#"
+                hasRefinedBorder={true}
+              />
+
+              <EventCard
+                title="Workshop: Building MVPs"
+                description="Learn how to rapidly prototype and validate your ideas. Hands-on workshop covering modern development tools and best practices."
+                date="March 29, 2025 • 2:00 PM"
+                location="Philadelphia, PA"
+                imageUrl="/coding-workshop-developers.jpg"
+                buttonText="Learn More"
+                buttonHref="#"
+                hasRefinedBorder={true}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div className="h-48 bg-black"></div>
+
       <section className="relative min-h-screen w-full overflow-hidden">
         <div className="absolute inset-0 bg-black"></div>
 
@@ -368,6 +641,39 @@ export default function Home() {
                 </div>
               </Link>
 
+              {/* Greylock Partners Card */}
+              <Link
+                href="https://greylock.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-black border-2 p-8 rounded-lg min-h-[300px] flex flex-col justify-between cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#F1EFE7]/20"
+                style={{ borderColor: "#F1EFE7" }}
+              >
+                <div className="flex flex-col items-center text-center">
+                  <div className="w-32 h-16 mb-6 flex items-center justify-center">
+                    <img
+                      src="/greylock-logo.png"
+                      alt="Greylock Partners"
+                      className="h-full w-auto object-contain"
+                      style={{
+                        filter:
+                          "brightness(0) saturate(100%) invert(94%) sepia(8%) saturate(346%) hue-rotate(314deg) brightness(98%) contrast(92%)",
+                      }}
+                    />
+                  </div>
+                  <h3 className="text-2xl font-bold mb-4" style={{ color: "#F1EFE7" }}>
+                    Greylock Partners
+                  </h3>
+                  <p className="font-light text-sm leading-relaxed" style={{ color: "#F1EFE7" }}>
+                    Leading venture capital firm investing in consumer and enterprise software companies, with a focus
+                    on AI-first startups. Partners with entrepreneurs from pre-seed through growth stages.
+                  </p>
+                </div>
+                <div className="mt-6 text-center">
+                  <span className="text-xs font-semibold bg-[#F1EFE7] text-black px-2 py-1 rounded">AI-First VC</span>
+                </div>
+              </Link>
+
               {/* Become a Partner block */}
               <div
                 className="bg-black border-2 p-8 rounded-lg min-h-[300px] flex flex-col justify-between cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#F1EFE7]/20"
@@ -387,58 +693,6 @@ export default function Home() {
                   </button>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <div className="h-96 bg-black"></div>
-
-      <section className="relative min-h-screen w-full overflow-hidden">
-        <div className="absolute inset-0 bg-black"></div>
-
-        <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 sm:px-8 py-16">
-          <div className="max-w-7xl mx-auto w-full">
-            <h2
-              className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl mb-8 sm:mb-16 text-center"
-              style={{ color: "#F1EFE7" }}
-            >
-              Events
-            </h2>
-
-            <div className="flex flex-col lg:grid lg:grid-cols-3 gap-8 lg:gap-16 max-w-6xl mx-auto items-center">
-              <EventCard
-                title="Startup Pitch Night"
-                description="Join us for an evening of innovative startup pitches from our portfolio companies. Network with founders, investors, and industry leaders."
-                date="March 15, 2024"
-                location="San Francisco, CA"
-                imageUrl="/startup-pitch-event.png"
-                buttonText="Register"
-                buttonHref="#"
-                hasRefinedBorder={true}
-              />
-
-              <EventCard
-                title="VC Masterclass"
-                description="Learn from seasoned venture capitalists about deal sourcing, due diligence, and portfolio management in this exclusive workshop."
-                date="April 22, 2024"
-                location="New York, NY"
-                imageUrl="/business-conference-room.png"
-                buttonText="Apply"
-                buttonHref="#"
-                hasRefinedBorder={true}
-              />
-
-              <EventCard
-                title="Founder's Retreat"
-                description="A weekend retreat for founders to connect, share experiences, and learn from each other in a relaxed mountain setting."
-                date="May 10-12, 2024"
-                location="Lake Tahoe, CA"
-                imageUrl="/mountain-retreat-conference.jpg"
-                buttonText="Join"
-                buttonHref="#"
-                hasRefinedBorder={true}
-              />
             </div>
           </div>
         </div>
