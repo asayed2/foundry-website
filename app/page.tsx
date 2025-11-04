@@ -384,6 +384,15 @@ export default function Home() {
               Companies
             </h2>
 
+            <p
+              className="text-lg md:text-xl font-light leading-relaxed max-w-4xl mx-auto text-center mb-16"
+              style={{ color: "#F1EFE7" }}
+            >
+              We're builders ourselves, and our passion for creating goes hand in hand with helping other founders like
+              us. The member companies within our group are a testament to that spirit of building, collaboration, and
+              execution.
+            </p>
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
               <Link
                 href="https://entropytoorder.xyz"
