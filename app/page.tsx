@@ -10,6 +10,7 @@ import XLogoIcon from "@/components/icons/x"
 import { socialLinks } from "@/lib/constants"
 import Link from "next/link"
 import { Modal } from "@/components/ui/modal"
+import { EventCard } from "@/components/ui/3d-card-demo"
 
 export default function Home() {
   const [isJoinModalOpen, setIsJoinModalOpen] = useState(false)
@@ -474,6 +475,56 @@ export default function Home() {
       </section>
 
       <div className="h-96 bg-black"></div>
+
+      {/* Events section with EventCard components */}
+      <section id="events" className="relative min-h-screen w-full overflow-hidden">
+        <div className="absolute inset-0 bg-black"></div>
+
+        <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-8 py-16">
+          <div className="max-w-7xl mx-auto w-full">
+            <h2 className="font-serif text-6xl md:text-7xl lg:text-8xl mb-16 text-center" style={{ color: "#F1EFE7" }}>
+              Events
+            </h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+              <EventCard
+                title="Founder Meetup"
+                description="Join us for an evening of networking with fellow founders, investors, and builders. Share your experiences and learn from others in the community."
+                date="March 15, 2025 • 6:00 PM"
+                location="Philadelphia, PA"
+                imageUrl="/startup-networking-event.png"
+                buttonText="Learn More"
+                buttonHref="#"
+                hasRefinedBorder={true}
+              />
+
+              <EventCard
+                title="Pitch Night"
+                description="Present your startup to a panel of experienced VCs and get valuable feedback. Top pitches will have the opportunity for follow-up meetings."
+                date="March 22, 2025 • 7:00 PM"
+                location="Philadelphia, PA"
+                imageUrl="/startup-pitch.png"
+                buttonText="Learn More"
+                buttonHref="#"
+                hasRefinedBorder={true}
+              />
+
+              <EventCard
+                title="Workshop: Building MVPs"
+                description="Learn how to rapidly prototype and validate your ideas. Hands-on workshop covering modern development tools and best practices."
+                date="March 29, 2025 • 2:00 PM"
+                location="Philadelphia, PA"
+                imageUrl="/coding-workshop-developers.jpg"
+                buttonText="Learn More"
+                buttonHref="#"
+                hasRefinedBorder={true}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div className="h-48 bg-black"></div>
 
       <section className="relative min-h-screen w-full overflow-hidden">
         <div className="absolute inset-0 bg-black"></div>
