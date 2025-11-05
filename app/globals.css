@@ -107,6 +107,18 @@
   }
 }
 
+/* Animate the F in foundry with a subtle pulse glow */
+@keyframes foundry-f-glow {
+  0%, 100% {
+    text-shadow: 0 0 20px rgba(241, 239, 231, 0.4), 0 4px 12px rgba(0, 0, 0, 0.3);
+    letter-spacing: 0.05em;
+  }
+  50% {
+    text-shadow: 0 0 40px rgba(241, 239, 231, 0.8), 0 4px 12px rgba(0, 0, 0, 0.3);
+    letter-spacing: 0.08em;
+  }
+}
+
 @layer base {
   * {
     @apply border-border;

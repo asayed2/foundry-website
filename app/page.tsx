@@ -56,11 +56,14 @@ export default function Home() {
           </div>
           <Background src="/istockphoto-1421524030-640_adpp_is.mp4" placeholder="/alt-placeholder.png" />
           <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
-            <h1 className="font-serif text-white text-8xl md:text-9xl lg:text-[12rem] leading-[0.6] text-center mb-16 [text-shadow:0_2px_4px_rgba(0,0,0,0.2)]">
-              the
-              <br />
-              <span className="italic">foundry</span>
-            </h1>
+            <div className="relative px-8 md:px-16 py-12 md:py-20 rounded-3xl md:rounded-[3rem] max-w-4xl mx-auto">
+
+              <h1 className="relative font-serif text-white text-7xl md:text-9xl lg:text-[10rem] leading-[0.9] md:leading-[0.8] text-center [text-shadow:0_4px_12px_rgba(0,0,0,0.3)]">
+                the
+                <br />
+                <span className="italic font-serif text-7xl md:text-9xl lg:text-[10rem]"><span style={{ animation: 'foundry-f-glow 3s ease-in-out infinite' }}>f</span>oundry</span>
+              </h1>
+            </div>
           </div>
           <Footer />
         </div>
@@ -165,18 +168,6 @@ export default function Home() {
                     />
                   </Link>
                   <Link
-                    href="https://www.avax.network"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-40 h-12 md:w-48 md:h-14 flex items-center justify-center hover:opacity-80 transition-opacity shrink-0"
-                  >
-                    <img
-                      src="/avalanche-logo.png"
-                      alt="Avalanche"
-                      className="h-full w-auto object-contain filter brightness-0 invert"
-                    />
-                  </Link>
-                  <Link
                     href="https://lovable.dev"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -276,18 +267,6 @@ export default function Home() {
                     />
                   </Link>
                   <Link
-                    href="https://www.avax.network"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-40 h-12 md:w-48 md:h-14 flex items-center justify-center hover:opacity-80 transition-opacity shrink-0"
-                  >
-                    <img
-                      src="/avalanche-logo.png"
-                      alt="Avalanche"
-                      className="h-full w-auto object-contain filter brightness-0 invert"
-                    />
-                  </Link>
-                  <Link
                     href="https://lovable.dev"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -384,18 +363,6 @@ export default function Home() {
                       src="/greylock-logo.png"
                       alt="Greylock Partners"
                       className="h-full w-auto object-contain filter brightness-0 invert transition-all duration-300"
-                    />
-                  </Link>
-                  <Link
-                    href="https://www.avax.network"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-40 h-12 md:w-48 md:h-14 flex items-center justify-center hover:opacity-80 transition-opacity shrink-0"
-                  >
-                    <img
-                      src="/avalanche-logo.png"
-                      alt="Avalanche"
-                      className="h-full w-auto object-contain filter brightness-0 invert"
                     />
                   </Link>
                   <Link
@@ -499,7 +466,7 @@ export default function Home() {
                     <div className="w-12 h-12 bg-[#F1EFE7]/10 rounded-xl flex items-center justify-center group-hover:bg-[#F1EFE7]/20 transition-colors duration-300">
                       <div className="w-6 h-6 bg-[#F1EFE7]/60 rounded-md"></div>
                     </div>
-                    <span className="text-xs font-semibold bg-gradient-to-r from-[#F1EFE7] to-[#d4d2ca] bg-clip-text text-transparent px-3 py-1.5 rounded-full border border-[#F1EFE7]/30">IPO: ETO</span>
+                    <span className="text-xs font-semibold bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent px-3 py-1.5 rounded-full border border-yellow-500/30">Seed: ETO</span>
                   </div>
                   <h3 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[#F1EFE7] to-[#c9c7bf] bg-clip-text text-transparent tracking-tight" style={{ fontFamily: "Arial, sans-serif" }}>
                     ETO
@@ -526,7 +493,7 @@ export default function Home() {
                     <div className="w-12 h-12 bg-[#F1EFE7]/10 rounded-xl flex items-center justify-center group-hover:bg-[#F1EFE7]/20 transition-colors duration-300">
                       <div className="w-6 h-6 bg-[#F1EFE7]/60 rounded-md"></div>
                     </div>
-                    <span className="text-xs font-semibold bg-gradient-to-r from-emerald-400 to-emerald-600 bg-clip-text text-transparent px-3 py-1.5 rounded-full border border-emerald-500/30">Acquired</span>
+                    <span className="text-xs font-semibold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent px-3 py-1.5 rounded-full border border-blue-500/30">Series A</span>
                   </div>
                   <h3 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[#F1EFE7] to-[#c9c7bf] bg-clip-text text-transparent tracking-tight" style={{ fontFamily: "Arial, sans-serif" }}>
                     Spaces.ai
@@ -549,7 +516,7 @@ export default function Home() {
                     <div className="w-12 h-12 bg-[#F1EFE7]/10 rounded-xl flex items-center justify-center group-hover:bg-[#F1EFE7]/20 transition-colors duration-300">
                       <div className="w-6 h-6 bg-[#F1EFE7]/60 rounded-md"></div>
                     </div>
-                    <span className="text-xs font-semibold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent px-3 py-1.5 rounded-full border border-blue-500/30">Series A</span>
+                    <span className="text-xs font-semibold bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent px-3 py-1.5 rounded-full border border-yellow-500/30">Seed</span>
                   </div>
                   <h3 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[#F1EFE7] to-[#c9c7bf] bg-clip-text text-transparent tracking-tight" style={{ fontFamily: "Arial, sans-serif" }}>
                     Ulterius
@@ -567,21 +534,28 @@ export default function Home() {
               </div>
 
               <div
-                className="group relative bg-gradient-to-br from-black via-[#0a0a0a] to-black border border-dashed border-[#F1EFE7]/20 p-10 rounded-2xl min-h-[350px] flex flex-col justify-center items-center cursor-pointer transition-all duration-500 hover:border-[#F1EFE7]/40 hover:border-solid overflow-hidden"
+                className="group relative bg-gradient-to-br from-black via-[#0a0a0a] to-black border border-[#F1EFE7]/30 p-10 rounded-2xl min-h-[350px] flex flex-col justify-between cursor-pointer transition-all duration-500 hover:scale-[1.02] hover:border-[#F1EFE7]/60 hover:shadow-2xl hover:shadow-[#F1EFE7]/20 overflow-hidden"
               >
-                <div className="absolute inset-0 bg-[#F1EFE7]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="relative text-center">
-                  <div className="w-16 h-16 mx-auto mb-6 bg-[#F1EFE7]/5 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                    <svg className="w-8 h-8 text-[#F1EFE7]/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                    </svg>
+                <div className="absolute inset-0 bg-gradient-to-br from-[#F1EFE7]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="relative">
+                  <div className="flex items-start justify-between mb-6">
+                    <div className="w-12 h-12 bg-[#F1EFE7]/10 rounded-xl flex items-center justify-center group-hover:bg-[#F1EFE7]/20 transition-colors duration-300">
+                      <div className="w-6 h-6 bg-[#F1EFE7]/60 rounded-md"></div>
+                    </div>
+                    <span className="text-xs font-semibold bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent px-3 py-1.5 rounded-full border border-yellow-500/30">Seed</span>
                   </div>
-                  <h3 className="text-2xl font-light mb-4 text-[#F1EFE7]/60 tracking-wide italic" style={{ fontFamily: "Arial, sans-serif" }}>
-                    Coming Soon
+                  <h3 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[#F1EFE7] to-[#c9c7bf] bg-clip-text text-transparent tracking-tight" style={{ fontFamily: "Arial, sans-serif" }}>
+                    Poresee Labs
                   </h3>
-                  <p className="font-light text-sm leading-relaxed opacity-50 text-[#F1EFE7] tracking-wide" style={{ fontFamily: "Arial, sans-serif" }}>
-                    Exciting new portfolio company announcement coming soon.
+                  <p className="font-light text-base leading-relaxed text-[#F1EFE7]/70 tracking-wide" style={{ fontFamily: "Arial, sans-serif" }}>
+                    Engineered attachments for accessible, affordable prosthetic innovation. Custom bionic limbs powered by attachment-based technology, making advanced mobility solutions available to everyone.
                   </p>
+                </div>
+                <div className="relative mt-8 flex items-center text-[#F1EFE7]/60 group-hover:text-[#F1EFE7] transition-colors duration-300">
+                  <span className="text-sm font-medium tracking-wider uppercase" style={{ fontFamily: "Arial, sans-serif" }}>Learn more</span>
+                  <svg className="w-4 h-4 ml-2 group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
                 </div>
               </div>
 
