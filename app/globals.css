@@ -75,49 +75,6 @@
   }
 }
 
-/* Lighthouse sweep animation - horizontal sweep */
-@keyframes sweep {
-  0% {
-    transform: translateX(-100%) rotate(-15deg);
-    opacity: 0;
-  }
-  10% {
-    opacity: 0.4;
-  }
-  50% {
-    transform: translateX(50%) rotate(-15deg);
-    opacity: 0.6;
-  }
-  90% {
-    opacity: 0.4;
-  }
-  100% {
-    transform: translateX(200%) rotate(-15deg);
-    opacity: 0;
-  }
-}
-
-/* Circular lighthouse rotation - rotating beams from center */
-@keyframes lighthouse-rotate {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-/* Animate the F in foundry with a subtle pulse glow */
-@keyframes foundry-f-glow {
-  0%, 100% {
-    text-shadow: 0 0 20px rgba(241, 239, 231, 0.4), 0 4px 12px rgba(0, 0, 0, 0.3);
-    letter-spacing: 0.05em;
-  }
-  50% {
-    text-shadow: 0 0 40px rgba(241, 239, 231, 0.8), 0 4px 12px rgba(0, 0, 0, 0.3);
-    letter-spacing: 0.08em;
-  }
-}
 
 @layer base {
   * {

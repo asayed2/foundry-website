@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 import { Background } from "@/components/background"
 import { Footer } from "@/components/footer"
 import { FloatingHeader } from "@/components/floating-header"
@@ -9,28 +9,39 @@ import { buttonVariants } from "@/components/ui/button"
 import XLogoIcon from "@/components/icons/x"
 import { socialLinks } from "@/lib/constants"
 import Link from "next/link"
+import Image from "next/image"
 import { Modal } from "@/components/ui/modal"
+import { Timeline } from "@/components/ui/timeline"
+import { motion, useInView } from "framer-motion"
+
+// Fade-in section wrapper
+function FadeInSection({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: "-100px" })
+  
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 40 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+      transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  )
+}
 
 export default function Home() {
   const [isJoinModalOpen, setIsJoinModalOpen] = useState(false)
 
+  // Scroll to top on page load
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   return (
     <>
-      {/* Global Lighthouse Wave - spans entire page */}
-      <div className="fixed inset-0 pointer-events-none z-0">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200vmax] h-[200vmax] animate-[lighthouse-rotate_12s_linear_infinite]">
-          <div className="absolute top-1/2 left-1/2 w-full h-[120px] origin-center -translate-y-1/2">
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#F1EFE7]/35 to-transparent blur-2xl shadow-[0_0_80px_rgba(241,239,231,0.6)]"></div>
-          </div>
-          <div className="absolute top-1/2 left-1/2 w-full h-[100px] origin-center -translate-y-1/2 rotate-120">
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#F1EFE7]/30 to-transparent blur-2xl shadow-[0_0_70px_rgba(241,239,231,0.55)]"></div>
-          </div>
-          <div className="absolute top-1/2 left-1/2 w-full h-[110px] origin-center -translate-y-1/2 rotate-240">
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#F1EFE7]/32 to-transparent blur-2xl shadow-[0_0_75px_rgba(241,239,231,0.58)]"></div>
-          </div>
-        </div>
-      </div>
-
       <FloatingHeader />
 
       <main className="p-inset h-[100dvh] w-full border-border text-border bg-border relative z-10">
@@ -61,7 +72,7 @@ export default function Home() {
               <h1 className="relative font-serif text-white text-7xl md:text-9xl lg:text-[10rem] leading-[0.9] md:leading-[0.8] text-center [text-shadow:0_4px_12px_rgba(0,0,0,0.3)]">
                 the
                 <br />
-                <span className="italic font-serif text-7xl md:text-9xl lg:text-[10rem]"><span style={{ animation: 'foundry-f-glow 3s ease-in-out infinite' }}>f</span>oundry</span>
+                <span className="italic font-serif text-7xl md:text-9xl lg:text-[10rem]">foundry</span>
               </h1>
             </div>
           </div>
@@ -69,745 +80,756 @@ export default function Home() {
         </div>
       </main>
 
-      <section id="about" className="relative min-h-screen w-full overflow-hidden">
-        <div className="absolute inset-0 bg-black"></div>
-
-        {/* Subtle grid pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(241,239,231,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(241,239,231,0.02)_1px,transparent_1px)] bg-[size:100px_100px]"></div>
-
-
-        {/* Radial gradient overlays */}
-        <div className="absolute inset-0">
-          <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-[#F1EFE7]/5 rounded-full blur-[120px]"></div>
-          <div className="absolute bottom-1/4 right-1/3 w-[500px] h-[500px] bg-[#F1EFE7]/3 rounded-full blur-[100px]"></div>
+      {/* Partners/Backed By Section */}
+      <section id="partners" className="relative h-screen w-full overflow-hidden bg-black flex flex-col justify-center">
+        {/* Subtle ambient gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#F1EFE7]/[0.02] via-transparent to-transparent pointer-events-none" />
+        
+        <FadeInSection className="relative z-10 flex flex-col items-center justify-center px-8">
+          {/* Decorative element */}
+          <div className="flex justify-center mb-8">
+            <div className="w-px h-12 bg-gradient-to-b from-transparent to-[#F1EFE7]/30" />
         </div>
 
-        <div className="relative z-10 pt-32 pb-8">
-          <div className="flex flex-col items-center gap-6 w-full mb-8">
-            <p
-              className="text-center text-base md:text-lg lg:text-xl text-[#F1EFE7] opacity-80 max-w-3xl mx-auto mb-16 px-4 leading-relaxed"
-            >
-              
-            </p>
-            <div className="relative mb-48 md:mb-40 lg:mb-48">
-              <p
-                className="text-base md:text-lg lg:text-xl font-light tracking-[0.2em] uppercase text-center relative z-10"
-                style={{ color: "#F1EFE7" }}
-              >
-                <span className="opacity-60">Backed by</span>
-              </p>
-              {/* Decorative line */}
-              <div className="absolute left-1/2 -translate-x-1/2 top-1/2 w-24 md:w-32 h-px bg-gradient-to-r from-transparent via-[#F1EFE7]/40 to-transparent"></div>
-            </div>
-            <div className="w-full overflow-hidden -mt-32 md:-mt-40 lg:-mt-48 mb-20 md:mb-24 lg:mb-32 relative">
+          <p
+            className="text-[10px] md:text-xs font-medium tracking-[0.4em] uppercase text-center mb-20"
+            style={{ color: "#F1EFE7", opacity: 0.4, fontFamily: "Arial, sans-serif" }}
+          >
+            Backed by
+          </p>
+          
+          <div className="w-full overflow-hidden relative">
               {/* Gradient overlays for smooth fade effect */}
-              <div className="absolute left-0 top-0 bottom-0 w-32 md:w-48 bg-gradient-to-r from-black via-black/80 to-transparent z-10 pointer-events-none"></div>
-              <div className="absolute right-0 top-0 bottom-0 w-32 md:w-48 bg-gradient-to-l from-black via-black/80 to-transparent z-10 pointer-events-none"></div>
+              <div className="absolute left-0 top-0 bottom-0 w-40 md:w-64 bg-gradient-to-r from-black via-black/90 to-transparent z-10 pointer-events-none"></div>
+              <div className="absolute right-0 top-0 bottom-0 w-40 md:w-64 bg-gradient-to-l from-black via-black/90 to-transparent z-10 pointer-events-none"></div>
               
               <div className="flex animate-scroll-left">
                 {/* First set of logos */}
-                <div className="flex items-center gap-12 md:gap-16 px-8 shrink-0">
+                <div className="flex items-center gap-16 md:gap-24 px-12 shrink-0">
                   <Link
                     href="https://www.avax.network"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group w-40 h-16 md:w-52 md:h-20 flex items-center justify-center shrink-0 transition-all duration-300 hover:scale-105 hover:opacity-90"
+                    className="group w-44 h-12 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
                   >
                     <img
                       src="/avalanche-logo.png"
                       alt="Avalanche"
-                      className="h-full w-auto object-contain transition-all duration-300"
+                      className="max-h-full max-w-full object-contain"
                     />
                   </Link>
                   <Link
                     href="https://www.dormroomfund.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group w-40 h-16 md:w-52 md:h-20 flex items-center justify-center shrink-0 transition-all duration-300 hover:scale-105 hover:opacity-90"
+                    className="group w-44 h-12 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
                   >
                     <img
                       src="/dorm-room-fund-logo.svg"
                       alt="Dorm Room Fund"
-                      className="h-full w-auto object-contain filter brightness-0 invert transition-all duration-300"
+                      className="max-h-full max-w-full object-contain filter brightness-0 invert"
                     />
                   </Link>
                   <Link
                     href="https://www.afore.vc"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group w-20 h-8 md:w-24 md:h-10 flex items-center justify-center shrink-0 transition-all duration-300 hover:scale-105 hover:opacity-90"
+                    className="group w-44 h-12 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
                   >
                     <img
                       src="/afore-capital-logo.png"
                       alt="Afore Capital"
-                      className="h-full w-auto object-contain filter brightness-0 invert transition-all duration-300"
+                      className="max-h-full max-w-full object-contain filter brightness-0 invert"
                     />
                   </Link>
                   <Link
                     href="https://pear.vc"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group w-48 h-20 md:w-64 md:h-24 flex items-center justify-center shrink-0 transition-all duration-300 hover:scale-105 hover:opacity-90 px-4 py-2"
+                    className="group w-44 h-12 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
                   >
                     <img
                       src="/pear-vc-logo.png"
                       alt="Pear VC"
-                      className="h-full w-auto object-contain filter brightness-0 invert transition-all duration-300"
-                    />
-                  </Link>
-                  <Link
-                    href="https://greylock.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group w-40 h-16 md:w-52 md:h-20 flex items-center justify-center shrink-0 transition-all duration-300 hover:scale-105 hover:opacity-90"
-                  >
-                    <img
-                      src="/greylock-logo.png"
-                      alt="Greylock Partners"
-                      className="h-full w-auto object-contain filter brightness-0 invert transition-all duration-300"
+                      className="max-h-full max-w-full object-contain filter brightness-0 invert"
                     />
                   </Link>
                   <Link
                     href="https://lovable.dev"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group w-16 h-16 md:w-20 md:h-20 flex items-center justify-center shrink-0 transition-all duration-300 hover:scale-105 hover:opacity-90"
+                    className="group w-44 h-12 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
                   >
                     <img 
                       src="/lovable-logo.png" 
                       alt="Lovable" 
-                      className="h-full w-auto object-contain transition-all duration-300"
+                      className="max-h-full max-w-full object-contain"
                     />
                   </Link>
                   <Link
                     href="https://adobe.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group w-32 h-14 md:w-40 md:h-16 flex items-center justify-center shrink-0 transition-all duration-300 hover:scale-105 hover:opacity-90"
+                    className="group w-44 h-12 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
                   >
                     <img
                       src="/adobe-logo.png"
                       alt="Adobe"
-                      className="h-full w-auto object-contain filter brightness-0 invert transition-all duration-300"
+                      className="max-h-full max-w-full object-contain filter brightness-0 invert"
                     />
                   </Link>
                   <Link
                     href="https://www.perplexity.ai"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group w-40 h-14 md:w-48 md:h-16 flex items-center justify-center shrink-0 transition-all duration-300 hover:scale-105 hover:opacity-90"
+                    className="group w-44 h-12 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
                   >
                     <img
                       src="/off-white-logo.png"
                       alt="Off-White"
-                      className="h-full w-auto object-contain filter brightness-0 invert transition-all duration-300"
+                      className="max-h-full max-w-full object-contain filter brightness-0 invert"
                     />
                   </Link>
                 </div>
                 {/* Duplicate set for seamless loop */}
-                <div className="flex items-center gap-12 md:gap-16 px-8 shrink-0">
+                <div className="flex items-center gap-16 md:gap-24 px-12 shrink-0">
                   <Link
                     href="https://www.avax.network"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group w-40 h-16 md:w-52 md:h-20 flex items-center justify-center shrink-0 transition-all duration-300 hover:scale-105 hover:opacity-90"
+                    className="group w-44 h-12 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
                   >
                     <img
                       src="/avalanche-logo.png"
                       alt="Avalanche"
-                      className="h-full w-auto object-contain transition-all duration-300"
+                      className="max-h-full max-w-full object-contain"
                     />
                   </Link>
                   <Link
                     href="https://www.dormroomfund.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group w-40 h-16 md:w-52 md:h-20 flex items-center justify-center shrink-0 transition-all duration-300 hover:scale-105 hover:opacity-90"
+                    className="group w-44 h-12 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
                   >
                     <img
                       src="/dorm-room-fund-logo.svg"
                       alt="Dorm Room Fund"
-                      className="h-full w-auto object-contain filter brightness-0 invert transition-all duration-300"
+                      className="max-h-full max-w-full object-contain filter brightness-0 invert"
                     />
                   </Link>
                   <Link
                     href="https://www.afore.vc"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group w-20 h-8 md:w-24 md:h-10 flex items-center justify-center shrink-0 transition-all duration-300 hover:scale-105 hover:opacity-90"
+                    className="group w-44 h-12 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
                   >
                     <img
                       src="/afore-capital-logo.png"
                       alt="Afore Capital"
-                      className="h-full w-auto object-contain filter brightness-0 invert transition-all duration-300"
+                      className="max-h-full max-w-full object-contain filter brightness-0 invert"
                     />
                   </Link>
                   <Link
                     href="https://pear.vc"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group w-48 h-20 md:w-64 md:h-24 flex items-center justify-center shrink-0 transition-all duration-300 hover:scale-105 hover:opacity-90 px-4 py-2"
+                    className="group w-44 h-12 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
                   >
                     <img
                       src="/pear-vc-logo.png"
                       alt="Pear VC"
-                      className="h-full w-auto object-contain filter brightness-0 invert transition-all duration-300"
-                    />
-                  </Link>
-                  <Link
-                    href="https://greylock.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group w-40 h-16 md:w-52 md:h-20 flex items-center justify-center shrink-0 transition-all duration-300 hover:scale-105 hover:opacity-90"
-                  >
-                    <img
-                      src="/greylock-logo.png"
-                      alt="Greylock Partners"
-                      className="h-full w-auto object-contain filter brightness-0 invert transition-all duration-300"
+                      className="max-h-full max-w-full object-contain filter brightness-0 invert"
                     />
                   </Link>
                   <Link
                     href="https://lovable.dev"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group w-16 h-16 md:w-20 md:h-20 flex items-center justify-center shrink-0 transition-all duration-300 hover:scale-105 hover:opacity-90"
+                    className="group w-44 h-12 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
                   >
                     <img 
                       src="/lovable-logo.png" 
                       alt="Lovable" 
-                      className="h-full w-auto object-contain transition-all duration-300"
+                      className="max-h-full max-w-full object-contain"
                     />
                   </Link>
                   <Link
                     href="https://adobe.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group w-32 h-14 md:w-40 md:h-16 flex items-center justify-center shrink-0 transition-all duration-300 hover:scale-105 hover:opacity-90"
+                    className="group w-44 h-12 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
                   >
                     <img
                       src="/adobe-logo.png"
                       alt="Adobe"
-                      className="h-full w-auto object-contain filter brightness-0 invert transition-all duration-300"
+                      className="max-h-full max-w-full object-contain filter brightness-0 invert"
                     />
                   </Link>
                   <Link
                     href="https://www.perplexity.ai"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group w-40 h-14 md:w-48 md:h-16 flex items-center justify-center shrink-0 transition-all duration-300 hover:scale-105 hover:opacity-90"
+                    className="group w-44 h-12 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
                   >
                     <img
                       src="/off-white-logo.png"
                       alt="Off-White"
-                      className="h-full w-auto object-contain filter brightness-0 invert transition-all duration-300"
+                      className="max-h-full max-w-full object-contain filter brightness-0 invert"
                     />
                   </Link>
                 </div>
                 {/* Third set for extra smoothness */}
-                <div className="flex items-center gap-12 md:gap-16 px-8 shrink-0">
+                <div className="flex items-center gap-16 md:gap-24 px-12 shrink-0">
                   <Link
                     href="https://www.avax.network"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group w-40 h-16 md:w-52 md:h-20 flex items-center justify-center shrink-0 transition-all duration-300 hover:scale-105 hover:opacity-90"
+                    className="group w-44 h-12 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
                   >
                     <img
                       src="/avalanche-logo.png"
                       alt="Avalanche"
-                      className="h-full w-auto object-contain transition-all duration-300"
+                      className="max-h-full max-w-full object-contain"
                     />
                   </Link>
                   <Link
                     href="https://www.dormroomfund.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group w-40 h-16 md:w-52 md:h-20 flex items-center justify-center shrink-0 transition-all duration-300 hover:scale-105 hover:opacity-90"
+                    className="group w-44 h-12 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
                   >
                     <img
                       src="/dorm-room-fund-logo.svg"
                       alt="Dorm Room Fund"
-                      className="h-full w-auto object-contain filter brightness-0 invert transition-all duration-300"
+                      className="max-h-full max-w-full object-contain filter brightness-0 invert"
                     />
                   </Link>
                   <Link
                     href="https://www.afore.vc"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group w-20 h-8 md:w-24 md:h-10 flex items-center justify-center shrink-0 transition-all duration-300 hover:scale-105 hover:opacity-90"
+                    className="group w-44 h-12 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
                   >
                     <img
                       src="/afore-capital-logo.png"
                       alt="Afore Capital"
-                      className="h-full w-auto object-contain filter brightness-0 invert transition-all duration-300"
+                      className="max-h-full max-w-full object-contain filter brightness-0 invert"
                     />
                   </Link>
                   <Link
                     href="https://pear.vc"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group w-48 h-20 md:w-64 md:h-24 flex items-center justify-center shrink-0 transition-all duration-300 hover:scale-105 hover:opacity-90 px-4 py-2"
+                    className="group w-44 h-12 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
                   >
                     <img
                       src="/pear-vc-logo.png"
                       alt="Pear VC"
-                      className="h-full w-auto object-contain filter brightness-0 invert transition-all duration-300"
-                    />
-                  </Link>
-                  <Link
-                    href="https://greylock.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group w-40 h-16 md:w-52 md:h-20 flex items-center justify-center shrink-0 transition-all duration-300 hover:scale-105 hover:opacity-90"
-                  >
-                    <img
-                      src="/greylock-logo.png"
-                      alt="Greylock Partners"
-                      className="h-full w-auto object-contain filter brightness-0 invert transition-all duration-300"
+                      className="max-h-full max-w-full object-contain filter brightness-0 invert"
                     />
                   </Link>
                   <Link
                     href="https://lovable.dev"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group w-16 h-16 md:w-20 md:h-20 flex items-center justify-center shrink-0 transition-all duration-300 hover:scale-105 hover:opacity-90"
+                    className="group w-44 h-12 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
                   >
                     <img 
                       src="/lovable-logo.png" 
                       alt="Lovable" 
-                      className="h-full w-auto object-contain transition-all duration-300"
+                      className="max-h-full max-w-full object-contain"
                     />
                   </Link>
                   <Link
                     href="https://adobe.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group w-32 h-14 md:w-40 md:h-16 flex items-center justify-center shrink-0 transition-all duration-300 hover:scale-105 hover:opacity-90"
+                    className="group w-44 h-12 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
                   >
                     <img
                       src="/adobe-logo.png"
                       alt="Adobe"
-                      className="h-full w-auto object-contain filter brightness-0 invert transition-all duration-300"
+                      className="max-h-full max-w-full object-contain filter brightness-0 invert"
                     />
                   </Link>
                   <Link
                     href="https://www.perplexity.ai"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group w-40 h-14 md:w-48 md:h-16 flex items-center justify-center shrink-0 transition-all duration-300 hover:scale-105 hover:opacity-90"
+                    className="group w-44 h-12 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
                   >
                     <img
                       src="/off-white-logo.png"
                       alt="Off-White"
-                      className="h-full w-auto object-contain filter brightness-0 invert transition-all duration-300"
+                      className="max-h-full max-w-full object-contain filter brightness-0 invert"
                     />
                   </Link>
                 </div>
               </div>
             </div>
-            <h2 className="text-6xl md:text-7xl lg:text-8xl mb-8" style={{ color: "#F1EFE7", fontFamily: "'Times New Roman', serif" }}>
-              About <span className="italic">Us</span>
-            </h2>
-
-            <div className="space-y-8">
-              <p
-                className="text-lg md:text-xl font-light leading-relaxed max-w-4xl mx-auto text-center"
-                style={{ color: "#F1EFE7", fontFamily: "Arial, sans-serif" }}
-              >
-                Foundry is the first builder-led community in Philadelphia that's actually building alongside its
-                members. We started by searching for the right resources?VC connections, partnerships, go-to-market
-                guidance, and real builder support?then decided to create them ourselves. Foundry exists for those with
-                the knowledge and drive to make the impossible happen. We genuinely care, and that's what sets us apart.
-              </p>
-            </div>
+          
+          {/* Decorative bottom element */}
+          <div className="flex justify-center mt-20">
+            <div className="w-px h-12 bg-gradient-to-t from-transparent to-[#F1EFE7]/30" />
           </div>
-        </div>
+        </FadeInSection>
       </section>
 
-      <section id="companies" className="relative min-h-screen w-full overflow-hidden -mt-24 md:-mt-32">
-        <div className="absolute inset-0 bg-black"></div>
+      {/* About Section */}
+      <section id="about" className="relative h-screen w-full overflow-hidden bg-black flex flex-col justify-center">
+        {/* Subtle radial gradient */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(241,239,231,0.03)_0%,_transparent_70%)] pointer-events-none" />
+        
+        <FadeInSection className="relative z-10 flex flex-col items-center justify-center px-6 md:px-12 lg:px-20">
+          <div className="w-full max-w-6xl mx-auto">
+            {/* Decorative top element */}
+            <div className="flex justify-center mb-12">
+              <div className="w-px h-16 bg-gradient-to-b from-transparent via-[#F1EFE7]/30 to-[#F1EFE7]/10" />
+            </div>
+            
+            <h2 className="text-5xl md:text-6xl lg:text-8xl mb-16 text-center tracking-tight" style={{ color: "#F1EFE7", fontFamily: "'Times New Roman', serif" }}>
+              About <span className="italic font-light">Us</span>
+            </h2>
 
-        {/* Subtle grid pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(241,239,231,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(241,239,231,0.02)_1px,transparent_1px)] bg-[size:100px_100px]"></div>
+            {/* Two-column layout on larger screens */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+              <div className="space-y-6">
+                <span className="text-[10px] font-medium tracking-[0.3em] uppercase text-[#F1EFE7]/40" style={{ fontFamily: "Arial, sans-serif" }}>Our Mission</span>
+                <p
+                  className="text-lg md:text-xl lg:text-2xl font-light leading-relaxed"
+                  style={{ color: "#F1EFE7", opacity: 0.9, fontFamily: "Arial, sans-serif" }}
+                >
+                  Foundry is the first builder-led community in Philadelphia that's actually building alongside its members.
+                </p>
+              </div>
+              
+              <div className="space-y-6">
+                <span className="text-[10px] font-medium tracking-[0.3em] uppercase text-[#F1EFE7]/40" style={{ fontFamily: "Arial, sans-serif" }}>Our Approach</span>
+                <p
+                  className="text-lg md:text-xl lg:text-2xl font-light leading-relaxed"
+                  style={{ color: "#F1EFE7", opacity: 0.9, fontFamily: "Arial, sans-serif" }}
+                >
+                  We started by searching for the right resources—VC connections, partnerships, go-to-market guidance—then decided to create them ourselves.
+                </p>
+              </div>
+            </div>
+            
+            {/* Centered tagline */}
+            <div className="mt-20 text-center">
+              <p
+                className="text-xl md:text-2xl lg:text-3xl font-light leading-relaxed max-w-3xl mx-auto italic"
+                style={{ color: "#F1EFE7", opacity: 0.7, fontFamily: "'Times New Roman', serif" }}
+              >
+                "We genuinely care, and that's what sets us apart."
+              </p>
+            </div>
+            
+            {/* Decorative bottom element */}
+            <div className="flex justify-center mt-16">
+              <div className="h-px w-48 bg-gradient-to-r from-transparent via-[#F1EFE7]/20 to-transparent" />
+            </div>
+          </div>
+        </FadeInSection>
+      </section>
 
-        {/* Animated gradient background */}
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#F1EFE7]/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#F1EFE7]/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        </div>
-
-        {/* Additional radial gradients for depth */}
-        <div className="absolute inset-0">
-          <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-[#F1EFE7]/3 rounded-full blur-[100px]"></div>
-          <div className="absolute bottom-0 left-1/3 w-[600px] h-[600px] bg-[#F1EFE7]/4 rounded-full blur-[120px]"></div>
-        </div>
-
-        <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-8 pt-8 pb-24">
-          <div className="max-w-7xl mx-auto w-full">
-            <h2 className="text-6xl md:text-7xl lg:text-8xl mb-8 text-center tracking-tight" style={{ color: "#F1EFE7", fontFamily: "'Times New Roman', serif" }}>
+      <section id="companies" className="relative h-screen w-full overflow-hidden bg-black flex flex-col justify-center">
+        {/* Subtle ambient gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#F1EFE7]/[0.02] to-transparent pointer-events-none" />
+        
+        <FadeInSection className="relative z-10 flex flex-col items-center justify-center px-6 md:px-12 lg:px-20 py-16">
+          <div className="w-full max-w-7xl mx-auto">
+            {/* Section header with decorative elements */}
+            <div className="flex items-center justify-center gap-8 mb-6">
+              <div className="hidden md:block h-px w-24 bg-gradient-to-r from-transparent to-[#F1EFE7]/30" />
+              <h2 className="text-5xl md:text-6xl lg:text-7xl text-center tracking-tight" style={{ color: "#F1EFE7", fontFamily: "'Times New Roman', serif" }}>
               <span className="italic font-light">Our</span> Companies
             </h2>
+              <div className="hidden md:block h-px w-24 bg-gradient-to-l from-transparent to-[#F1EFE7]/30" />
+            </div>
             <p
-              className="text-center text-base md:text-lg lg:text-xl text-[#F1EFE7] opacity-80 max-w-3xl mx-auto mb-20 px-4 leading-relaxed font-light tracking-wide"
+              className="text-center text-base md:text-lg text-[#F1EFE7] opacity-60 max-w-xl mx-auto mb-16 leading-relaxed font-light"
               style={{ fontFamily: "Arial, sans-serif" }}
             >
-              We're builders ourselves, and our passion for creating goes hand in hand with helping other founders like us. The member companies within our group are a testament to that spirit of building, collaboration, and execution.
+              We're builders ourselves, helping other founders like us.
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-[#F1EFE7]/15 border border-[#F1EFE7]/15">
               <Link
                 href="https://entropytoorder.xyz"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative bg-gradient-to-br from-black via-[#0a0a0a] to-black border border-[#F1EFE7]/30 p-10 rounded-2xl min-h-[350px] flex flex-col justify-between cursor-pointer transition-all duration-500 hover:scale-[1.02] hover:border-[#F1EFE7]/60 hover:shadow-2xl hover:shadow-[#F1EFE7]/20 overflow-hidden"
+                className="group bg-[#0a0a0a] p-8 md:p-10 flex flex-col transition-all duration-300 hover:bg-[#111]"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-[#F1EFE7]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="relative">
-                  <div className="flex items-start justify-between mb-6">
-                    <div className="w-12 h-12 bg-[#F1EFE7]/10 rounded-xl flex items-center justify-center group-hover:bg-[#F1EFE7]/20 transition-colors duration-300">
-                      <div className="w-6 h-6 bg-[#F1EFE7]/60 rounded-md"></div>
-                    </div>
-                    <span className="text-xs font-semibold bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent px-3 py-1.5 rounded-full border border-yellow-500/30">Seed: ETO</span>
-                  </div>
-                  <h3 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[#F1EFE7] to-[#c9c7bf] bg-clip-text text-transparent tracking-tight" style={{ fontFamily: "Arial, sans-serif" }}>
-                    ETO
-                  </h3>
-                  <p className="font-light text-base leading-relaxed text-[#F1EFE7]/70 tracking-wide" style={{ fontFamily: "Arial, sans-serif" }}>
-                    ETO is a Web 3 finance company creating Synthetic assets bringing real world value on-chain through
-                    purchasable tokens with structured avenues of Yield.
-                  </p>
-                </div>
-                <div className="relative mt-8 flex items-center text-[#F1EFE7]/60 group-hover:text-[#F1EFE7] transition-colors duration-300">
-                  <span className="text-sm font-medium tracking-wider uppercase" style={{ fontFamily: "Arial, sans-serif" }}>Learn more</span>
-                  <svg className="w-4 h-4 ml-2 group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                <div className="flex items-center justify-between mb-8">
+                  <span className="text-[10px] font-medium tracking-[0.2em] uppercase text-[#F1EFE7]/40" style={{ fontFamily: "Arial, sans-serif" }}>Seed Round</span>
+                  <svg className="w-4 h-4 text-[#F1EFE7]/30 group-hover:text-[#F1EFE7]/70 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 17L17 7M17 7H7M17 7v10" />
                   </svg>
                 </div>
+                <h3 className="text-xl md:text-2xl font-semibold mb-4 text-[#F1EFE7] group-hover:text-white transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
+                  ETO
+                </h3>
+                <p className="text-sm leading-relaxed text-[#F1EFE7]/50 group-hover:text-[#F1EFE7]/70 transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
+                  Web 3 finance company creating synthetic assets bringing real world value on-chain.
+                </p>
               </Link>
 
-              <div
-                className="group relative bg-gradient-to-br from-black via-[#0a0a0a] to-black border border-[#F1EFE7]/30 p-10 rounded-2xl min-h-[350px] flex flex-col justify-between cursor-pointer transition-all duration-500 hover:scale-[1.02] hover:border-[#F1EFE7]/60 hover:shadow-2xl hover:shadow-[#F1EFE7]/20 overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-[#F1EFE7]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="relative">
-                  <div className="flex items-start justify-between mb-6">
-                    <div className="w-12 h-12 bg-[#F1EFE7]/10 rounded-xl flex items-center justify-center group-hover:bg-[#F1EFE7]/20 transition-colors duration-300">
-                      <div className="w-6 h-6 bg-[#F1EFE7]/60 rounded-md"></div>
-                    </div>
-                    <span className="text-xs font-semibold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent px-3 py-1.5 rounded-full border border-blue-500/30">Series A</span>
-                  </div>
-                  <h3 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[#F1EFE7] to-[#c9c7bf] bg-clip-text text-transparent tracking-tight" style={{ fontFamily: "Arial, sans-serif" }}>
-                    Spaces.ai
-                  </h3>
-                  <p className="font-light text-base leading-relaxed text-[#F1EFE7]/70 tracking-wide" style={{ fontFamily: "Arial, sans-serif" }}>
-                    Making interior design easy with AI.
-                  </p>
+              <div className="group bg-[#0a0a0a] p-8 md:p-10 flex flex-col transition-all duration-300 hover:bg-[#111]">
+                <div className="flex items-center justify-between mb-8">
+                  <span className="text-[10px] font-medium tracking-[0.2em] uppercase text-[#F1EFE7]/40" style={{ fontFamily: "Arial, sans-serif" }}>Pre-Seed</span>
                 </div>
-                <div className="relative mt-8">
-                  <p className="text-sm text-[#F1EFE7]/60 tracking-wide" style={{ fontFamily: "Arial, sans-serif" }}>Acquired by <span className="font-semibold text-[#F1EFE7]">Invitae</span></p>
-                </div>
+                <h3 className="text-xl md:text-2xl font-semibold mb-4 text-[#F1EFE7] group-hover:text-white transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
+                  Deal Nest
+                </h3>
+                <p className="text-sm leading-relaxed text-[#F1EFE7]/50 group-hover:text-[#F1EFE7]/70 transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
+                  AI-powered deal flow management for venture capital firms.
+                </p>
               </div>
 
-              <div
-                className="group relative bg-gradient-to-br from-black via-[#0a0a0a] to-black border border-[#F1EFE7]/30 p-10 rounded-2xl min-h-[350px] flex flex-col justify-between cursor-pointer transition-all duration-500 hover:scale-[1.02] hover:border-[#F1EFE7]/60 hover:shadow-2xl hover:shadow-[#F1EFE7]/20 overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-[#F1EFE7]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="relative">
-                  <div className="flex items-start justify-between mb-6">
-                    <div className="w-12 h-12 bg-[#F1EFE7]/10 rounded-xl flex items-center justify-center group-hover:bg-[#F1EFE7]/20 transition-colors duration-300">
-                      <div className="w-6 h-6 bg-[#F1EFE7]/60 rounded-md"></div>
+              <div className="group bg-[#0a0a0a] p-8 md:p-10 flex flex-col transition-all duration-300 hover:bg-[#111]">
+                <div className="flex items-center justify-between mb-8">
+                  <span className="text-[10px] font-medium tracking-[0.2em] uppercase text-[#F1EFE7]/40" style={{ fontFamily: "Arial, sans-serif" }}>Seed Round</span>
                     </div>
-                    <span className="text-xs font-semibold bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent px-3 py-1.5 rounded-full border border-yellow-500/30">Seed</span>
-                  </div>
-                  <h3 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[#F1EFE7] to-[#c9c7bf] bg-clip-text text-transparent tracking-tight" style={{ fontFamily: "Arial, sans-serif" }}>
+                <h3 className="text-xl md:text-2xl font-semibold mb-4 text-[#F1EFE7] group-hover:text-white transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
                     Ulterius
                   </h3>
-                  <p className="font-light text-base leading-relaxed text-[#F1EFE7]/70 tracking-wide" style={{ fontFamily: "Arial, sans-serif" }}>
+                <p className="text-sm leading-relaxed text-[#F1EFE7]/50 group-hover:text-[#F1EFE7]/70 transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
                     Innovative technology solutions for the modern enterprise.
                   </p>
-                </div>
-                <div className="relative mt-8 flex items-center text-[#F1EFE7]/60 group-hover:text-[#F1EFE7] transition-colors duration-300">
-                  <span className="text-sm font-medium tracking-wider uppercase" style={{ fontFamily: "Arial, sans-serif" }}>Learn more</span>
-                  <svg className="w-4 h-4 ml-2 group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </div>
               </div>
 
-              <div
-                className="group relative bg-gradient-to-br from-black via-[#0a0a0a] to-black border border-[#F1EFE7]/30 p-10 rounded-2xl min-h-[350px] flex flex-col justify-between cursor-pointer transition-all duration-500 hover:scale-[1.02] hover:border-[#F1EFE7]/60 hover:shadow-2xl hover:shadow-[#F1EFE7]/20 overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-[#F1EFE7]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="relative">
-                  <div className="flex items-start justify-between mb-6">
-                    <div className="w-12 h-12 bg-[#F1EFE7]/10 rounded-xl flex items-center justify-center group-hover:bg-[#F1EFE7]/20 transition-colors duration-300">
-                      <div className="w-6 h-6 bg-[#F1EFE7]/60 rounded-md"></div>
-                    </div>
-                    <span className="text-xs font-semibold bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent px-3 py-1.5 rounded-full border border-yellow-500/30">Seed</span>
-                  </div>
-                  <h3 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[#F1EFE7] to-[#c9c7bf] bg-clip-text text-transparent tracking-tight" style={{ fontFamily: "Arial, sans-serif" }}>
-                    Poresee Labs
+              <div className="group bg-[#0a0a0a] p-8 md:p-10 flex flex-col transition-all duration-300 hover:bg-[#111]">
+                <div className="flex items-center justify-between mb-8">
+                  <span className="text-[10px] font-medium tracking-[0.2em] uppercase text-[#F1EFE7]/40" style={{ fontFamily: "Arial, sans-serif" }}>Seed Round</span>
+                </div>
+                <h3 className="text-xl md:text-2xl font-semibold mb-4 text-[#F1EFE7] group-hover:text-white transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
+                  Velric AI
                   </h3>
-                  <p className="font-light text-base leading-relaxed text-[#F1EFE7]/70 tracking-wide" style={{ fontFamily: "Arial, sans-serif" }}>
-                    Engineered attachments for accessible, affordable prosthetic innovation. Custom bionic limbs powered by attachment-based technology, making advanced mobility solutions available to everyone.
-                  </p>
-                </div>
-                <div className="relative mt-8 flex items-center text-[#F1EFE7]/60 group-hover:text-[#F1EFE7] transition-colors duration-300">
-                  <span className="text-sm font-medium tracking-wider uppercase" style={{ fontFamily: "Arial, sans-serif" }}>Learn more</span>
-                  <svg className="w-4 h-4 ml-2 group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </div>
-              </div>
-
-              <div
-                className="group relative bg-gradient-to-br from-black via-[#0a0a0a] to-black border border-dashed border-[#F1EFE7]/20 p-10 rounded-2xl min-h-[350px] flex flex-col justify-center items-center cursor-pointer transition-all duration-500 hover:border-[#F1EFE7]/40 hover:border-solid overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-[#F1EFE7]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="relative text-center">
-                  <div className="w-16 h-16 mx-auto mb-6 bg-[#F1EFE7]/5 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                    <svg className="w-8 h-8 text-[#F1EFE7]/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                    </svg>
-                  </div>
-                  <h3 className="text-2xl font-light mb-4 text-[#F1EFE7]/60 tracking-wide italic" style={{ fontFamily: "Arial, sans-serif" }}>
-                    Coming Soon
-                  </h3>
-                  <p className="font-light text-sm leading-relaxed opacity-50 text-[#F1EFE7] tracking-wide" style={{ fontFamily: "Arial, sans-serif" }}>
-                    Exciting new portfolio company announcement coming soon.
-                  </p>
-                </div>
-              </div>
-
-              <div
-                className="group relative bg-gradient-to-br from-black via-[#0a0a0a] to-black border border-dashed border-[#F1EFE7]/20 p-10 rounded-2xl min-h-[350px] flex flex-col justify-center items-center cursor-pointer transition-all duration-500 hover:border-[#F1EFE7]/40 hover:border-solid overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-[#F1EFE7]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="relative text-center">
-                  <div className="w-16 h-16 mx-auto mb-6 bg-[#F1EFE7]/5 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                    <svg className="w-8 h-8 text-[#F1EFE7]/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                    </svg>
-                  </div>
-                  <h3 className="text-2xl font-light mb-4 text-[#F1EFE7]/60 tracking-wide italic" style={{ fontFamily: "Arial, sans-serif" }}>
-                    Coming Soon
-                  </h3>
-                  <p className="font-light text-sm leading-relaxed opacity-50 text-[#F1EFE7] tracking-wide" style={{ fontFamily: "Arial, sans-serif" }}>
-                    Exciting new portfolio company announcement coming soon.
-                  </p>
-                </div>
+                <p className="text-sm leading-relaxed text-[#F1EFE7]/50 group-hover:text-[#F1EFE7]/70 transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
+                  Enterprise AI infrastructure for automated decision intelligence.
+                </p>
               </div>
             </div>
 
-            {/* Join the Foundry Section */}
-            <div className="flex flex-col items-center justify-center mt-16 md:mt-24 mb-8">
-              <h3 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-6 text-center tracking-tight" style={{ color: "#F1EFE7" }}>
-                Join the Foundry
-              </h3>
-              <p className="text-lg md:text-xl font-light text-center mb-8 max-w-2xl mx-auto leading-relaxed" style={{ color: "#F1EFE7" }}>
-                Come join the movement to democratize the world.
-              </p>
-              <Link
-                href="https://forms.gle/eqmwtHuwrnafYych7"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm font-semibold bg-[#F1EFE7] text-black px-8 py-4 rounded-xl hover:bg-[#F1EFE7]/90 transition-all duration-300 hover:shadow-lg hover:shadow-[#F1EFE7]/50 transform hover:-translate-y-1 tracking-wider uppercase"
-              >
-                Apply Now
-              </Link>
+            {/* Bottom decorative line */}
+            <div className="flex justify-center mt-16">
+              <div className="h-px w-32 bg-gradient-to-r from-transparent via-[#F1EFE7]/20 to-transparent" />
             </div>
           </div>
-        </div>
+        </FadeInSection>
       </section>
 
-      <section id="vcs" className="relative min-h-screen w-full overflow-hidden">
-        <div className="absolute inset-0 bg-black"></div>
-
-        {/* Subtle grid pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(241,239,231,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(241,239,231,0.02)_1px,transparent_1px)] bg-[size:100px_100px]"></div>
-
-
-        {/* Radial gradient overlays */}
-        <div className="absolute inset-0">
-          <div className="absolute top-1/3 left-1/4 w-[650px] h-[650px] bg-[#F1EFE7]/4 rounded-full blur-[110px]"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-[550px] h-[550px] bg-[#F1EFE7]/3 rounded-full blur-[90px]"></div>
+      <section id="vcs" className="relative h-screen w-full overflow-hidden bg-black flex flex-col justify-center">
+        {/* Subtle ambient gradient */}
+        <div className="absolute inset-0 bg-gradient-to-t from-transparent via-[#F1EFE7]/[0.02] to-transparent pointer-events-none" />
+        
+        <FadeInSection className="relative z-10 flex flex-col items-center justify-center px-6 md:px-12 lg:px-20 py-16">
+          <div className="w-full max-w-7xl mx-auto">
+            {/* Section header with decorative elements */}
+            <div className="flex items-center justify-center gap-8 mb-6">
+              <div className="hidden md:block h-px w-24 bg-gradient-to-r from-transparent to-[#F1EFE7]/30" />
+              <h2 className="text-5xl md:text-6xl lg:text-7xl text-center tracking-tight" style={{ color: "#F1EFE7", fontFamily: "'Times New Roman', serif" }}>
+                <span className="italic font-light">Our</span> Partners
+              </h2>
+              <div className="hidden md:block h-px w-24 bg-gradient-to-l from-transparent to-[#F1EFE7]/30" />
         </div>
-
-        <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-8 py-16">
-          <div className="max-w-7xl mx-auto w-full">
-            <h2 className="text-6xl md:text-7xl lg:text-8xl mb-8 text-center tracking-tight" style={{ color: "#F1EFE7", fontFamily: "'Times New Roman', serif" }}>
-              VC's
-            </h2>
             <p
-              className="text-center text-base md:text-lg lg:text-xl text-[#F1EFE7] opacity-80 max-w-3xl mx-auto mb-20 px-4 leading-relaxed font-light tracking-wide"
+              className="text-center text-base md:text-lg text-[#F1EFE7] opacity-60 max-w-xl mx-auto mb-16 leading-relaxed font-light"
               style={{ fontFamily: "Arial, sans-serif" }}
             >
-              Foundry brings together startups and real VC partners who actually move the needle. We cut through the noise to connect founders with the capital and connections they need—no fluff, just results. If you're serious about building and closing deals, Foundry is where both founders and VCs or potential partners want to be.
+              VC partners who actually move the needle. No fluff, just results.
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-              {/* Dorm Room Fund Card */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-[#F1EFE7]/15 border border-[#F1EFE7]/15">
               <Link
                 href="https://www.dormroomfund.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative bg-gradient-to-br from-black via-[#0a0a0a] to-black border border-[#F1EFE7]/30 p-10 rounded-2xl min-h-[350px] flex flex-col justify-between cursor-pointer transition-all duration-500 hover:scale-[1.02] hover:border-[#F1EFE7]/60 hover:shadow-2xl hover:shadow-[#F1EFE7]/20 overflow-hidden"
+                className="group bg-[#0a0a0a] p-8 md:p-10 flex flex-col transition-all duration-300 hover:bg-[#111]"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-[#F1EFE7]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="relative">
-                  <div className="flex items-start justify-between mb-6">
-                    <div className="w-16 h-16 md:w-20 md:h-20 bg-[#F1EFE7]/10 rounded-xl flex items-center justify-center group-hover:bg-[#F1EFE7]/20 transition-colors duration-300 px-2">
-                      <img
-                        src="/dorm-room-fund-logo.svg"
-                        alt="Dorm Room Fund"
-                        className="h-10 md:h-12 w-auto object-contain filter brightness-0 invert"
-                      />
-                    </div>
-                    <span className="text-xs font-semibold bg-gradient-to-r from-[#F1EFE7] to-[#d4d2ca] bg-clip-text text-transparent px-3 py-1.5 rounded-full border border-[#F1EFE7]/30" style={{ fontFamily: "Arial, sans-serif" }}>Student-Run VC</span>
-                  </div>
-                  <h3 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[#F1EFE7] to-[#c9c7bf] bg-clip-text text-transparent tracking-tight" style={{ fontFamily: "Arial, sans-serif" }}>
-                    Dorm Room Fund
-                  </h3>
-                  <p className="font-light text-base leading-relaxed text-[#F1EFE7]/70 tracking-wide" style={{ fontFamily: "Arial, sans-serif" }}>
-                    Student-run venture capital fund that invests in student-run startups. Providing funding and
-                    mentorship to the next generation of entrepreneurs.
-                  </p>
-                </div>
-                <div className="relative mt-8 flex items-center text-[#F1EFE7]/60 group-hover:text-[#F1EFE7] transition-colors duration-300">
-                  <span className="text-sm font-medium tracking-wider uppercase" style={{ fontFamily: "Arial, sans-serif" }}>Learn more</span>
-                  <svg className="w-4 h-4 ml-2 group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                <div className="flex items-center justify-between mb-8">
+                  <span className="text-[10px] font-medium tracking-[0.2em] uppercase text-[#F1EFE7]/40" style={{ fontFamily: "Arial, sans-serif" }}>Student-run VC</span>
+                  <svg className="w-4 h-4 text-[#F1EFE7]/30 group-hover:text-[#F1EFE7]/70 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 17L17 7M17 7H7M17 7v10" />
                   </svg>
                 </div>
+                <h3 className="text-xl md:text-2xl font-semibold mb-4 text-[#F1EFE7] group-hover:text-white transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
+                  Dorm Room Fund
+                </h3>
+                <p className="text-sm leading-relaxed text-[#F1EFE7]/50 group-hover:text-[#F1EFE7]/70 transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
+                  The premier student-run venture fund backing student founders.
+                </p>
               </Link>
 
-              {/* Afore Capital Card */}
               <Link
                 href="https://www.afore.vc"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative bg-gradient-to-br from-black via-[#0a0a0a] to-black border border-[#F1EFE7]/30 p-10 rounded-2xl min-h-[350px] flex flex-col justify-between cursor-pointer transition-all duration-500 hover:scale-[1.02] hover:border-[#F1EFE7]/60 hover:shadow-2xl hover:shadow-[#F1EFE7]/20 overflow-hidden"
+                className="group bg-[#0a0a0a] p-8 md:p-10 flex flex-col transition-all duration-300 hover:bg-[#111]"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-[#F1EFE7]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="relative">
-                  <div className="flex items-start justify-between mb-6">
-                    <div className="w-16 h-16 md:w-20 md:h-20 bg-[#F1EFE7]/10 rounded-xl flex items-center justify-center group-hover:bg-[#F1EFE7]/20 transition-colors duration-300 px-2">
-                      <img
-                        src="/afore-capital-logo.png"
-                        alt="Afore Capital"
-                        className="h-10 md:h-12 w-auto object-contain filter brightness-0 invert"
-                      />
-                    </div>
-                    <span className="text-xs font-semibold bg-gradient-to-r from-[#F1EFE7] to-[#d4d2ca] bg-clip-text text-transparent px-3 py-1.5 rounded-full border border-[#F1EFE7]/30" style={{ fontFamily: "Arial, sans-serif" }}>Early Stage VC</span>
-                  </div>
-                  <h3 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[#F1EFE7] to-[#c9c7bf] bg-clip-text text-transparent tracking-tight" style={{ fontFamily: "Arial, sans-serif" }}>
-                    Afore Capital
-                  </h3>
-                  <p className="font-light text-base leading-relaxed text-[#F1EFE7]/70 tracking-wide" style={{ fontFamily: "Arial, sans-serif" }}>
-                    Early-stage venture capital firm focused on backing exceptional founders building transformative
-                    companies across various industries.
-                  </p>
-                </div>
-                <div className="relative mt-8 flex items-center text-[#F1EFE7]/60 group-hover:text-[#F1EFE7] transition-colors duration-300">
-                  <span className="text-sm font-medium tracking-wider uppercase" style={{ fontFamily: "Arial, sans-serif" }}>Learn more</span>
-                  <svg className="w-4 h-4 ml-2 group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                <div className="flex items-center justify-between mb-8">
+                  <span className="text-[10px] font-medium tracking-[0.2em] uppercase text-[#F1EFE7]/40" style={{ fontFamily: "Arial, sans-serif" }}>Early Stage</span>
+                  <svg className="w-4 h-4 text-[#F1EFE7]/30 group-hover:text-[#F1EFE7]/70 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 17L17 7M17 7H7M17 7v10" />
                   </svg>
                 </div>
+                <h3 className="text-xl md:text-2xl font-semibold mb-4 text-[#F1EFE7] group-hover:text-white transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
+                  Afore Capital
+                </h3>
+                <p className="text-sm leading-relaxed text-[#F1EFE7]/50 group-hover:text-[#F1EFE7]/70 transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
+                  Pre-seed fund investing in technical founders.
+                </p>
               </Link>
 
-              {/* Pear VC Card */}
               <Link
                 href="https://pear.vc"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative bg-gradient-to-br from-black via-[#0a0a0a] to-black border border-[#F1EFE7]/30 p-10 rounded-2xl min-h-[350px] flex flex-col justify-between cursor-pointer transition-all duration-500 hover:scale-[1.02] hover:border-[#F1EFE7]/60 hover:shadow-2xl hover:shadow-[#F1EFE7]/20 overflow-hidden"
+                className="group bg-[#0a0a0a] p-8 md:p-10 flex flex-col transition-all duration-300 hover:bg-[#111]"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-[#F1EFE7]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="relative">
-                  <div className="flex items-start justify-between mb-6">
-                    <div className="w-16 h-16 md:w-20 md:h-20 bg-[#F1EFE7]/10 rounded-xl flex items-center justify-center group-hover:bg-[#F1EFE7]/20 transition-colors duration-300 px-2">
-                      <img
-                        src="/pear-vc-logo.png"
-                        alt="Pear VC"
-                        className="h-10 md:h-12 w-auto object-contain filter brightness-0 invert"
-                      />
-                    </div>
-                    <span className="text-xs font-semibold bg-gradient-to-r from-[#F1EFE7] to-[#d4d2ca] bg-clip-text text-transparent px-3 py-1.5 rounded-full border border-[#F1EFE7]/30" style={{ fontFamily: "Arial, sans-serif" }}>Pre-Seed & Seed VC</span>
-                  </div>
-                  <h3 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[#F1EFE7] to-[#c9c7bf] bg-clip-text text-transparent tracking-tight" style={{ fontFamily: "Arial, sans-serif" }}>
-                    Pear VC
-                  </h3>
-                  <p className="font-light text-base leading-relaxed text-[#F1EFE7]/70 tracking-wide" style={{ fontFamily: "Arial, sans-serif" }}>
-                    Pre-seed and seed stage venture capital firm that partners with entrepreneurs from day zero to build
-                    category-defining companies.
-                  </p>
-                </div>
-                <div className="relative mt-8 flex items-center text-[#F1EFE7]/60 group-hover:text-[#F1EFE7] transition-colors duration-300">
-                  <span className="text-sm font-medium tracking-wider uppercase" style={{ fontFamily: "Arial, sans-serif" }}>Learn more</span>
-                  <svg className="w-4 h-4 ml-2 group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                <div className="flex items-center justify-between mb-8">
+                  <span className="text-[10px] font-medium tracking-[0.2em] uppercase text-[#F1EFE7]/40" style={{ fontFamily: "Arial, sans-serif" }}>Pre-Seed & Seed</span>
+                  <svg className="w-4 h-4 text-[#F1EFE7]/30 group-hover:text-[#F1EFE7]/70 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 17L17 7M17 7H7M17 7v10" />
                   </svg>
                 </div>
+                <h3 className="text-xl md:text-2xl font-semibold mb-4 text-[#F1EFE7] group-hover:text-white transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
+                  Pear VC
+                </h3>
+                <p className="text-sm leading-relaxed text-[#F1EFE7]/50 group-hover:text-[#F1EFE7]/70 transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
+                  Supporting exceptional founders from the earliest stages.
+                </p>
               </Link>
 
-              {/* Greylock Partners Card */}
               <Link
                 href="https://greylock.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative bg-gradient-to-br from-black via-[#0a0a0a] to-black border border-[#F1EFE7]/30 p-10 rounded-2xl min-h-[350px] flex flex-col justify-between cursor-pointer transition-all duration-500 hover:scale-[1.02] hover:border-[#F1EFE7]/60 hover:shadow-2xl hover:shadow-[#F1EFE7]/20 overflow-hidden"
+                className="group bg-[#0a0a0a] p-8 md:p-10 flex flex-col transition-all duration-300 hover:bg-[#111]"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-[#F1EFE7]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="relative">
-                  <div className="flex items-start justify-between mb-6">
-                    <div className="w-16 h-16 md:w-20 md:h-20 bg-[#F1EFE7]/10 rounded-xl flex items-center justify-center group-hover:bg-[#F1EFE7]/20 transition-colors duration-300 px-2">
-                      <img
-                        src="/greylock-logo.png"
-                        alt="Greylock Partners"
-                        className="h-10 md:h-12 w-auto object-contain filter brightness-0 invert"
-                      />
-                    </div>
-                    <span className="text-xs font-semibold bg-gradient-to-r from-[#F1EFE7] to-[#d4d2ca] bg-clip-text text-transparent px-3 py-1.5 rounded-full border border-[#F1EFE7]/30" style={{ fontFamily: "Arial, sans-serif" }}>AI-First VC</span>
-                  </div>
-                  <h3 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[#F1EFE7] to-[#c9c7bf] bg-clip-text text-transparent tracking-tight" style={{ fontFamily: "Arial, sans-serif" }}>
-                    Greylock Partners
-                  </h3>
-                  <p className="font-light text-base leading-relaxed text-[#F1EFE7]/70 tracking-wide" style={{ fontFamily: "Arial, sans-serif" }}>
-                    Leading venture capital firm investing in consumer and enterprise software companies, with a focus
-                    on AI-first startups. Partners with entrepreneurs from pre-seed through growth stages.
-                  </p>
-                </div>
-                <div className="relative mt-8 flex items-center text-[#F1EFE7]/60 group-hover:text-[#F1EFE7] transition-colors duration-300">
-                  <span className="text-sm font-medium tracking-wider uppercase" style={{ fontFamily: "Arial, sans-serif" }}>Learn more</span>
-                  <svg className="w-4 h-4 ml-2 group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                <div className="flex items-center justify-between mb-8">
+                  <span className="text-[10px] font-medium tracking-[0.2em] uppercase text-[#F1EFE7]/40" style={{ fontFamily: "Arial, sans-serif" }}>AI-First VC</span>
+                  <svg className="w-4 h-4 text-[#F1EFE7]/30 group-hover:text-[#F1EFE7]/70 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 17L17 7M17 7H7M17 7v10" />
                   </svg>
                 </div>
+                <h3 className="text-xl md:text-2xl font-semibold mb-4 text-[#F1EFE7] group-hover:text-white transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
+                  Greylock
+                </h3>
+                <p className="text-sm leading-relaxed text-[#F1EFE7]/50 group-hover:text-[#F1EFE7]/70 transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
+                  Legendary Silicon Valley venture firm backing iconic companies.
+                </p>
               </Link>
             </div>
 
-            {/* Become a Partner Section */}
-            <div className="flex flex-col items-center justify-center mt-16 md:mt-24 mb-8">
-              <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-center tracking-tight" style={{ color: "#F1EFE7", fontFamily: "Arial, sans-serif" }}>
-                Become a Partner
-              </h3>
-              <p className="text-lg md:text-xl font-light text-center mb-8 max-w-2xl mx-auto leading-relaxed" style={{ color: "#F1EFE7", fontFamily: "Arial, sans-serif" }}>
-                Join the Over $1 billion dollars supporting the foundry and gain access to the best deals.
-              </p>
-              <Link
-                href="https://forms.gle/4QJVBz56nvrjSxHSA"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm font-semibold bg-[#F1EFE7] text-black px-8 py-4 rounded-xl hover:bg-[#F1EFE7]/90 transition-all duration-300 hover:shadow-lg hover:shadow-[#F1EFE7]/50 transform hover:-translate-y-1 tracking-wider uppercase inline-block" style={{ fontFamily: "Arial, sans-serif" }}
-              >
-                Contact Us
-              </Link>
+            {/* Bottom decorative line */}
+            <div className="flex justify-center mt-16">
+              <div className="h-px w-32 bg-gradient-to-r from-transparent via-[#F1EFE7]/20 to-transparent" />
             </div>
+          </div>
+        </FadeInSection>
+      </section>
+
+      {/* Events Section */}
+      <section id="events" className="relative w-full overflow-hidden bg-black">
+        {/* Subtle ambient gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#F1EFE7]/[0.015] to-transparent pointer-events-none" />
+        
+        <div className="relative z-10 py-20 md:py-32">
+          {/* Section Header */}
+          <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 mb-16">
+            <div className="flex items-center justify-center gap-8 mb-6">
+              <div className="hidden md:block h-px w-24 bg-gradient-to-r from-transparent to-[#F1EFE7]/30" />
+              <h2 className="text-5xl md:text-6xl lg:text-7xl text-center tracking-tight" style={{ color: "#F1EFE7", fontFamily: "'Times New Roman', serif" }}>
+                <span className="italic font-light">Our</span> Events
+              </h2>
+              <div className="hidden md:block h-px w-24 bg-gradient-to-l from-transparent to-[#F1EFE7]/30" />
+            </div>
+            <p
+              className="text-center text-base md:text-lg text-[#F1EFE7] opacity-60 max-w-xl mx-auto leading-relaxed font-light"
+              style={{ fontFamily: "Arial, sans-serif" }}
+            >
+              Building community through meaningful gatherings and workshops.
+            </p>
+          </div>
+          
+          {/* Timeline Component */}
+          <Timeline
+            data={[
+              {
+                title: "Spring 2025",
+                content: (
+                  <div>
+                    <p className="text-[#F1EFE7]/80 text-sm md:text-base font-light mb-8" style={{ fontFamily: "Arial, sans-serif" }}>
+                      Foundry Demo Day — Our flagship event where portfolio companies pitch to top VCs and angel investors.
+                    </p>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="relative h-32 md:h-48 lg:h-56 w-full overflow-hidden border border-[#F1EFE7]/10">
+                        <Image
+                          src="/startup-pitch-event.png"
+                          alt="Startup pitch event"
+                          fill
+                          className="object-cover opacity-80 hover:opacity-100 transition-opacity duration-300"
+                        />
+                      </div>
+                      <div className="relative h-32 md:h-48 lg:h-56 w-full overflow-hidden border border-[#F1EFE7]/10">
+                        <Image
+                          src="/business-conference-room.png"
+                          alt="Conference room"
+                          fill
+                          className="object-cover opacity-80 hover:opacity-100 transition-opacity duration-300"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                ),
+              },
+              {
+                title: "Winter 2024",
+                content: (
+                  <div>
+                    <p className="text-[#F1EFE7]/80 text-sm md:text-base font-light mb-4" style={{ fontFamily: "Arial, sans-serif" }}>
+                      Builder Workshops — Hands-on sessions for technical founders covering product development, growth, and fundraising.
+                    </p>
+                    <div className="mb-8 space-y-2">
+                      <div className="flex gap-3 items-center text-[#F1EFE7]/60 text-xs md:text-sm" style={{ fontFamily: "Arial, sans-serif" }}>
+                        <span className="w-1.5 h-1.5 bg-[#F1EFE7]/40 rounded-full" />
+                        Technical Architecture Review
+                      </div>
+                      <div className="flex gap-3 items-center text-[#F1EFE7]/60 text-xs md:text-sm" style={{ fontFamily: "Arial, sans-serif" }}>
+                        <span className="w-1.5 h-1.5 bg-[#F1EFE7]/40 rounded-full" />
+                        Go-to-Market Strategy Session
+                      </div>
+                      <div className="flex gap-3 items-center text-[#F1EFE7]/60 text-xs md:text-sm" style={{ fontFamily: "Arial, sans-serif" }}>
+                        <span className="w-1.5 h-1.5 bg-[#F1EFE7]/40 rounded-full" />
+                        Pitch Deck Workshop
+                      </div>
+                      <div className="flex gap-3 items-center text-[#F1EFE7]/60 text-xs md:text-sm" style={{ fontFamily: "Arial, sans-serif" }}>
+                        <span className="w-1.5 h-1.5 bg-[#F1EFE7]/40 rounded-full" />
+                        VC Office Hours
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="relative h-32 md:h-48 lg:h-56 w-full overflow-hidden border border-[#F1EFE7]/10">
+                        <Image
+                          src="/coding-workshop-developers.jpg"
+                          alt="Coding workshop"
+                          fill
+                          className="object-cover opacity-80 hover:opacity-100 transition-opacity duration-300"
+                        />
+                      </div>
+                      <div className="relative h-32 md:h-48 lg:h-56 w-full overflow-hidden border border-[#F1EFE7]/10">
+                        <Image
+                          src="/mountain-retreat-conference.jpg"
+                          alt="Retreat conference"
+                          fill
+                          className="object-cover opacity-80 hover:opacity-100 transition-opacity duration-300"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                ),
+              },
+              {
+                title: "Fall 2024",
+                content: (
+                  <div>
+                    <p className="text-[#F1EFE7]/80 text-sm md:text-base font-light mb-8" style={{ fontFamily: "Arial, sans-serif" }}>
+                      Foundry Launch — The beginning of Philadelphia's first builder-led venture community. Inaugural networking event with 100+ founders and investors.
+                    </p>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="relative h-32 md:h-48 lg:h-56 w-full overflow-hidden border border-[#F1EFE7]/10">
+                        <Image
+                          src="/startup-networking-event.png"
+                          alt="Networking event"
+                          fill
+                          className="object-cover opacity-80 hover:opacity-100 transition-opacity duration-300"
+                        />
+                      </div>
+                      <div className="relative h-32 md:h-48 lg:h-56 w-full overflow-hidden border border-[#F1EFE7]/10">
+                        <Image
+                          src="/startup-pitch.png"
+                          alt="Startup pitch"
+                          fill
+                          className="object-cover opacity-80 hover:opacity-100 transition-opacity duration-300"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                ),
+              },
+            ]}
+          />
+          
+          {/* Bottom decorative element */}
+          <div className="flex justify-center mt-16">
+            <div className="h-px w-48 bg-gradient-to-r from-transparent via-[#F1EFE7]/20 to-transparent" />
           </div>
         </div>
       </section>
 
-      <div className="h-48 bg-black"></div>
+      {/* CTA Section */}
+      <section id="cta" className="relative h-screen w-full overflow-hidden bg-black flex flex-col justify-center">
+        {/* Subtle radial gradient from bottom */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_rgba(241,239,231,0.04)_0%,_transparent_60%)] pointer-events-none" />
+        
+        <FadeInSection className="relative z-10 flex flex-col items-center justify-center px-6 md:px-12 lg:px-20">
+          <div className="w-full max-w-5xl mx-auto text-center">
+            {/* Large decorative quote mark */}
+            <div className="mb-8">
+              <span className="text-[120px] md:text-[180px] leading-none font-serif text-[#F1EFE7]/[0.08] select-none" style={{ fontFamily: "'Times New Roman', serif" }}>"</span>
+            </div>
+            
+            <h2 className="text-5xl md:text-6xl lg:text-8xl mb-8 tracking-tight -mt-20" style={{ color: "#F1EFE7", fontFamily: "'Times New Roman', serif" }}>
+              Join the <span className="italic font-light">Foundry</span>
+            </h2>
+            
+            <p
+              className="text-lg md:text-xl text-[#F1EFE7] opacity-60 max-w-2xl mx-auto mb-16 leading-relaxed font-light"
+              style={{ fontFamily: "Arial, sans-serif" }}
+            >
+              Whether you're a founder building the future or an investor looking for the best deals, we'd love to connect.
+            </p>
+            
+            {/* CTA Buttons in a refined container */}
+            <div className="inline-flex flex-col sm:flex-row gap-4 p-1 border border-[#F1EFE7]/10">
+              <Link
+                href="https://forms.gle/eqmwtHuwrnafYych7"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group text-sm font-medium bg-[#F1EFE7] text-black px-12 py-5 hover:bg-white transition-colors duration-200 tracking-[0.15em] uppercase text-center flex items-center justify-center gap-3"
+                style={{ fontFamily: "Arial, sans-serif" }}
+              >
+                Apply as Founder
+                <svg className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </Link>
+              <Link
+                href="https://forms.gle/4QJVBz56nvrjSxHSA"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group text-sm font-medium bg-transparent text-[#F1EFE7] px-12 py-5 hover:bg-[#F1EFE7]/5 transition-colors duration-200 tracking-[0.15em] uppercase text-center flex items-center justify-center gap-3"
+                style={{ fontFamily: "Arial, sans-serif" }}
+              >
+                Become a Partner
+                <svg className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </Link>
+            </div>
+            
+            {/* Footer-like info */}
+            <div className="mt-24 flex items-center justify-center gap-8 text-[#F1EFE7]/30 text-xs tracking-widest uppercase" style={{ fontFamily: "Arial, sans-serif" }}>
+              <span>Philadelphia</span>
+              <span className="w-1 h-1 bg-[#F1EFE7]/30 rounded-full" />
+              <span>Est. 2024</span>
+              <span className="w-1 h-1 bg-[#F1EFE7]/30 rounded-full" />
+              <span>For Builders</span>
+            </div>
+          </div>
+        </FadeInSection>
+      </section>
 
       {/* Join the Foundry modal */}
       <Modal isOpen={isJoinModalOpen} onClose={() => setIsJoinModalOpen(false)} title="Join the Foundry">

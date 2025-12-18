@@ -27,12 +27,6 @@ const VideoWithPlaceholder = ({
   const [videoError, setVideoError] = useState(false)
 
   useEffect(() => {
-    if (process.env.NODE_ENV === "development" && !placeholder) {
-      console.warn("No placeholder provided for video")
-    }
-  }, [placeholder])
-
-  useEffect(() => {
     const video = videoRef.current
 
     if (video) {
@@ -51,12 +45,9 @@ const VideoWithPlaceholder = ({
         setVideoLoaded(false)
       }
 
-      const handleLoadStart = () => {}
-
       video.addEventListener("loadeddata", handleLoadedData)
       video.addEventListener("canplay", handleCanPlay)
       video.addEventListener("error", handleError)
-      video.addEventListener("loadstart", handleLoadStart)
       video.load()
 
       if (video.readyState >= 2) {
@@ -67,31 +58,20 @@ const VideoWithPlaceholder = ({
         video.removeEventListener("loadeddata", handleLoadedData)
         video.removeEventListener("canplay", handleCanPlay)
         video.removeEventListener("error", handleError)
-        video.removeEventListener("loadstart", handleLoadStart)
       }
     }
   }, [src])
 
   useEffect(() => {
     if (videoRef.current && videoLoaded && !videoError) {
-      videoRef.current.play().catch((error) => {})
+      videoRef.current.play().catch(() => {})
     }
   }, [videoLoaded, videoError])
 
   return (
     <>
-      {placeholder && !videoError ? (
-        <Image
-          src={placeholder || "/placeholder.svg"}
-          loading="eager"
-          priority
-          sizes="100vw"
-          alt="Background"
-          className={cn(className, { invisible: videoLoaded && !videoError })}
-          quality={100}
-          fill
-        />
-      ) : null}
+      {/* Black background while video loads - no placeholder image flash */}
+      <div className={cn(className, "bg-black", { invisible: videoLoaded && !videoError })} />
       {!videoError ? (
         <video
           ref={videoRef}
@@ -101,7 +81,7 @@ const VideoWithPlaceholder = ({
           loop
           controls={false}
           preload="auto"
-          className={cn(className, { invisible: !videoLoaded })}
+          className={cn(className, "transition-opacity duration-500", videoLoaded ? "opacity-100" : "opacity-0")}
         />
       ) : (
         placeholder && (

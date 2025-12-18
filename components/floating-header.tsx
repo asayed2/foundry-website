@@ -43,33 +43,38 @@ export function FloatingHeader() {
         </Link>
 
         {/* Navigation Links */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-6">
           <a
             href="#about"
             onClick={(e) => handleNavClick(e, "#about")}
-            className="text-[#F1EFE7] hover:text-[#F1EFE7]/80 text-sm font-medium transition-all duration-300 hover:scale-110 relative group"
+            className="text-[#F1EFE7]/80 hover:text-[#F1EFE7] text-sm font-medium transition-colors duration-200"
             style={{ fontFamily: "Arial, sans-serif" }}
           >
             About
-            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#F1EFE7] group-hover:w-full transition-all duration-300"></span>
           </a>
           <a
             href="#companies"
             onClick={(e) => handleNavClick(e, "#companies")}
-            className="text-[#F1EFE7] hover:text-[#F1EFE7]/80 text-sm font-medium transition-all duration-300 hover:scale-110 relative group"
+            className="text-[#F1EFE7]/80 hover:text-[#F1EFE7] text-sm font-medium transition-colors duration-200"
             style={{ fontFamily: "Arial, sans-serif" }}
           >
             Companies
-            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#F1EFE7] group-hover:w-full transition-all duration-300"></span>
           </a>
           <a
             href="#vcs"
             onClick={(e) => handleNavClick(e, "#vcs")}
-            className="text-[#F1EFE7] hover:text-[#F1EFE7]/80 text-sm font-medium transition-all duration-300 hover:scale-110 relative group"
+            className="text-[#F1EFE7]/80 hover:text-[#F1EFE7] text-sm font-medium transition-colors duration-200"
             style={{ fontFamily: "Arial, sans-serif" }}
           >
-            VC's
-            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#F1EFE7] group-hover:w-full transition-all duration-300"></span>
+            Partners
+          </a>
+          <a
+            href="#events"
+            onClick={(e) => handleNavClick(e, "#events")}
+            className="text-[#F1EFE7]/80 hover:text-[#F1EFE7] text-sm font-medium transition-colors duration-200"
+            style={{ fontFamily: "Arial, sans-serif" }}
+          >
+            Events
           </a>
         </div>
 
@@ -78,13 +83,10 @@ export function FloatingHeader() {
           href="https://forms.gle/eqmwtHuwrnafYych7"
           target="_blank"
           rel="noopener noreferrer"
-          className="bg-[#F1EFE7]/15 hover:bg-[#F1EFE7]/25 border border-[#F1EFE7]/40 hover:border-[#F1EFE7]/60 text-[#F1EFE7] rounded-full px-5 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#F1EFE7]/20 flex items-center gap-2 group flex-shrink-0"
+          className="bg-[#F1EFE7] text-black px-5 py-2 text-sm font-medium transition-colors duration-200 hover:bg-[#F1EFE7]/90 flex-shrink-0"
           style={{ fontFamily: "Arial, sans-serif" }}
         >
           Join Foundry
-          <svg className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-          </svg>
         </Link>
 
         {/* Time/Location */}
