@@ -12,19 +12,26 @@ import Link from "next/link"
 import Image from "next/image"
 import { Modal } from "@/components/ui/modal"
 import { Timeline } from "@/components/ui/timeline"
-import { motion, useInView } from "framer-motion"
+import { motion, useInView, useScroll, useTransform } from "framer-motion"
 
-// Fade-in section wrapper
+// Scroll-triggered fade section wrapper - fades in when scrolling down, fades out when scrolling up
 function FadeInSection({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
+  const ref = useRef<HTMLDivElement>(null)
+  const isInView = useInView(ref, { 
+    once: false,
+    amount: 0.3,
+    margin: "-10% 0px -10% 0px"
+  })
   
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 40 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-      transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+      initial={{ opacity: 0, y: 60 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 60 }}
+      transition={{ 
+        duration: 0.8, 
+        ease: [0.25, 0.1, 0.25, 1]
+      }}
       className={className}
     >
       {children}
@@ -387,7 +394,7 @@ export default function Home() {
               <div className="w-px h-16 bg-gradient-to-b from-transparent via-[#F1EFE7]/30 to-[#F1EFE7]/10" />
             </div>
             
-            <h2 className="text-5xl md:text-6xl lg:text-8xl mb-16 text-center tracking-tight" style={{ color: "#F1EFE7", fontFamily: "'Times New Roman', serif" }}>
+            <h2 className="text-5xl md:text-6xl lg:text-8xl mb-16 text-center tracking-tighter" style={{ color: "#F1EFE7", fontFamily: "'Times New Roman', serif", letterSpacing: "-0.04em" }}>
               About <span className="italic font-light">Us</span>
             </h2>
 
@@ -418,7 +425,7 @@ export default function Home() {
             <div className="mt-20 text-center">
               <p
                 className="text-xl md:text-2xl lg:text-3xl font-light leading-relaxed max-w-3xl mx-auto italic"
-                style={{ color: "#F1EFE7", opacity: 0.7, fontFamily: "'Times New Roman', serif" }}
+                style={{ color: "#F1EFE7", opacity: 0.7, fontFamily: "'Times New Roman', serif", letterSpacing: "-0.03em" }}
               >
                 "We genuinely care, and that's what sets us apart."
               </p>
@@ -432,90 +439,104 @@ export default function Home() {
         </FadeInSection>
       </section>
 
+      {/* Spacer between About and Companies */}
+      <section className="relative h-[50vh] w-full overflow-hidden bg-black flex flex-col items-center justify-center">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#F1EFE7]/[0.01] to-transparent pointer-events-none" />
+        <FadeInSection className="relative z-10 flex flex-col items-center gap-6">
+          <div className="w-px h-24 bg-gradient-to-b from-[#F1EFE7]/20 via-[#F1EFE7]/10 to-transparent" />
+          <div className="w-2 h-2 rounded-full bg-[#F1EFE7]/20" />
+          <div className="w-px h-24 bg-gradient-to-t from-[#F1EFE7]/20 via-[#F1EFE7]/10 to-transparent" />
+        </FadeInSection>
+      </section>
+
       <section id="companies" className="relative h-screen w-full overflow-hidden bg-black flex flex-col justify-center">
         {/* Subtle ambient gradient */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#F1EFE7]/[0.02] to-transparent pointer-events-none" />
         
-        <FadeInSection className="relative z-10 flex flex-col items-center justify-center px-6 md:px-12 lg:px-20 py-16">
-          <div className="w-full max-w-7xl mx-auto">
-            {/* Section header with decorative elements */}
-            <div className="flex items-center justify-center gap-8 mb-6">
-              <div className="hidden md:block h-px w-24 bg-gradient-to-r from-transparent to-[#F1EFE7]/30" />
-              <h2 className="text-5xl md:text-6xl lg:text-7xl text-center tracking-tight" style={{ color: "#F1EFE7", fontFamily: "'Times New Roman', serif" }}>
-              <span className="italic font-light">Our</span> Companies
-            </h2>
-              <div className="hidden md:block h-px w-24 bg-gradient-to-l from-transparent to-[#F1EFE7]/30" />
-            </div>
-            <p
-              className="text-center text-base md:text-lg text-[#F1EFE7] opacity-60 max-w-xl mx-auto mb-16 leading-relaxed font-light"
-              style={{ fontFamily: "Arial, sans-serif" }}
-            >
-              We're builders ourselves, helping other founders like us.
-            </p>
+        <FadeInSection className="relative z-10 flex flex-col h-full w-full">
+          {/* Minimal header */}
+          <div className="flex items-center justify-center py-6">
+            <span className="text-[11px] md:text-xs font-medium tracking-[0.3em] uppercase text-[#F1EFE7]/40" style={{ fontFamily: "Arial, sans-serif" }}>
+              Our Companies
+            </span>
+        </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-[#F1EFE7]/15 border border-[#F1EFE7]/15">
+          {/* Full-bleed cards */}
+          <div className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-[#F1EFE7]/10">
               <Link
                 href="https://entropytoorder.xyz"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group bg-[#0a0a0a] p-8 md:p-10 flex flex-col transition-all duration-300 hover:bg-[#111]"
-              >
-                <div className="flex items-center justify-between mb-8">
-                  <span className="text-[10px] font-medium tracking-[0.2em] uppercase text-[#F1EFE7]/40" style={{ fontFamily: "Arial, sans-serif" }}>Seed Round</span>
-                  <svg className="w-4 h-4 text-[#F1EFE7]/30 group-hover:text-[#F1EFE7]/70 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 17L17 7M17 7H7M17 7v10" />
-                  </svg>
-                </div>
-                <h3 className="text-xl md:text-2xl font-semibold mb-4 text-[#F1EFE7] group-hover:text-white transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
-                  ETO
-                </h3>
-                <p className="text-sm leading-relaxed text-[#F1EFE7]/50 group-hover:text-[#F1EFE7]/70 transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
+              className="group bg-[#0a0a0a] p-8 md:p-12 lg:p-14 flex flex-col transition-all duration-300 hover:bg-[#111]"
+            >
+              <div className="flex items-center justify-between mb-8 md:mb-12">
+                <span className="text-[10px] md:text-[11px] font-medium tracking-[0.2em] uppercase text-[#F1EFE7]/40" style={{ fontFamily: "Arial, sans-serif" }}>Seed Round</span>
+                <svg className="w-5 h-5 text-[#F1EFE7]/30 group-hover:text-[#F1EFE7]/70 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 17L17 7M17 7H7M17 7v10" />
+                </svg>
+                    </div>
+              <div className="flex-1 flex flex-col justify-center">
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-semibold mb-6 text-[#F1EFE7] group-hover:text-white transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
+                    ETO
+                  </h3>
+                <p className="text-sm md:text-base leading-relaxed text-[#F1EFE7]/50 group-hover:text-[#F1EFE7]/70 transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
                   Web 3 finance company creating synthetic assets bringing real world value on-chain.
-                </p>
+                  </p>
+                </div>
               </Link>
 
-              <div className="group bg-[#0a0a0a] p-8 md:p-10 flex flex-col transition-all duration-300 hover:bg-[#111]">
-                <div className="flex items-center justify-between mb-8">
-                  <span className="text-[10px] font-medium tracking-[0.2em] uppercase text-[#F1EFE7]/40" style={{ fontFamily: "Arial, sans-serif" }}>Pre-Seed</span>
-                </div>
-                <h3 className="text-xl md:text-2xl font-semibold mb-4 text-[#F1EFE7] group-hover:text-white transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
-                  Deal Nest
-                </h3>
-                <p className="text-sm leading-relaxed text-[#F1EFE7]/50 group-hover:text-[#F1EFE7]/70 transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
-                  AI-powered deal flow management for venture capital firms.
-                </p>
-              </div>
-
-              <div className="group bg-[#0a0a0a] p-8 md:p-10 flex flex-col transition-all duration-300 hover:bg-[#111]">
-                <div className="flex items-center justify-between mb-8">
-                  <span className="text-[10px] font-medium tracking-[0.2em] uppercase text-[#F1EFE7]/40" style={{ fontFamily: "Arial, sans-serif" }}>Seed Round</span>
+            <div className="group bg-[#0a0a0a] p-8 md:p-12 lg:p-14 flex flex-col transition-all duration-300 hover:bg-[#111]">
+              <div className="flex items-center justify-between mb-8 md:mb-12">
+                <span className="text-[10px] md:text-[11px] font-medium tracking-[0.2em] uppercase text-[#F1EFE7]/40" style={{ fontFamily: "Arial, sans-serif" }}>Pre-Seed</span>
                     </div>
-                <h3 className="text-xl md:text-2xl font-semibold mb-4 text-[#F1EFE7] group-hover:text-white transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
+              <div className="flex-1 flex flex-col justify-center">
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-semibold mb-6 text-[#F1EFE7] group-hover:text-white transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
+                  Deal Nest
+                  </h3>
+                <p className="text-sm md:text-base leading-relaxed text-[#F1EFE7]/50 group-hover:text-[#F1EFE7]/70 transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
+                  AI-powered deal flow management for venture capital firms.
+                  </p>
+                </div>
+                </div>
+
+            <div className="group bg-[#0a0a0a] p-8 md:p-12 lg:p-14 flex flex-col transition-all duration-300 hover:bg-[#111]">
+              <div className="flex items-center justify-between mb-8 md:mb-12">
+                <span className="text-[10px] md:text-[11px] font-medium tracking-[0.2em] uppercase text-[#F1EFE7]/40" style={{ fontFamily: "Arial, sans-serif" }}>Seed Round</span>
+              </div>
+              <div className="flex-1 flex flex-col justify-center">
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-semibold mb-6 text-[#F1EFE7] group-hover:text-white transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
                     Ulterius
                   </h3>
-                <p className="text-sm leading-relaxed text-[#F1EFE7]/50 group-hover:text-[#F1EFE7]/70 transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
+                <p className="text-sm md:text-base leading-relaxed text-[#F1EFE7]/50 group-hover:text-[#F1EFE7]/70 transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
                     Innovative technology solutions for the modern enterprise.
                   </p>
-              </div>
-
-              <div className="group bg-[#0a0a0a] p-8 md:p-10 flex flex-col transition-all duration-300 hover:bg-[#111]">
-                <div className="flex items-center justify-between mb-8">
-                  <span className="text-[10px] font-medium tracking-[0.2em] uppercase text-[#F1EFE7]/40" style={{ fontFamily: "Arial, sans-serif" }}>Seed Round</span>
                 </div>
-                <h3 className="text-xl md:text-2xl font-semibold mb-4 text-[#F1EFE7] group-hover:text-white transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
+                </div>
+
+            <div className="group bg-[#0a0a0a] p-8 md:p-12 lg:p-14 flex flex-col transition-all duration-300 hover:bg-[#111]">
+              <div className="flex items-center justify-between mb-8 md:mb-12">
+                <span className="text-[10px] md:text-[11px] font-medium tracking-[0.2em] uppercase text-[#F1EFE7]/40" style={{ fontFamily: "Arial, sans-serif" }}>Seed Round</span>
+              </div>
+              <div className="flex-1 flex flex-col justify-center">
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-semibold mb-6 text-[#F1EFE7] group-hover:text-white transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
                   Velric AI
                   </h3>
-                <p className="text-sm leading-relaxed text-[#F1EFE7]/50 group-hover:text-[#F1EFE7]/70 transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
+                <p className="text-sm md:text-base leading-relaxed text-[#F1EFE7]/50 group-hover:text-[#F1EFE7]/70 transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
                   Enterprise AI infrastructure for automated decision intelligence.
-                </p>
+                  </p>
+                </div>
+                </div>
               </div>
-            </div>
+        </FadeInSection>
+      </section>
 
-            {/* Bottom decorative line */}
-            <div className="flex justify-center mt-16">
-              <div className="h-px w-32 bg-gradient-to-r from-transparent via-[#F1EFE7]/20 to-transparent" />
-            </div>
-          </div>
+      {/* Spacer between Companies and Partners */}
+      <section className="relative h-[50vh] w-full overflow-hidden bg-black flex flex-col items-center justify-center">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#F1EFE7]/[0.01] to-transparent pointer-events-none" />
+        <FadeInSection className="relative z-10 flex flex-col items-center gap-6">
+          <div className="w-px h-24 bg-gradient-to-b from-[#F1EFE7]/20 via-[#F1EFE7]/10 to-transparent" />
+          <div className="w-2 h-2 rounded-full bg-[#F1EFE7]/20" />
+          <div className="w-px h-24 bg-gradient-to-t from-[#F1EFE7]/20 via-[#F1EFE7]/10 to-transparent" />
         </FadeInSection>
       </section>
 
@@ -523,109 +544,103 @@ export default function Home() {
         {/* Subtle ambient gradient */}
         <div className="absolute inset-0 bg-gradient-to-t from-transparent via-[#F1EFE7]/[0.02] to-transparent pointer-events-none" />
         
-        <FadeInSection className="relative z-10 flex flex-col items-center justify-center px-6 md:px-12 lg:px-20 py-16">
-          <div className="w-full max-w-7xl mx-auto">
-            {/* Section header with decorative elements */}
-            <div className="flex items-center justify-center gap-8 mb-6">
-              <div className="hidden md:block h-px w-24 bg-gradient-to-r from-transparent to-[#F1EFE7]/30" />
-              <h2 className="text-5xl md:text-6xl lg:text-7xl text-center tracking-tight" style={{ color: "#F1EFE7", fontFamily: "'Times New Roman', serif" }}>
-                <span className="italic font-light">Our</span> Partners
-              </h2>
-              <div className="hidden md:block h-px w-24 bg-gradient-to-l from-transparent to-[#F1EFE7]/30" />
-        </div>
-            <p
-              className="text-center text-base md:text-lg text-[#F1EFE7] opacity-60 max-w-xl mx-auto mb-16 leading-relaxed font-light"
-              style={{ fontFamily: "Arial, sans-serif" }}
+        <FadeInSection className="relative z-10 flex flex-col h-full w-full">
+          {/* Minimal header */}
+          <div className="flex items-center justify-center py-6">
+            <span className="text-[11px] md:text-xs font-medium tracking-[0.3em] uppercase text-[#F1EFE7]/40" style={{ fontFamily: "Arial, sans-serif" }}>
+              Our Partners
+            </span>
+          </div>
+
+          {/* Full-bleed cards */}
+          <div className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-[#F1EFE7]/10">
+            <Link
+              href="https://www.dormroomfund.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group bg-[#0a0a0a] p-8 md:p-12 lg:p-14 flex flex-col transition-all duration-300 hover:bg-[#111]"
             >
-              VC partners who actually move the needle. No fluff, just results.
-            </p>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-[#F1EFE7]/15 border border-[#F1EFE7]/15">
-              <Link
-                href="https://www.dormroomfund.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group bg-[#0a0a0a] p-8 md:p-10 flex flex-col transition-all duration-300 hover:bg-[#111]"
-              >
-                <div className="flex items-center justify-between mb-8">
-                  <span className="text-[10px] font-medium tracking-[0.2em] uppercase text-[#F1EFE7]/40" style={{ fontFamily: "Arial, sans-serif" }}>Student-run VC</span>
-                  <svg className="w-4 h-4 text-[#F1EFE7]/30 group-hover:text-[#F1EFE7]/70 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 17L17 7M17 7H7M17 7v10" />
-                  </svg>
-                </div>
-                <h3 className="text-xl md:text-2xl font-semibold mb-4 text-[#F1EFE7] group-hover:text-white transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
+              <div className="flex items-center justify-between mb-8 md:mb-12">
+                <span className="text-[10px] md:text-[11px] font-medium tracking-[0.2em] uppercase text-[#F1EFE7]/40" style={{ fontFamily: "Arial, sans-serif" }}>Student-run VC</span>
+                <svg className="w-5 h-5 text-[#F1EFE7]/30 group-hover:text-[#F1EFE7]/70 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 17L17 7M17 7H7M17 7v10" />
+                    </svg>
+                  </div>
+              <div className="flex-1 flex flex-col justify-center">
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-semibold mb-6 text-[#F1EFE7] group-hover:text-white transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
                   Dorm Room Fund
-                </h3>
-                <p className="text-sm leading-relaxed text-[#F1EFE7]/50 group-hover:text-[#F1EFE7]/70 transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
+                  </h3>
+                <p className="text-sm md:text-base leading-relaxed text-[#F1EFE7]/50 group-hover:text-[#F1EFE7]/70 transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
                   The premier student-run venture fund backing student founders.
-                </p>
-              </Link>
+                  </p>
+              </div>
+            </Link>
 
-              <Link
-                href="https://www.afore.vc"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group bg-[#0a0a0a] p-8 md:p-10 flex flex-col transition-all duration-300 hover:bg-[#111]"
-              >
-                <div className="flex items-center justify-between mb-8">
-                  <span className="text-[10px] font-medium tracking-[0.2em] uppercase text-[#F1EFE7]/40" style={{ fontFamily: "Arial, sans-serif" }}>Early Stage</span>
-                  <svg className="w-4 h-4 text-[#F1EFE7]/30 group-hover:text-[#F1EFE7]/70 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 17L17 7M17 7H7M17 7v10" />
-                  </svg>
-                </div>
-                <h3 className="text-xl md:text-2xl font-semibold mb-4 text-[#F1EFE7] group-hover:text-white transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
+            <Link
+              href="https://www.afore.vc"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group bg-[#0a0a0a] p-8 md:p-12 lg:p-14 flex flex-col transition-all duration-300 hover:bg-[#111]"
+            >
+              <div className="flex items-center justify-between mb-8 md:mb-12">
+                <span className="text-[10px] md:text-[11px] font-medium tracking-[0.2em] uppercase text-[#F1EFE7]/40" style={{ fontFamily: "Arial, sans-serif" }}>Early Stage</span>
+                <svg className="w-5 h-5 text-[#F1EFE7]/30 group-hover:text-[#F1EFE7]/70 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 17L17 7M17 7H7M17 7v10" />
+                    </svg>
+                  </div>
+              <div className="flex-1 flex flex-col justify-center">
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-semibold mb-6 text-[#F1EFE7] group-hover:text-white transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
                   Afore Capital
-                </h3>
-                <p className="text-sm leading-relaxed text-[#F1EFE7]/50 group-hover:text-[#F1EFE7]/70 transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
+                  </h3>
+                <p className="text-sm md:text-base leading-relaxed text-[#F1EFE7]/50 group-hover:text-[#F1EFE7]/70 transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
                   Pre-seed fund investing in technical founders.
-                </p>
-              </Link>
-
-              <Link
-                href="https://pear.vc"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group bg-[#0a0a0a] p-8 md:p-10 flex flex-col transition-all duration-300 hover:bg-[#111]"
-              >
-                <div className="flex items-center justify-between mb-8">
-                  <span className="text-[10px] font-medium tracking-[0.2em] uppercase text-[#F1EFE7]/40" style={{ fontFamily: "Arial, sans-serif" }}>Pre-Seed & Seed</span>
-                  <svg className="w-4 h-4 text-[#F1EFE7]/30 group-hover:text-[#F1EFE7]/70 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 17L17 7M17 7H7M17 7v10" />
-                  </svg>
+                  </p>
                 </div>
-                <h3 className="text-xl md:text-2xl font-semibold mb-4 text-[#F1EFE7] group-hover:text-white transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
+            </Link>
+
+            <Link
+              href="https://pear.vc"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group bg-[#0a0a0a] p-8 md:p-12 lg:p-14 flex flex-col transition-all duration-300 hover:bg-[#111]"
+            >
+              <div className="flex items-center justify-between mb-8 md:mb-12">
+                <span className="text-[10px] md:text-[11px] font-medium tracking-[0.2em] uppercase text-[#F1EFE7]/40" style={{ fontFamily: "Arial, sans-serif" }}>Pre-Seed & Seed</span>
+                <svg className="w-5 h-5 text-[#F1EFE7]/30 group-hover:text-[#F1EFE7]/70 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 17L17 7M17 7H7M17 7v10" />
+                </svg>
+              </div>
+              <div className="flex-1 flex flex-col justify-center">
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-semibold mb-6 text-[#F1EFE7] group-hover:text-white transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
                   Pear VC
-                </h3>
-                <p className="text-sm leading-relaxed text-[#F1EFE7]/50 group-hover:text-[#F1EFE7]/70 transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
+              </h3>
+                <p className="text-sm md:text-base leading-relaxed text-[#F1EFE7]/50 group-hover:text-[#F1EFE7]/70 transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
                   Supporting exceptional founders from the earliest stages.
-                </p>
-              </Link>
+              </p>
+              </div>
+            </Link>
 
               <Link
-                href="https://greylock.com"
+              href="https://greylock.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group bg-[#0a0a0a] p-8 md:p-10 flex flex-col transition-all duration-300 hover:bg-[#111]"
-              >
-                <div className="flex items-center justify-between mb-8">
-                  <span className="text-[10px] font-medium tracking-[0.2em] uppercase text-[#F1EFE7]/40" style={{ fontFamily: "Arial, sans-serif" }}>AI-First VC</span>
-                  <svg className="w-4 h-4 text-[#F1EFE7]/30 group-hover:text-[#F1EFE7]/70 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 17L17 7M17 7H7M17 7v10" />
-                  </svg>
-                </div>
-                <h3 className="text-xl md:text-2xl font-semibold mb-4 text-[#F1EFE7] group-hover:text-white transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
+              className="group bg-[#0a0a0a] p-8 md:p-12 lg:p-14 flex flex-col transition-all duration-300 hover:bg-[#111]"
+            >
+              <div className="flex items-center justify-between mb-8 md:mb-12">
+                <span className="text-[10px] md:text-[11px] font-medium tracking-[0.2em] uppercase text-[#F1EFE7]/40" style={{ fontFamily: "Arial, sans-serif" }}>AI-First VC</span>
+                <svg className="w-5 h-5 text-[#F1EFE7]/30 group-hover:text-[#F1EFE7]/70 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 17L17 7M17 7H7M17 7v10" />
+                </svg>
+              </div>
+              <div className="flex-1 flex flex-col justify-center">
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-semibold mb-6 text-[#F1EFE7] group-hover:text-white transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
                   Greylock
                 </h3>
-                <p className="text-sm leading-relaxed text-[#F1EFE7]/50 group-hover:text-[#F1EFE7]/70 transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
+                <p className="text-sm md:text-base leading-relaxed text-[#F1EFE7]/50 group-hover:text-[#F1EFE7]/70 transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
                   Legendary Silicon Valley venture firm backing iconic companies.
                 </p>
+              </div>
               </Link>
-            </div>
-
-            {/* Bottom decorative line */}
-            <div className="flex justify-center mt-16">
-              <div className="h-px w-32 bg-gradient-to-r from-transparent via-[#F1EFE7]/20 to-transparent" />
-            </div>
           </div>
         </FadeInSection>
       </section>
@@ -635,16 +650,16 @@ export default function Home() {
         {/* Subtle ambient gradient */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#F1EFE7]/[0.015] to-transparent pointer-events-none" />
         
-        <div className="relative z-10 py-20 md:py-32">
+        <FadeInSection className="relative z-10 py-20 md:py-32">
           {/* Section Header */}
           <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 mb-16">
             <div className="flex items-center justify-center gap-8 mb-6">
               <div className="hidden md:block h-px w-24 bg-gradient-to-r from-transparent to-[#F1EFE7]/30" />
-              <h2 className="text-5xl md:text-6xl lg:text-7xl text-center tracking-tight" style={{ color: "#F1EFE7", fontFamily: "'Times New Roman', serif" }}>
+              <h2 className="text-5xl md:text-6xl lg:text-7xl text-center tracking-tighter" style={{ color: "#F1EFE7", fontFamily: "'Times New Roman', serif", letterSpacing: "-0.04em" }}>
                 <span className="italic font-light">Our</span> Events
               </h2>
               <div className="hidden md:block h-px w-24 bg-gradient-to-l from-transparent to-[#F1EFE7]/30" />
-            </div>
+        </div>
             <p
               className="text-center text-base md:text-lg text-[#F1EFE7] opacity-60 max-w-xl mx-auto leading-relaxed font-light"
               style={{ fontFamily: "Arial, sans-serif" }}
@@ -708,7 +723,7 @@ export default function Home() {
                         <span className="w-1.5 h-1.5 bg-[#F1EFE7]/40 rounded-full" />
                         VC Office Hours
                       </div>
-                    </div>
+                </div>
                     <div className="grid grid-cols-2 gap-4">
                       <div className="relative h-32 md:h-48 lg:h-56 w-full overflow-hidden border border-[#F1EFE7]/10">
                         <Image
@@ -717,7 +732,7 @@ export default function Home() {
                           fill
                           className="object-cover opacity-80 hover:opacity-100 transition-opacity duration-300"
                         />
-                      </div>
+                </div>
                       <div className="relative h-32 md:h-48 lg:h-56 w-full overflow-hidden border border-[#F1EFE7]/10">
                         <Image
                           src="/mountain-retreat-conference.jpg"
@@ -745,7 +760,7 @@ export default function Home() {
                           fill
                           className="object-cover opacity-80 hover:opacity-100 transition-opacity duration-300"
                         />
-                      </div>
+                </div>
                       <div className="relative h-32 md:h-48 lg:h-56 w-full overflow-hidden border border-[#F1EFE7]/10">
                         <Image
                           src="/startup-pitch.png"
@@ -753,7 +768,7 @@ export default function Home() {
                           fill
                           className="object-cover opacity-80 hover:opacity-100 transition-opacity duration-300"
                         />
-                      </div>
+                </div>
                     </div>
                   </div>
                 ),
@@ -764,8 +779,8 @@ export default function Home() {
           {/* Bottom decorative element */}
           <div className="flex justify-center mt-16">
             <div className="h-px w-48 bg-gradient-to-r from-transparent via-[#F1EFE7]/20 to-transparent" />
-          </div>
-        </div>
+                </div>
+        </FadeInSection>
       </section>
 
       {/* CTA Section */}
@@ -777,10 +792,10 @@ export default function Home() {
           <div className="w-full max-w-5xl mx-auto text-center">
             {/* Large decorative quote mark */}
             <div className="mb-8">
-              <span className="text-[120px] md:text-[180px] leading-none font-serif text-[#F1EFE7]/[0.08] select-none" style={{ fontFamily: "'Times New Roman', serif" }}>"</span>
-            </div>
+              <span className="text-[120px] md:text-[180px] leading-none font-serif text-[#F1EFE7]/[0.08] select-none" style={{ fontFamily: "'Times New Roman', serif", letterSpacing: "-0.03em" }}>"</span>
+                </div>
             
-            <h2 className="text-5xl md:text-6xl lg:text-8xl mb-8 tracking-tight -mt-20" style={{ color: "#F1EFE7", fontFamily: "'Times New Roman', serif" }}>
+            <h2 className="text-5xl md:text-6xl lg:text-8xl mb-8 tracking-tighter -mt-20" style={{ color: "#F1EFE7", fontFamily: "'Times New Roman', serif", letterSpacing: "-0.04em" }}>
               Join the <span className="italic font-light">Foundry</span>
             </h2>
             
@@ -803,7 +818,7 @@ export default function Home() {
                 Apply as Founder
                 <svg className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
+                  </svg>
               </Link>
               <Link
                 href="https://forms.gle/4QJVBz56nvrjSxHSA"

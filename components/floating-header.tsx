@@ -38,7 +38,7 @@ export function FloatingHeader() {
         {/* Logo */}
         <Link href="#about" onClick={(e) => handleNavClick(e, "#about")} className="flex items-center gap-2 hover:opacity-80 transition-opacity flex-shrink-0">
           <div className="w-8 h-8 bg-black border border-[#F1EFE7]/40 rounded-md flex items-center justify-center hover:border-[#F1EFE7]/60 transition-colors">
-            <span className="text-[#F1EFE7] text-sm font-bold italic" style={{ fontFamily: "'Times New Roman', serif" }}>f</span>
+            <span className="text-[#F1EFE7] text-sm font-bold italic" style={{ fontFamily: "'Times New Roman', serif", letterSpacing: "-0.03em" }}>f</span>
           </div>
         </Link>
 

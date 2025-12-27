@@ -89,3 +89,10 @@
 html {
   scroll-behavior: smooth;
 }
+
+/* Condensed serif styling for headings */
+.font-serif-condensed {
+  font-family: 'Times New Roman', Times, serif;
+  letter-spacing: -0.03em;
+  font-stretch: condensed;
+}

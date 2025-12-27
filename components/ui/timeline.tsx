@@ -49,8 +49,8 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
                 <div className="h-3 w-3 rounded-full bg-[#F1EFE7]/30" />
               </div>
               <h3 
-                className="hidden md:block text-xl md:pl-20 md:text-4xl font-semibold text-[#F1EFE7]/60"
-                style={{ fontFamily: "'Times New Roman', serif" }}
+                className="hidden md:block text-xl md:pl-20 md:text-4xl font-semibold text-[#F1EFE7]/60 tracking-tighter"
+                style={{ fontFamily: "'Times New Roman', serif", letterSpacing: "-0.04em" }}
               >
                 {item.title}
               </h3>
@@ -58,8 +58,8 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
 
             <div className="relative pl-20 pr-4 md:pl-4 w-full">
               <h3 
-                className="md:hidden block text-2xl mb-4 text-left font-semibold text-[#F1EFE7]/60"
-                style={{ fontFamily: "'Times New Roman', serif" }}
+                className="md:hidden block text-2xl mb-4 text-left font-semibold text-[#F1EFE7]/60 tracking-tighter"
+                style={{ fontFamily: "'Times New Roman', serif", letterSpacing: "-0.04em" }}
               >
                 {item.title}
               </h3>
@@ -85,4 +85,5 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
     </div>
   );
 };
+
 
