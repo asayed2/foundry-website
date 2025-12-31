@@ -12,7 +12,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { Modal } from "@/components/ui/modal"
 import { Timeline } from "@/components/ui/timeline"
-import { motion, useInView, useScroll, useTransform } from "framer-motion"
+import { motion, useInView, useScroll, useTransform, AnimatePresence } from "framer-motion"
 
 // Scroll-triggered fade section wrapper - fades in when scrolling down, fades out when scrolling up
 function FadeInSection({ children, className = "" }: { children: React.ReactNode; className?: string }) {
@@ -39,12 +39,68 @@ function FadeInSection({ children, className = "" }: { children: React.ReactNode
   )
 }
 
+// Partners data
+const PARTNERS = [
+  {
+    name: "Dorm Room Fund",
+    type: "Student-run VC",
+    description: "The premier student-run venture fund backing student founders.",
+    url: "https://www.dormroomfund.com"
+  },
+  {
+    name: "Afore Capital",
+    type: "Early Stage",
+    description: "Pre-seed fund investing in technical founders.",
+    url: "https://www.afore.vc"
+  },
+  {
+    name: "Pear VC",
+    type: "Pre-Seed & Seed",
+    description: "Supporting exceptional founders from the earliest stages.",
+    url: "https://pear.vc"
+  },
+  {
+    name: "Greylock",
+    type: "AI-First VC",
+    description: "Legendary Silicon Valley venture firm backing iconic companies.",
+    url: "https://greylock.com"
+  },
+  {
+    name: "NVX Fund",
+    type: "Venture Capital",
+    description: "Strategic investment fund focused on breakthrough technologies.",
+    url: "#"
+  },
+  {
+    name: "KW Empower",
+    type: "Real Estate Tech",
+    description: "Keller Williams' innovation arm empowering real estate entrepreneurs.",
+    url: "#"
+  },
+  {
+    name: "Breakthrough Ventures",
+    type: "Deep Tech VC",
+    description: "Investing in transformative science and technology companies.",
+    url: "#"
+  }
+]
+
 export default function Home() {
   const [isJoinModalOpen, setIsJoinModalOpen] = useState(false)
+  const [currentPartnerIndex, setCurrentPartnerIndex] = useState(0)
 
   // Scroll to top on page load
   useEffect(() => {
     window.scrollTo(0, 0)
+  }, [])
+
+  // Auto-rotate partners carousel
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentPartnerIndex((prev) => (prev + 4) % PARTNERS.length)
+    }, 5000) // Rotate every 5 seconds
+    
+    return () => clearInterval(interval)
   }, [])
 
   return (
@@ -378,7 +434,7 @@ export default function Home() {
           {/* Decorative bottom element */}
           <div className="flex justify-center mt-20">
             <div className="w-px h-12 bg-gradient-to-t from-transparent to-[#F1EFE7]/30" />
-          </div>
+            </div>
         </FadeInSection>
       </section>
 
@@ -408,8 +464,8 @@ export default function Home() {
                 >
                   Foundry is the first builder-led community in Philadelphia that's actually building alongside its members.
                 </p>
-              </div>
-              
+        </div>
+
               <div className="space-y-6">
                 <span className="text-[10px] font-medium tracking-[0.3em] uppercase text-[#F1EFE7]/40" style={{ fontFamily: "Arial, sans-serif" }}>Our Approach</span>
                 <p
@@ -419,8 +475,8 @@ export default function Home() {
                   We started by searching for the right resources—VC connections, partnerships, go-to-market guidance—then decided to create them ourselves.
                 </p>
               </div>
-            </div>
-            
+        </div>
+
             {/* Centered tagline */}
             <div className="mt-20 text-center">
               <p
@@ -497,12 +553,12 @@ export default function Home() {
                   AI-powered deal flow management for venture capital firms.
                   </p>
                 </div>
-                </div>
+              </div>
 
             <div className="group bg-[#0a0a0a] p-8 md:p-12 lg:p-14 flex flex-col transition-all duration-300 hover:bg-[#111]">
               <div className="flex items-center justify-between mb-8 md:mb-12">
                 <span className="text-[10px] md:text-[11px] font-medium tracking-[0.2em] uppercase text-[#F1EFE7]/40" style={{ fontFamily: "Arial, sans-serif" }}>Seed Round</span>
-              </div>
+                    </div>
               <div className="flex-1 flex flex-col justify-center">
                 <h3 className="text-2xl md:text-3xl lg:text-4xl font-semibold mb-6 text-[#F1EFE7] group-hover:text-white transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
                     Ulterius
@@ -511,12 +567,12 @@ export default function Home() {
                     Innovative technology solutions for the modern enterprise.
                   </p>
                 </div>
-                </div>
+              </div>
 
             <div className="group bg-[#0a0a0a] p-8 md:p-12 lg:p-14 flex flex-col transition-all duration-300 hover:bg-[#111]">
               <div className="flex items-center justify-between mb-8 md:mb-12">
                 <span className="text-[10px] md:text-[11px] font-medium tracking-[0.2em] uppercase text-[#F1EFE7]/40" style={{ fontFamily: "Arial, sans-serif" }}>Seed Round</span>
-              </div>
+                    </div>
               <div className="flex-1 flex flex-col justify-center">
                 <h3 className="text-2xl md:text-3xl lg:text-4xl font-semibold mb-6 text-[#F1EFE7] group-hover:text-white transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
                   Velric AI
@@ -552,96 +608,88 @@ export default function Home() {
             </span>
           </div>
 
-          {/* Full-bleed cards */}
-          <div className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-[#F1EFE7]/10">
-            <Link
-              href="https://www.dormroomfund.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group bg-[#0a0a0a] p-8 md:p-12 lg:p-14 flex flex-col transition-all duration-300 hover:bg-[#111]"
-            >
-              <div className="flex items-center justify-between mb-8 md:mb-12">
-                <span className="text-[10px] md:text-[11px] font-medium tracking-[0.2em] uppercase text-[#F1EFE7]/40" style={{ fontFamily: "Arial, sans-serif" }}>Student-run VC</span>
-                <svg className="w-5 h-5 text-[#F1EFE7]/30 group-hover:text-[#F1EFE7]/70 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 17L17 7M17 7H7M17 7v10" />
-                    </svg>
-                  </div>
-              <div className="flex-1 flex flex-col justify-center">
-                <h3 className="text-2xl md:text-3xl lg:text-4xl font-semibold mb-6 text-[#F1EFE7] group-hover:text-white transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
-                  Dorm Room Fund
-                  </h3>
-                <p className="text-sm md:text-base leading-relaxed text-[#F1EFE7]/50 group-hover:text-[#F1EFE7]/70 transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
-                  The premier student-run venture fund backing student founders.
-                  </p>
-              </div>
-            </Link>
-
-            <Link
-              href="https://www.afore.vc"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group bg-[#0a0a0a] p-8 md:p-12 lg:p-14 flex flex-col transition-all duration-300 hover:bg-[#111]"
-            >
-              <div className="flex items-center justify-between mb-8 md:mb-12">
-                <span className="text-[10px] md:text-[11px] font-medium tracking-[0.2em] uppercase text-[#F1EFE7]/40" style={{ fontFamily: "Arial, sans-serif" }}>Early Stage</span>
-                <svg className="w-5 h-5 text-[#F1EFE7]/30 group-hover:text-[#F1EFE7]/70 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 17L17 7M17 7H7M17 7v10" />
-                    </svg>
-                  </div>
-              <div className="flex-1 flex flex-col justify-center">
-                <h3 className="text-2xl md:text-3xl lg:text-4xl font-semibold mb-6 text-[#F1EFE7] group-hover:text-white transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
-                  Afore Capital
-                  </h3>
-                <p className="text-sm md:text-base leading-relaxed text-[#F1EFE7]/50 group-hover:text-[#F1EFE7]/70 transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
-                  Pre-seed fund investing in technical founders.
-                  </p>
-                </div>
-            </Link>
-
-            <Link
-              href="https://pear.vc"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group bg-[#0a0a0a] p-8 md:p-12 lg:p-14 flex flex-col transition-all duration-300 hover:bg-[#111]"
-            >
-              <div className="flex items-center justify-between mb-8 md:mb-12">
-                <span className="text-[10px] md:text-[11px] font-medium tracking-[0.2em] uppercase text-[#F1EFE7]/40" style={{ fontFamily: "Arial, sans-serif" }}>Pre-Seed & Seed</span>
-                <svg className="w-5 h-5 text-[#F1EFE7]/30 group-hover:text-[#F1EFE7]/70 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 17L17 7M17 7H7M17 7v10" />
-                </svg>
-              </div>
-              <div className="flex-1 flex flex-col justify-center">
-                <h3 className="text-2xl md:text-3xl lg:text-4xl font-semibold mb-6 text-[#F1EFE7] group-hover:text-white transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
-                  Pear VC
-              </h3>
-                <p className="text-sm md:text-base leading-relaxed text-[#F1EFE7]/50 group-hover:text-[#F1EFE7]/70 transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
-                  Supporting exceptional founders from the earliest stages.
-              </p>
-              </div>
-            </Link>
-
+{/* Full-bleed cards carousel */}
+          <div className="flex-1 relative">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentPartnerIndex}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5 }}
+                className="absolute inset-0 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-[#F1EFE7]/10"
+              >
+                {PARTNERS.slice(currentPartnerIndex, currentPartnerIndex + 4).concat(
+                  PARTNERS.slice(0, Math.max(0, (currentPartnerIndex + 4) - PARTNERS.length))
+                ).slice(0, 4).map((partner, idx) => (
               <Link
-              href="https://greylock.com"
+                    key={`${partner.name}-${currentPartnerIndex}-${idx}`}
+                    href={partner.url}
                 target="_blank"
                 rel="noopener noreferrer"
-              className="group bg-[#0a0a0a] p-8 md:p-12 lg:p-14 flex flex-col transition-all duration-300 hover:bg-[#111]"
+                    className="group bg-[#0a0a0a] p-8 md:p-12 lg:p-14 flex flex-col transition-all duration-300 hover:bg-[#111]"
+                  >
+                    <div className="flex items-center justify-between mb-8 md:mb-12">
+                      <span className="text-[10px] md:text-[11px] font-medium tracking-[0.2em] uppercase text-[#F1EFE7]/40" style={{ fontFamily: "Arial, sans-serif" }}>
+                        {partner.type}
+                      </span>
+                      <svg className="w-5 h-5 text-[#F1EFE7]/30 group-hover:text-[#F1EFE7]/70 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 17L17 7M17 7H7M17 7v10" />
+                    </svg>
+                  </div>
+                    <div className="flex-1 flex flex-col justify-center">
+                      <h3 className="text-2xl md:text-3xl lg:text-4xl font-semibold mb-6 text-[#F1EFE7] group-hover:text-white transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
+                        {partner.name}
+                  </h3>
+                      <p className="text-sm md:text-base leading-relaxed text-[#F1EFE7]/50 group-hover:text-[#F1EFE7]/70 transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
+                        {partner.description}
+                  </p>
+                </div>
+                  </Link>
+                ))}
+              </motion.div>
+            </AnimatePresence>
+              </div>
+
+          {/* Navigation arrows and indicators */}
+          <div className="flex items-center justify-center gap-4 md:gap-8 py-6 px-4">
+            {/* Left arrow */}
+            <button
+              onClick={() => setCurrentPartnerIndex((prev) => (prev - 4 + PARTNERS.length) % PARTNERS.length)}
+              className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center border border-[#F1EFE7]/20 bg-black/40 backdrop-blur-sm hover:border-[#F1EFE7]/40 hover:bg-black/60 transition-all duration-300 group"
+              aria-label="Previous partners"
             >
-              <div className="flex items-center justify-between mb-8 md:mb-12">
-                <span className="text-[10px] md:text-[11px] font-medium tracking-[0.2em] uppercase text-[#F1EFE7]/40" style={{ fontFamily: "Arial, sans-serif" }}>AI-First VC</span>
-                <svg className="w-5 h-5 text-[#F1EFE7]/30 group-hover:text-[#F1EFE7]/70 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 17L17 7M17 7H7M17 7v10" />
-                </svg>
-              </div>
-              <div className="flex-1 flex flex-col justify-center">
-                <h3 className="text-2xl md:text-3xl lg:text-4xl font-semibold mb-6 text-[#F1EFE7] group-hover:text-white transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
-                  Greylock
-                </h3>
-                <p className="text-sm md:text-base leading-relaxed text-[#F1EFE7]/50 group-hover:text-[#F1EFE7]/70 transition-colors" style={{ fontFamily: "Arial, sans-serif" }}>
-                  Legendary Silicon Valley venture firm backing iconic companies.
-                </p>
-              </div>
-              </Link>
-          </div>
+              <svg className="w-4 h-4 md:w-5 md:h-5 text-[#F1EFE7]/40 group-hover:text-[#F1EFE7]/70 group-hover:-translate-x-0.5 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19l-7-7 7-7" />
+                    </svg>
+            </button>
+
+            {/* Carousel indicators */}
+            <div className="flex items-center gap-2">
+              {Array.from({ length: Math.ceil(PARTNERS.length / 4) }).map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setCurrentPartnerIndex(idx * 4)}
+                  className={`transition-all duration-300 ${
+                    currentPartnerIndex === idx * 4
+                      ? 'w-8 h-1.5 bg-[#F1EFE7]/40'
+                      : 'w-1.5 h-1.5 bg-[#F1EFE7]/20 hover:bg-[#F1EFE7]/30'
+                  }`}
+                />
+              ))}
+            </div>
+
+            {/* Right arrow */}
+            <button
+              onClick={() => setCurrentPartnerIndex((prev) => (prev + 4) % PARTNERS.length)}
+              className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center border border-[#F1EFE7]/20 bg-black/40 backdrop-blur-sm hover:border-[#F1EFE7]/40 hover:bg-black/60 transition-all duration-300 group"
+              aria-label="Next partners"
+            >
+              <svg className="w-4 h-4 md:w-5 md:h-5 text-[#F1EFE7]/40 group-hover:text-[#F1EFE7]/70 group-hover:translate-x-0.5 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+            </div>
         </FadeInSection>
       </section>
 
@@ -657,7 +705,7 @@ export default function Home() {
               <div className="hidden md:block h-px w-24 bg-gradient-to-r from-transparent to-[#F1EFE7]/30" />
               <h2 className="text-5xl md:text-6xl lg:text-7xl text-center tracking-tighter" style={{ color: "#F1EFE7", fontFamily: "'Times New Roman', serif", letterSpacing: "-0.04em" }}>
                 <span className="italic font-light">Our</span> Events
-              </h2>
+            </h2>
               <div className="hidden md:block h-px w-24 bg-gradient-to-l from-transparent to-[#F1EFE7]/30" />
         </div>
             <p
@@ -669,106 +717,85 @@ export default function Home() {
           </div>
           
           {/* Timeline Component */}
-          <Timeline
+<Timeline
             data={[
               {
-                title: "Spring 2025",
+                title: "OCT 4",
                 content: (
                   <div>
-                    <p className="text-[#F1EFE7]/80 text-sm md:text-base font-light mb-8" style={{ fontFamily: "Arial, sans-serif" }}>
-                      Foundry Demo Day — Our flagship event where portfolio companies pitch to top VCs and angel investors.
+                    <p className="text-[#F1EFE7]/40 text-xs tracking-[0.2em] uppercase mb-2" style={{ fontFamily: "Arial, sans-serif" }}>
+                      2025
                     </p>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="relative h-32 md:h-48 lg:h-56 w-full overflow-hidden border border-[#F1EFE7]/10">
-                        <Image
-                          src="/startup-pitch-event.png"
-                          alt="Startup pitch event"
-                          fill
-                          className="object-cover opacity-80 hover:opacity-100 transition-opacity duration-300"
-                        />
-                      </div>
-                      <div className="relative h-32 md:h-48 lg:h-56 w-full overflow-hidden border border-[#F1EFE7]/10">
-                        <Image
-                          src="/business-conference-room.png"
-                          alt="Conference room"
-                          fill
-                          className="object-cover opacity-80 hover:opacity-100 transition-opacity duration-300"
-                        />
-                      </div>
+                    <h3 className="text-[#F1EFE7] text-2xl md:text-3xl mb-4" style={{ fontFamily: "'Times New Roman', serif", letterSpacing: "-0.03em" }}>
+                      The Catalyst
+                    </h3>
+                    <p className="text-[#F1EFE7]/60 text-sm md:text-base font-light mb-6 max-w-xl" style={{ fontFamily: "Arial, sans-serif" }}>
+                      Our inaugural mixer. 20 builders, 3 VC partners. Real conversations, real outcomes—the fire-starter event.
+                    </p>
+                    <div className="relative h-48 md:h-64 w-full overflow-hidden border border-[#F1EFE7]/10">
+                      <Image
+                        src="/startup-pitch.png"
+                        alt="The Catalyst mixer"
+                        fill
+                        className="object-cover opacity-70 hover:opacity-90 transition-opacity duration-500"
+                      />
                     </div>
                   </div>
                 ),
               },
               {
-                title: "Winter 2024",
+                title: "NOV 21–23",
                 content: (
                   <div>
-                    <p className="text-[#F1EFE7]/80 text-sm md:text-base font-light mb-4" style={{ fontFamily: "Arial, sans-serif" }}>
-                      Builder Workshops — Hands-on sessions for technical founders covering product development, growth, and fundraising.
+                    <p className="text-[#F1EFE7]/40 text-xs tracking-[0.2em] uppercase mb-2" style={{ fontFamily: "Arial, sans-serif" }}>
+                      2025
                     </p>
-                    <div className="mb-8 space-y-2">
-                      <div className="flex gap-3 items-center text-[#F1EFE7]/60 text-xs md:text-sm" style={{ fontFamily: "Arial, sans-serif" }}>
-                        <span className="w-1.5 h-1.5 bg-[#F1EFE7]/40 rounded-full" />
-                        Technical Architecture Review
-                      </div>
-                      <div className="flex gap-3 items-center text-[#F1EFE7]/60 text-xs md:text-sm" style={{ fontFamily: "Arial, sans-serif" }}>
-                        <span className="w-1.5 h-1.5 bg-[#F1EFE7]/40 rounded-full" />
-                        Go-to-Market Strategy Session
-                      </div>
-                      <div className="flex gap-3 items-center text-[#F1EFE7]/60 text-xs md:text-sm" style={{ fontFamily: "Arial, sans-serif" }}>
-                        <span className="w-1.5 h-1.5 bg-[#F1EFE7]/40 rounded-full" />
-                        Pitch Deck Workshop
-                      </div>
-                      <div className="flex gap-3 items-center text-[#F1EFE7]/60 text-xs md:text-sm" style={{ fontFamily: "Arial, sans-serif" }}>
-                        <span className="w-1.5 h-1.5 bg-[#F1EFE7]/40 rounded-full" />
-                        VC Office Hours
-                      </div>
+                    <h3 className="text-[#F1EFE7] text-2xl md:text-3xl mb-4" style={{ fontFamily: "'Times New Roman', serif", letterSpacing: "-0.03em" }}>
+                      Startup in a Weekend
+                  </h3>
+                    <p className="text-[#F1EFE7]/60 text-sm md:text-base font-light mb-4 max-w-xl" style={{ fontFamily: "Arial, sans-serif" }}>
+                      With KW Empower in Philadelphia. 150+ attendees, 17 brand partners, $10K in prizes, 15+ deals in pipeline.
+                  </p>
+                    <div className="flex flex-wrap gap-x-6 gap-y-1 mb-6 text-[#F1EFE7]/40 text-xs" style={{ fontFamily: "Arial, sans-serif" }}>
+                      <span>Microsoft execs</span>
+                      <span>Google leads</span>
+                      <span>Mercor engineers</span>
                 </div>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="relative h-32 md:h-48 lg:h-56 w-full overflow-hidden border border-[#F1EFE7]/10">
-                        <Image
-                          src="/coding-workshop-developers.jpg"
-                          alt="Coding workshop"
-                          fill
-                          className="object-cover opacity-80 hover:opacity-100 transition-opacity duration-300"
-                        />
-                </div>
-                      <div className="relative h-32 md:h-48 lg:h-56 w-full overflow-hidden border border-[#F1EFE7]/10">
-                        <Image
-                          src="/mountain-retreat-conference.jpg"
-                          alt="Retreat conference"
-                          fill
-                          className="object-cover opacity-80 hover:opacity-100 transition-opacity duration-300"
-                        />
-                      </div>
+                    <div className="relative h-48 md:h-64 w-full overflow-hidden border border-[#F1EFE7]/10">
+                      <Image
+                        src="/startup-networking-event.png"
+                        alt="Hackathon"
+                        fill
+                        className="object-cover opacity-70 hover:opacity-90 transition-opacity duration-500"
+                      />
                     </div>
                   </div>
                 ),
               },
               {
-                title: "Fall 2024",
+                title: "DEC 21",
                 content: (
                   <div>
-                    <p className="text-[#F1EFE7]/80 text-sm md:text-base font-light mb-8" style={{ fontFamily: "Arial, sans-serif" }}>
-                      Foundry Launch — The beginning of Philadelphia's first builder-led venture community. Inaugural networking event with 100+ founders and investors.
+                    <p className="text-[#F1EFE7]/40 text-xs tracking-[0.2em] uppercase mb-2" style={{ fontFamily: "Arial, sans-serif" }}>
+                      2025
                     </p>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="relative h-32 md:h-48 lg:h-56 w-full overflow-hidden border border-[#F1EFE7]/10">
-                        <Image
-                          src="/startup-networking-event.png"
-                          alt="Networking event"
-                          fill
-                          className="object-cover opacity-80 hover:opacity-100 transition-opacity duration-300"
-                        />
+                    <h3 className="text-[#F1EFE7] text-2xl md:text-3xl mb-4" style={{ fontFamily: "'Times New Roman', serif", letterSpacing: "-0.03em" }}>
+                      Builder Night
+                  </h3>
+                    <p className="text-[#F1EFE7]/60 text-sm md:text-base font-light mb-4 max-w-xl" style={{ fontFamily: "Arial, sans-serif" }}>
+                      With Code & Coffee Philly. 25 builders at Foundry House—debugging, connecting, shipping.
+                  </p>
+                    <div className="flex flex-wrap gap-x-6 gap-y-1 mb-6 text-[#F1EFE7]/40 text-xs" style={{ fontFamily: "Arial, sans-serif" }}>
+                      <span>High-signal conversations</span>
+                      <span>Startup advice</span>
                 </div>
-                      <div className="relative h-32 md:h-48 lg:h-56 w-full overflow-hidden border border-[#F1EFE7]/10">
-                        <Image
-                          src="/startup-pitch.png"
-                          alt="Startup pitch"
-                          fill
-                          className="object-cover opacity-80 hover:opacity-100 transition-opacity duration-300"
-                        />
-                </div>
+                    <div className="relative h-48 md:h-64 w-full overflow-hidden border border-[#F1EFE7]/10">
+                      <Image
+                        src="/coding-workshop-developers.jpg"
+                        alt="Builder night"
+                        fill
+                        className="object-cover opacity-70 hover:opacity-90 transition-opacity duration-500"
+                      />
                     </div>
                   </div>
                 ),
@@ -794,7 +821,7 @@ export default function Home() {
             <div className="mb-8">
               <span className="text-[120px] md:text-[180px] leading-none font-serif text-[#F1EFE7]/[0.08] select-none" style={{ fontFamily: "'Times New Roman', serif", letterSpacing: "-0.03em" }}>"</span>
                 </div>
-            
+
             <h2 className="text-5xl md:text-6xl lg:text-8xl mb-8 tracking-tighter -mt-20" style={{ color: "#F1EFE7", fontFamily: "'Times New Roman', serif", letterSpacing: "-0.04em" }}>
               Join the <span className="italic font-light">Foundry</span>
             </h2>
@@ -832,6 +859,16 @@ export default function Home() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </Link>
+              <Link
+                href="/sponsors"
+                className="group text-sm font-medium bg-transparent text-[#F1EFE7] px-12 py-5 hover:bg-[#F1EFE7]/5 transition-colors duration-200 tracking-[0.15em] uppercase text-center flex items-center justify-center gap-3 border-t sm:border-t-0 sm:border-l border-[#F1EFE7]/10"
+                style={{ fontFamily: "Arial, sans-serif" }}
+              >
+                Become a Sponsor
+                <svg className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </Link>
             </div>
             
             {/* Footer-like info */}
@@ -841,8 +878,8 @@ export default function Home() {
               <span>Est. 2024</span>
               <span className="w-1 h-1 bg-[#F1EFE7]/30 rounded-full" />
               <span>For Builders</span>
-            </div>
           </div>
+        </div>
         </FadeInSection>
       </section>
 

@@ -76,6 +76,13 @@ export function FloatingHeader() {
           >
             Events
           </a>
+          <Link
+            href="/sponsors"
+            className="text-[#F1EFE7]/80 hover:text-[#F1EFE7] text-sm font-medium transition-colors duration-200"
+            style={{ fontFamily: "Arial, sans-serif" }}
+          >
+            Sponsors
+          </Link>
         </div>
 
         {/* CTA Button */}
