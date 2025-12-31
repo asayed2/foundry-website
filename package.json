@@ -11,7 +11,7 @@
   "dependencies": {
     "@emotion/is-prop-valid": "latest",
     "@eslint/eslintrc": "latest",
-    "@hookform/resolvers": ^3.3.4",
+    "@hookform/resolvers": "^3.3.4",
     "@joycostudio/v0-setup": "latest",
     "@radix-ui/react-icons": "latest",
     "@radix-ui/react-label": "latest",
