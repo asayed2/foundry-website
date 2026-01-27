@@ -31,15 +31,15 @@ function FadeInSection({ children, className = "" }: { children: React.ReactNode
 // Upcoming events data
 const UPCOMING_EVENTS: SponsorEvent[] = [
   {
-    id: "q1-2026-demo",
-    title: "Q1 2026 Demo Day",
-    date: "March 2026",
-    description: "Our flagship event where portfolio companies pitch to top VCs and angel investors. High-visibility opportunity for sponsors.",
-    expectedAttendance: "200+",
-    audience: { founders: 45, investors: 35, engineers: 20 },
-    sponsorSlots: { available: 3, total: 5 },
-    benefits: ["Main stage branding", "Speaking slot", "VIP access", "Lead list"],
-    image: "/startup-pitch-event.png",
+    id: "code-workshop-fitler",
+    title: "Code Workshop at The Fitler",
+    date: "February 2026",
+    description: "A 150+ person workshop for people of all skill levels. Come learn, meet others, and be with some of the most ambitious people in the world.",
+    expectedAttendance: "150+",
+    audience: { founders: 30, investors: 30, engineers: 40 },
+    audienceLabels: { first: "Engineers", second: "Beginners", third: "Sponsors/VCs" },
+    benefits: ["Workshop branding", "Speaking opportunity", "Direct engagement", "Community presence"],
+    image: "/coding-workshop-developers.jpg",
   },
   {
     id: "q1-2026-hackathon",
@@ -48,7 +48,6 @@ const UPCOMING_EVENTS: SponsorEvent[] = [
     description: "A weekend of building, mentorship, and innovation. Following the success of our 150+ attendee Fall hackathon.",
     expectedAttendance: "200+",
     audience: { founders: 30, investors: 15, engineers: 55 },
-    sponsorSlots: { available: 8, total: 12 },
     benefits: ["Prize category naming", "Mentor access", "Booth space", "Recruiting"],
     image: "/startup-networking-event.png",
   },
@@ -59,57 +58,13 @@ const UPCOMING_EVENTS: SponsorEvent[] = [
     description: "Intimate gatherings of 25-40 builders at Foundry House. High-signal networking and debugging sessions.",
     expectedAttendance: "30-40",
     audience: { founders: 50, investors: 10, engineers: 40 },
-    sponsorSlots: { available: 2, total: 3 },
     benefits: ["Exclusive access", "Direct engagement", "Community presence"],
     image: "/coding-workshop-developers.jpg",
   },
 ]
 
-// Sponsorship tiers
-const TIERS = [
-  {
-    id: "silver",
-    name: "Silver",
-    price: "$2,500",
-    description: "Perfect for companies looking to build brand awareness within the Foundry community.",
-    benefits: [
-      "Logo on event materials",
-      "Social media mention",
-      "2 event tickets",
-      "Community newsletter feature",
-    ],
-  },
-  {
-    id: "gold",
-    name: "Gold",
-    price: "$7,500",
-    popular: true,
-    description: "Ideal for companies seeking meaningful engagement with founders and talent.",
-    benefits: [
-      "Everything in Silver",
-      "Booth/table at events",
-      "5-minute speaking slot",
-      "5 event tickets",
-      "Access to talent pipeline",
-      "Featured in recap content",
-    ],
-  },
-  {
-    id: "platinum",
-    name: "Platinum",
-    price: "$15,000+",
-    description: "Full partnership for maximum visibility and deep community integration.",
-    benefits: [
-      "Everything in Gold",
-      "Co-branded event naming",
-      "Keynote speaking opportunity",
-      "10+ event tickets",
-      "Exclusive founder dinners",
-      "Priority deal flow access",
-      "Custom activation support",
-    ],
-  },
-]
+// Sponsorship tiers - Hidden for now
+// const TIERS = [...]
 
 export default function SponsorsPage() {
   return (
@@ -218,94 +173,12 @@ export default function SponsorsPage() {
         </FadeInSection>
       </section>
 
-      {/* Sponsorship Tiers Section */}
+      {/* Sponsorship Tiers Section - Hidden for now */}
+      {/* 
       <section className="relative py-32 px-6 md:px-12 lg:px-20">
-        <FadeInSection className="relative z-10 max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <p
-              className="text-[#F1EFE7]/40 text-xs tracking-[0.2em] uppercase mb-4"
-              style={{ fontFamily: "Arial, sans-serif" }}
-            >
-              Sponsorship Tiers
-            </p>
-            <h2
-              className="text-4xl md:text-5xl mb-4"
-              style={{ fontFamily: "'Times New Roman', serif", letterSpacing: "-0.03em" }}
-            >
-              Choose Your Partnership Level
-            </h2>
-            <p
-              className="text-[#F1EFE7]/50 text-base max-w-xl mx-auto"
-              style={{ fontFamily: "Arial, sans-serif" }}
-            >
-              Flexible options for companies of all sizes. Custom packages available upon request.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {TIERS.map((tier, index) => (
-              <motion.div
-                key={tier.id}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className={`relative p-8 border transition-all duration-300 ${
-                  tier.popular
-                    ? "border-[#F1EFE7]/40 bg-[#F1EFE7]/[0.05]"
-                    : "border-[#F1EFE7]/10 bg-[#F1EFE7]/[0.02] hover:border-[#F1EFE7]/20"
-                }`}
-              >
-                {tier.popular && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-[#F1EFE7] text-black text-xs font-medium" style={{ fontFamily: "Arial, sans-serif" }}>
-                    Most Popular
-                  </div>
-                )}
-
-                <p
-                  className="text-[#F1EFE7]/50 text-xs tracking-[0.15em] uppercase mb-2"
-                  style={{ fontFamily: "Arial, sans-serif" }}
-                >
-                  {tier.name}
-                </p>
-
-                <p
-                  className="text-4xl text-[#F1EFE7] mb-4"
-                  style={{ fontFamily: "'Times New Roman', serif", letterSpacing: "-0.02em" }}
-                >
-                  {tier.price}
-                </p>
-
-                <p
-                  className="text-[#F1EFE7]/50 text-sm mb-8"
-                  style={{ fontFamily: "Arial, sans-serif" }}
-                >
-                  {tier.description}
-                </p>
-
-                <ul className="space-y-3">
-                  {tier.benefits.map((benefit, i) => (
-                    <li
-                      key={i}
-                      className="flex items-start gap-3 text-[#F1EFE7]/70 text-sm"
-                      style={{ fontFamily: "Arial, sans-serif" }}
-                    >
-                      <svg className="w-4 h-4 text-[#F1EFE7]/40 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                        <path
-                          fillRule="evenodd"
-                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                      {benefit}
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            ))}
-          </div>
-        </FadeInSection>
+        ... Tiers content hidden ...
       </section>
+      */}
 
       {/* Application Form Section */}
       <section className="relative py-32 px-6 md:px-12 lg:px-20">

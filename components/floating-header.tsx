@@ -68,14 +68,13 @@ export function FloatingHeader() {
           >
             Partners
           </a>
-          <a
-            href="#events"
-            onClick={(e) => handleNavClick(e, "#events")}
+          <Link
+            href="/events"
             className="text-[#F1EFE7]/80 hover:text-[#F1EFE7] text-sm font-medium transition-colors duration-200"
             style={{ fontFamily: "Arial, sans-serif" }}
           >
             Events
-          </a>
+          </Link>
           <Link
             href="/sponsors"
             className="text-[#F1EFE7]/80 hover:text-[#F1EFE7] text-sm font-medium transition-colors duration-200"

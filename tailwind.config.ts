@@ -62,7 +62,7 @@ const config: Config = {
         sm: "calc(var(--radius) - 4px)",
       },
       animation: {
-        "scroll-left": "scroll-left 15s linear infinite",
+        "scroll-left": "scroll-left 5s linear infinite",
       },
       keyframes: {
         "scroll-left": {

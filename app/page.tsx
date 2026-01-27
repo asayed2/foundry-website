@@ -163,17 +163,17 @@ export default function Home() {
           
           <div className="w-full overflow-hidden relative">
               {/* Gradient overlays for smooth fade effect */}
-              <div className="absolute left-0 top-0 bottom-0 w-40 md:w-64 bg-gradient-to-r from-black via-black/90 to-transparent z-10 pointer-events-none"></div>
-              <div className="absolute right-0 top-0 bottom-0 w-40 md:w-64 bg-gradient-to-l from-black via-black/90 to-transparent z-10 pointer-events-none"></div>
+              <div className="absolute left-0 top-0 bottom-0 w-16 md:w-64 bg-gradient-to-r from-black via-black/90 to-transparent z-10 pointer-events-none"></div>
+              <div className="absolute right-0 top-0 bottom-0 w-16 md:w-64 bg-gradient-to-l from-black via-black/90 to-transparent z-10 pointer-events-none"></div>
               
               <div className="flex animate-scroll-left">
                 {/* First set of logos */}
-                <div className="flex items-center gap-16 md:gap-24 px-12 shrink-0">
+                <div className="flex items-center gap-8 md:gap-24 px-4 md:px-12 shrink-0">
                   <Link
                     href="https://www.avax.network"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group w-44 h-12 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
+                    className="group w-28 h-8 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
                   >
                     <img
                       src="/avalanche-logo.png"
@@ -185,7 +185,7 @@ export default function Home() {
                     href="https://www.dormroomfund.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group w-44 h-12 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
+                    className="group w-28 h-8 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
                   >
                     <img
                       src="/dorm-room-fund-logo.svg"
@@ -197,7 +197,7 @@ export default function Home() {
                     href="https://www.afore.vc"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group w-44 h-12 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
+                    className="group w-28 h-8 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
                   >
                     <img
                       src="/afore-capital-logo.png"
@@ -209,7 +209,7 @@ export default function Home() {
                     href="https://pear.vc"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group w-44 h-12 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
+                    className="group w-28 h-8 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
                   >
                     <img
                       src="/pear-vc-logo.png"
@@ -221,7 +221,7 @@ export default function Home() {
                     href="https://lovable.dev"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group w-44 h-12 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
+                    className="group w-28 h-8 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
                   >
                     <img 
                       src="/lovable-logo.png" 
@@ -233,7 +233,7 @@ export default function Home() {
                     href="https://adobe.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group w-44 h-12 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
+                    className="group w-28 h-8 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
                   >
                     <img
                       src="/adobe-logo.png"
@@ -245,7 +245,7 @@ export default function Home() {
                     href="https://www.perplexity.ai"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group w-44 h-12 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
+                    className="group w-28 h-8 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
                   >
                     <img
                       src="/off-white-logo.png"
@@ -255,12 +255,12 @@ export default function Home() {
                   </Link>
                 </div>
                 {/* Duplicate set for seamless loop */}
-                <div className="flex items-center gap-16 md:gap-24 px-12 shrink-0">
+                <div className="flex items-center gap-8 md:gap-24 px-4 md:px-12 shrink-0">
                   <Link
                     href="https://www.avax.network"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group w-44 h-12 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
+                    className="group w-28 h-8 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
                   >
                     <img
                       src="/avalanche-logo.png"
@@ -272,7 +272,7 @@ export default function Home() {
                     href="https://www.dormroomfund.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group w-44 h-12 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
+                    className="group w-28 h-8 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
                   >
                     <img
                       src="/dorm-room-fund-logo.svg"
@@ -284,7 +284,7 @@ export default function Home() {
                     href="https://www.afore.vc"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group w-44 h-12 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
+                    className="group w-28 h-8 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
                   >
                     <img
                       src="/afore-capital-logo.png"
@@ -296,7 +296,7 @@ export default function Home() {
                     href="https://pear.vc"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group w-44 h-12 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
+                    className="group w-28 h-8 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
                   >
                     <img
                       src="/pear-vc-logo.png"
@@ -308,7 +308,7 @@ export default function Home() {
                     href="https://lovable.dev"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group w-44 h-12 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
+                    className="group w-28 h-8 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
                   >
                     <img 
                       src="/lovable-logo.png" 
@@ -320,7 +320,7 @@ export default function Home() {
                     href="https://adobe.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group w-44 h-12 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
+                    className="group w-28 h-8 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
                   >
                     <img
                       src="/adobe-logo.png"
@@ -332,7 +332,7 @@ export default function Home() {
                     href="https://www.perplexity.ai"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group w-44 h-12 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
+                    className="group w-28 h-8 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
                   >
                     <img
                       src="/off-white-logo.png"
@@ -342,12 +342,12 @@ export default function Home() {
                   </Link>
                 </div>
                 {/* Third set for extra smoothness */}
-                <div className="flex items-center gap-16 md:gap-24 px-12 shrink-0">
+                <div className="flex items-center gap-8 md:gap-24 px-4 md:px-12 shrink-0">
                   <Link
                     href="https://www.avax.network"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group w-44 h-12 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
+                    className="group w-28 h-8 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
                   >
                     <img
                       src="/avalanche-logo.png"
@@ -359,7 +359,7 @@ export default function Home() {
                     href="https://www.dormroomfund.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group w-44 h-12 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
+                    className="group w-28 h-8 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
                   >
                     <img
                       src="/dorm-room-fund-logo.svg"
@@ -371,7 +371,7 @@ export default function Home() {
                     href="https://www.afore.vc"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group w-44 h-12 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
+                    className="group w-28 h-8 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
                   >
                     <img
                       src="/afore-capital-logo.png"
@@ -383,7 +383,7 @@ export default function Home() {
                     href="https://pear.vc"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group w-44 h-12 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
+                    className="group w-28 h-8 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
                   >
                     <img
                       src="/pear-vc-logo.png"
@@ -395,7 +395,7 @@ export default function Home() {
                     href="https://lovable.dev"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group w-44 h-12 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
+                    className="group w-28 h-8 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
                   >
                     <img 
                       src="/lovable-logo.png" 
@@ -407,7 +407,7 @@ export default function Home() {
                     href="https://adobe.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group w-44 h-12 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
+                    className="group w-28 h-8 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
                   >
                     <img
                       src="/adobe-logo.png"
@@ -419,7 +419,7 @@ export default function Home() {
                     href="https://www.perplexity.ai"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group w-44 h-12 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
+                    className="group w-28 h-8 md:w-56 md:h-14 flex items-center justify-center shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-200"
                   >
                     <img
                       src="/off-white-logo.png"
@@ -709,11 +709,28 @@ export default function Home() {
               <div className="hidden md:block h-px w-24 bg-gradient-to-l from-transparent to-[#F1EFE7]/30" />
         </div>
             <p
-              className="text-center text-base md:text-lg text-[#F1EFE7] opacity-60 max-w-xl mx-auto leading-relaxed font-light"
+              className="text-center text-base md:text-lg text-[#F1EFE7] opacity-60 max-w-xl mx-auto leading-relaxed font-light mb-10"
               style={{ fontFamily: "Arial, sans-serif" }}
             >
               Building community through meaningful gatherings and workshops.
             </p>
+
+            {/* Event Calendar Button */}
+            <div className="flex justify-center">
+              <Link
+                href="/events"
+                className="group inline-flex items-center gap-3 border border-[#F1EFE7]/30 text-[#F1EFE7] px-8 py-4 text-sm font-medium hover:border-[#F1EFE7]/60 hover:bg-[#F1EFE7]/5 transition-all duration-200 tracking-[0.1em] uppercase"
+                style={{ fontFamily: "Arial, sans-serif" }}
+              >
+                <svg className="w-5 h-5 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                Event Calendar
+                <svg className="w-4 h-4 opacity-70 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </Link>
+            </div>
           </div>
           
           {/* Timeline Component */}
@@ -722,23 +739,20 @@ export default function Home() {
               {
                 title: "OCT 4",
                 content: (
-                  <div>
-                    <p className="text-[#F1EFE7]/40 text-xs tracking-[0.2em] uppercase mb-2" style={{ fontFamily: "Arial, sans-serif" }}>
+                  <div className="py-2">
+                    <p className="text-[#F1EFE7]/40 text-xs tracking-[0.2em] uppercase mb-3" style={{ fontFamily: "Arial, sans-serif" }}>
                       2025
                     </p>
-                    <h3 className="text-[#F1EFE7] text-2xl md:text-3xl mb-4" style={{ fontFamily: "'Times New Roman', serif", letterSpacing: "-0.03em" }}>
+                    <h3 className="text-[#F1EFE7] text-2xl md:text-3xl lg:text-4xl mb-4" style={{ fontFamily: "'Times New Roman', serif", letterSpacing: "-0.03em" }}>
                       The Catalyst
                     </h3>
-                    <p className="text-[#F1EFE7]/60 text-sm md:text-base font-light mb-6 max-w-xl" style={{ fontFamily: "Arial, sans-serif" }}>
-                      Our inaugural mixer. 20 builders, 3 VC partners. Real conversations, real outcomes—the fire-starter event.
+                    <p className="text-[#F1EFE7]/60 text-base md:text-lg font-light leading-relaxed max-w-2xl" style={{ fontFamily: "Arial, sans-serif" }}>
+                      Our inaugural mixer. 20 builders, 3 VC partners. Real conversations, real outcomes—the fire-starter event that launched the Foundry community.
                     </p>
-                    <div className="relative h-48 md:h-64 w-full overflow-hidden border border-[#F1EFE7]/10">
-                      <Image
-                        src="/startup-pitch.png"
-                        alt="The Catalyst mixer"
-                        fill
-                        className="object-cover opacity-70 hover:opacity-90 transition-opacity duration-500"
-                      />
+                    <div className="flex flex-wrap gap-3 mt-6">
+                      <span className="text-[#F1EFE7]/50 text-xs px-3 py-1.5 border border-[#F1EFE7]/15" style={{ fontFamily: "Arial, sans-serif" }}>Networking</span>
+                      <span className="text-[#F1EFE7]/50 text-xs px-3 py-1.5 border border-[#F1EFE7]/15" style={{ fontFamily: "Arial, sans-serif" }}>VC Partners</span>
+                      <span className="text-[#F1EFE7]/50 text-xs px-3 py-1.5 border border-[#F1EFE7]/15" style={{ fontFamily: "Arial, sans-serif" }}>20+ Attendees</span>
                     </div>
                   </div>
                 ),
@@ -746,28 +760,20 @@ export default function Home() {
               {
                 title: "NOV 21–23",
                 content: (
-                  <div>
-                    <p className="text-[#F1EFE7]/40 text-xs tracking-[0.2em] uppercase mb-2" style={{ fontFamily: "Arial, sans-serif" }}>
+                  <div className="py-2">
+                    <p className="text-[#F1EFE7]/40 text-xs tracking-[0.2em] uppercase mb-3" style={{ fontFamily: "Arial, sans-serif" }}>
                       2025
                     </p>
-                    <h3 className="text-[#F1EFE7] text-2xl md:text-3xl mb-4" style={{ fontFamily: "'Times New Roman', serif", letterSpacing: "-0.03em" }}>
+                    <h3 className="text-[#F1EFE7] text-2xl md:text-3xl lg:text-4xl mb-4" style={{ fontFamily: "'Times New Roman', serif", letterSpacing: "-0.03em" }}>
                       Startup in a Weekend
-                  </h3>
-                    <p className="text-[#F1EFE7]/60 text-sm md:text-base font-light mb-4 max-w-xl" style={{ fontFamily: "Arial, sans-serif" }}>
-                      With KW Empower in Philadelphia. 150+ attendees, 17 brand partners, $10K in prizes, 15+ deals in pipeline.
-                  </p>
-                    <div className="flex flex-wrap gap-x-6 gap-y-1 mb-6 text-[#F1EFE7]/40 text-xs" style={{ fontFamily: "Arial, sans-serif" }}>
-                      <span>Microsoft execs</span>
-                      <span>Google leads</span>
-                      <span>Mercor engineers</span>
-                </div>
-                    <div className="relative h-48 md:h-64 w-full overflow-hidden border border-[#F1EFE7]/10">
-                      <Image
-                        src="/startup-networking-event.png"
-                        alt="Hackathon"
-                        fill
-                        className="object-cover opacity-70 hover:opacity-90 transition-opacity duration-500"
-                      />
+                    </h3>
+                    <p className="text-[#F1EFE7]/60 text-base md:text-lg font-light leading-relaxed max-w-2xl" style={{ fontFamily: "Arial, sans-serif" }}>
+                      With KW Empower in Philadelphia. 150+ attendees, 17 brand partners, $10K in prizes, 15+ deals in pipeline. Direct mentoring from Microsoft execs, Google leads, and Mercor engineers.
+                    </p>
+                    <div className="flex flex-wrap gap-3 mt-6">
+                      <span className="text-[#F1EFE7]/50 text-xs px-3 py-1.5 border border-[#F1EFE7]/15" style={{ fontFamily: "Arial, sans-serif" }}>Hackathon</span>
+                      <span className="text-[#F1EFE7]/50 text-xs px-3 py-1.5 border border-[#F1EFE7]/15" style={{ fontFamily: "Arial, sans-serif" }}>$10K Prizes</span>
+                      <span className="text-[#F1EFE7]/50 text-xs px-3 py-1.5 border border-[#F1EFE7]/15" style={{ fontFamily: "Arial, sans-serif" }}>150+ Attendees</span>
                     </div>
                   </div>
                 ),
@@ -775,27 +781,42 @@ export default function Home() {
               {
                 title: "DEC 21",
                 content: (
-                  <div>
-                    <p className="text-[#F1EFE7]/40 text-xs tracking-[0.2em] uppercase mb-2" style={{ fontFamily: "Arial, sans-serif" }}>
+                  <div className="py-2">
+                    <p className="text-[#F1EFE7]/40 text-xs tracking-[0.2em] uppercase mb-3" style={{ fontFamily: "Arial, sans-serif" }}>
                       2025
                     </p>
-                    <h3 className="text-[#F1EFE7] text-2xl md:text-3xl mb-4" style={{ fontFamily: "'Times New Roman', serif", letterSpacing: "-0.03em" }}>
+                    <h3 className="text-[#F1EFE7] text-2xl md:text-3xl lg:text-4xl mb-4" style={{ fontFamily: "'Times New Roman', serif", letterSpacing: "-0.03em" }}>
                       Builder Night
-                  </h3>
-                    <p className="text-[#F1EFE7]/60 text-sm md:text-base font-light mb-4 max-w-xl" style={{ fontFamily: "Arial, sans-serif" }}>
-                      With Code & Coffee Philly. 25 builders at Foundry House—debugging, connecting, shipping.
-                  </p>
-                    <div className="flex flex-wrap gap-x-6 gap-y-1 mb-6 text-[#F1EFE7]/40 text-xs" style={{ fontFamily: "Arial, sans-serif" }}>
-                      <span>High-signal conversations</span>
-                      <span>Startup advice</span>
-                </div>
-                    <div className="relative h-48 md:h-64 w-full overflow-hidden border border-[#F1EFE7]/10">
-                      <Image
-                        src="/coding-workshop-developers.jpg"
-                        alt="Builder night"
-                        fill
-                        className="object-cover opacity-70 hover:opacity-90 transition-opacity duration-500"
-                      />
+                    </h3>
+                    <p className="text-[#F1EFE7]/60 text-base md:text-lg font-light leading-relaxed max-w-2xl" style={{ fontFamily: "Arial, sans-serif" }}>
+                      With Code & Coffee Philly. 25 builders at Foundry House—debugging, connecting, shipping. High-signal conversations and real startup advice.
+                    </p>
+                    <div className="flex flex-wrap gap-3 mt-6">
+                      <span className="text-[#F1EFE7]/50 text-xs px-3 py-1.5 border border-[#F1EFE7]/15" style={{ fontFamily: "Arial, sans-serif" }}>Code & Coffee</span>
+                      <span className="text-[#F1EFE7]/50 text-xs px-3 py-1.5 border border-[#F1EFE7]/15" style={{ fontFamily: "Arial, sans-serif" }}>Building</span>
+                      <span className="text-[#F1EFE7]/50 text-xs px-3 py-1.5 border border-[#F1EFE7]/15" style={{ fontFamily: "Arial, sans-serif" }}>25 Builders</span>
+                    </div>
+                  </div>
+                ),
+              },
+              {
+                title: "JAN 17–18",
+                content: (
+                  <div className="py-2">
+                    <p className="text-[#F1EFE7]/40 text-xs tracking-[0.2em] uppercase mb-3" style={{ fontFamily: "Arial, sans-serif" }}>
+                      2026
+                    </p>
+                    <h3 className="text-[#F1EFE7] text-2xl md:text-3xl lg:text-4xl mb-4" style={{ fontFamily: "'Times New Roman', serif", letterSpacing: "-0.03em" }}>
+                      Nexhacks at CMU
+                    </h3>
+                    <p className="text-[#F1EFE7]/60 text-base md:text-lg font-light leading-relaxed max-w-2xl" style={{ fontFamily: "Arial, sans-serif" }}>
+                      Co-hosted with Nexhacks Org at Carnegie Mellon. 1,500+ attendees, 40+ VCs in attendance, $50K in prizes. A high-impact event that brought together the best builders and investors.
+                    </p>
+                    <div className="flex flex-wrap gap-3 mt-6">
+                      <span className="text-[#F1EFE7]/50 text-xs px-3 py-1.5 border border-[#F1EFE7]/15" style={{ fontFamily: "Arial, sans-serif" }}>Nexhacks</span>
+                      <span className="text-[#F1EFE7]/50 text-xs px-3 py-1.5 border border-[#F1EFE7]/15" style={{ fontFamily: "Arial, sans-serif" }}>$50K Prizes</span>
+                      <span className="text-[#F1EFE7]/50 text-xs px-3 py-1.5 border border-[#F1EFE7]/15" style={{ fontFamily: "Arial, sans-serif" }}>1,500+ Attendees</span>
+                      <span className="text-[#F1EFE7]/50 text-xs px-3 py-1.5 border border-[#F1EFE7]/15" style={{ fontFamily: "Arial, sans-serif" }}>40+ VCs</span>
                     </div>
                   </div>
                 ),
@@ -806,7 +827,7 @@ export default function Home() {
           {/* Bottom decorative element */}
           <div className="flex justify-center mt-16">
             <div className="h-px w-48 bg-gradient-to-r from-transparent via-[#F1EFE7]/20 to-transparent" />
-                </div>
+          </div>
         </FadeInSection>
       </section>
 

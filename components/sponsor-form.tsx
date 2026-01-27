@@ -2,31 +2,29 @@
 
 import { useState } from "react"
 import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
 import { motion, AnimatePresence } from "framer-motion"
-import { submitSponsorApplication, sponsorFormSchema, type SponsorFormSchema } from "@/lib/sponsor-actions"
+import { submitSponsorApplication, type SponsorFormSchema } from "@/lib/sponsor-actions"
 import { type ActionResult, cn } from "@/lib/utils"
 import { CheckCircledIcon, CrossCircledIcon } from "@radix-ui/react-icons"
 
 const UPCOMING_EVENTS = [
-  { id: "q1-2026-demo", label: "Q1 2026 Demo Day" },
-  { id: "q1-2026-hackathon", label: "Q1 2026 Hackathon" },
+  { id: "code-workshop-fitler", label: "Code Workshop at The Fitler" },
+  { id: "spring-hackathon-2026", label: "Spring Hackathon 2026" },
   { id: "builder-nights", label: "Monthly Builder Nights" },
   { id: "general", label: "General Partnership" },
 ]
 
-const SPONSORSHIP_TIERS = [
-  { id: "platinum", label: "Platinum" },
-  { id: "gold", label: "Gold" },
-  { id: "silver", label: "Silver" },
-  { id: "custom", label: "Custom" },
+const SPONSORSHIP_TYPES = [
+  { id: "cash", label: "Cash" },
+  { id: "platform-credits", label: "Platform Credits" },
+  { id: "location", label: "Location" },
+  { id: "other", label: "Other" },
 ]
 
 export function SponsorForm() {
   const [submissionState, setSubmissionState] = useState<ActionResult<string> | null>(null)
 
   const form = useForm<SponsorFormSchema>({
-    resolver: zodResolver(sponsorFormSchema),
     defaultValues: {
       companyName: "",
       contactName: "",
@@ -88,7 +86,7 @@ export function SponsorForm() {
             Company Name *
           </label>
           <input
-            {...form.register("companyName")}
+            {...form.register("companyName", { required: "Company name is required" })}
             placeholder="Your company"
             className={inputStyles}
             style={{ fontFamily: "Arial, sans-serif" }}
@@ -102,7 +100,7 @@ export function SponsorForm() {
             Contact Name *
           </label>
           <input
-            {...form.register("contactName")}
+            {...form.register("contactName", { required: "Contact name is required" })}
             placeholder="Your name"
             className={inputStyles}
             style={{ fontFamily: "Arial, sans-serif" }}
@@ -119,7 +117,13 @@ export function SponsorForm() {
           Email *
         </label>
         <input
-          {...form.register("email")}
+          {...form.register("email", { 
+            required: "Email is required",
+            pattern: {
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+              message: "Invalid email address"
+            }
+          })}
           type="email"
           placeholder="you@company.com"
           className={inputStyles}
@@ -149,7 +153,7 @@ export function SponsorForm() {
               <input
                 type="checkbox"
                 value={event.id}
-                {...form.register("events")}
+                {...form.register("events", { required: "Please select at least one event" })}
                 className="sr-only"
               />
               <div
@@ -181,30 +185,30 @@ export function SponsorForm() {
         )}
       </div>
 
-      {/* Row 4: Tier Selection */}
+      {/* Row 4: Contribution Type Selection */}
       <div>
         <label className={labelStyles} style={{ fontFamily: "Arial, sans-serif" }}>
-          Sponsorship Tier *
+          Contribution Type *
         </label>
         <div className="flex flex-wrap gap-3">
-          {SPONSORSHIP_TIERS.map((tier) => (
+          {SPONSORSHIP_TYPES.map((type) => (
             <label
-              key={tier.id}
+              key={type.id}
               className={cn(
                 "px-6 py-3 border cursor-pointer transition-all duration-200",
-                form.watch("tier") === tier.id
+                form.watch("tier") === type.id
                   ? "border-[#F1EFE7] bg-[#F1EFE7] text-black"
                   : "border-[#F1EFE7]/20 text-[#F1EFE7]/80 hover:border-[#F1EFE7]/40"
               )}
             >
               <input
                 type="radio"
-                value={tier.id}
-                {...form.register("tier")}
+                value={type.id}
+                {...form.register("tier", { required: "Please select a contribution type" })}
                 className="sr-only"
               />
               <span className="text-sm font-medium" style={{ fontFamily: "Arial, sans-serif" }}>
-                {tier.label}
+                {type.label}
               </span>
             </label>
           ))}
@@ -244,4 +248,3 @@ export function SponsorForm() {
     </form>
   )
 }
-

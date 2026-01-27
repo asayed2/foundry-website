@@ -14,7 +14,12 @@ export interface SponsorEvent {
     investors: number
     engineers: number
   }
-  sponsorSlots: {
+  audienceLabels?: {
+    first: string
+    second: string
+    third: string
+  }
+  sponsorSlots?: {
     available: number
     total: number
   }
@@ -48,12 +53,14 @@ export function SponsorEventCard({ event, index }: SponsorEventCardProps) {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
         
-        {/* Slots Badge */}
-        <div className="absolute top-4 right-4 px-3 py-1.5 bg-black/60 backdrop-blur-sm border border-[#F1EFE7]/20">
-          <span className="text-[#F1EFE7]/80 text-xs" style={{ fontFamily: "Arial, sans-serif" }}>
-            {event.sponsorSlots.available}/{event.sponsorSlots.total} slots
-          </span>
-        </div>
+{/* Slots Badge - only show if sponsorSlots is provided */}
+        {event.sponsorSlots && (
+          <div className="absolute top-4 right-4 px-3 py-1.5 bg-black/60 backdrop-blur-sm border border-[#F1EFE7]/20">
+            <span className="text-[#F1EFE7]/80 text-xs" style={{ fontFamily: "Arial, sans-serif" }}>
+              {event.sponsorSlots.available}/{event.sponsorSlots.total} slots
+            </span>
+          </div>
+        )}
 
         {/* Date Badge */}
         <div className="absolute bottom-4 left-4">
@@ -112,9 +119,9 @@ export function SponsorEventCard({ event, index }: SponsorEventCardProps) {
               />
             </div>
             <div className="flex justify-between mt-1.5 text-[10px] text-[#F1EFE7]/40" style={{ fontFamily: "Arial, sans-serif" }}>
-              <span>Founders {event.audience.founders}%</span>
-              <span>VCs {event.audience.investors}%</span>
-              <span>Engineers {event.audience.engineers}%</span>
+              <span>{event.audienceLabels?.first || "Founders"} {event.audience.founders}%</span>
+              <span>{event.audienceLabels?.second || "VCs"} {event.audience.investors}%</span>
+              <span>{event.audienceLabels?.third || "Engineers"} {event.audience.engineers}%</span>
             </div>
           </div>
         </div>
